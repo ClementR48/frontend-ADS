@@ -4,33 +4,48 @@ import { useHistory, useParams } from "react-router-dom";
 import { getProducts } from "../../redux/reducer/productsReducer";
 
 const ProductShowcase = () => {
-  const [loading, setLoading] = useState(false)
+  const [quantity, setQuantity] = useState(1)
   const { id } = useParams();
 
   const { products } = useSelector((state) => ({
     ...state.productsReducer,
   }));
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (products.length === 0) {
-      fetch(dispatch(getProducts())).then(setLoading(true))
-    }
-  }, []);
-
-  
-
-
-
- 
-
-
-
   const indexProductClicked = products.findIndex(
     (obj) => obj.name.replace(/\s+/g, "").trim() === id
   );
 
-  return <div>{ loading &&  <p>{console.log(products)}</p>}</div>;
+  const updateProduct = (e) => {
+    setQuantity(Number(e.target.value))
+  }
+
+  const dispatch = useDispatch();
+
+  const addToCart = e => {
+    e.preventDefault();
+
+    const productAdded = {
+      ...products[indexProductClicked],
+      quantity: quantity
+    }
+
+    dispatch({
+      type: "ADDITEM",
+      payload: productAdded
+    })
+  }
+
+  return (
+    <div>
+      
+      <p>{products[indexProductClicked].name}</p>
+
+      <form onSubmit={addToCart}>
+        <input type="number" value={quantity} onChange={updateProduct} min="1" max={products[indexProductClicked].quantity} />
+        <button>Ajouter au panier</button>
+      </form>
+    </div>
+  );
 };
 
 export default ProductShowcase;

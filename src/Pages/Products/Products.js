@@ -18,8 +18,8 @@ const Products = () => {
     <ul>
       {products.map((product) => {
         return (
-          <>
-            {console.log(product)}
+          
+            
             <Link
               to={{
                 pathname: `/produits/${product.name
@@ -30,7 +30,7 @@ const Products = () => {
             >
               {product.name}
             </Link>
-          </>
+          
         );
       })}
     </ul>
