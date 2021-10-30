@@ -1,10 +1,21 @@
 .navbar {
   width: 100%;
+  padding: 10px 50px;
+  background-color: transparent;
   display: flex;
   justify-content: start;
   align-items: center;
   position: relative;
-  a{
-    margin: 15px;
+
+  img {
+    width: 90px;
+  }
+  .nav-page{
+    margin-left: 150px;
+    text-decoration: none;
+  }
+
+  .active-nav-page {
+    color: red;
   }
 }
