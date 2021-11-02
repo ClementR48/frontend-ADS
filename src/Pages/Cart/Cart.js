@@ -6,18 +6,31 @@ const Cart = () => {
     ...state.cartReducer,
   }));
 
+  const productState = useSelector((state) => ({
+    ...state.productsReducer
+  }))
+
   const handleChange = (event, id) => {
     const indexItem = cartState.cart.findIndex((obj) => obj.id === id);
+    const productItem = productState.products.findIndex((obj) => obj.id === id);
+
 
     const objUpdated = {
       ...cartState.cart[indexItem],
-      quantity: Number(event.target.value),
+      quantity:  Number(event.target.value),
     };
 
     dispatch({
       type: "UPDATEITEM",
       payload: objUpdated,
     });
+
+    if(event.target.value === "0") {
+      deleteProductFromCart(id)
+    }
+
+
+
   };
 
   const deleteProductFromCart = (id) => {
@@ -42,6 +55,8 @@ const Cart = () => {
     }
   }
 
+  
+
   return (
     <div>
       <ul>
@@ -57,6 +72,7 @@ const Cart = () => {
               <input
                 type="number"
                 onChange={(e) => handleChange(e, item.id)}
+                min="0"
                 value={item.quantity}
               ></input>
             </div>

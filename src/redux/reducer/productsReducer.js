@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   products: [],
 };
 
-export default function cartReducer(state = INITIAL_STATE, action) {
+export default function productReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "LOADPRODUCTS": {
       return {
@@ -13,6 +13,25 @@ export default function cartReducer(state = INITIAL_STATE, action) {
         products: action.payload,
       };
     }
+
+    case "UPDATEPRODUCT": {
+      const indexProduct = state.products.findIndex(
+        (obj) => obj.id === action.payload.id
+      );
+
+      const updateQuantity = {
+        ...state.products[indexProduct],
+        quantity:
+          state.products[indexProduct].quantity - action.payload.quantity,
+      };
+      const newArr = [...state.products];
+      newArr.splice(indexProduct, 1, updateQuantity);
+
+      return {
+        products: newArr,
+      };
+    }
+    
     default: {
       return {
         ...state,

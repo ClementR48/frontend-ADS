@@ -1,0 +1,39 @@
+@import "../../global.scss";
+
+.menu-responsive {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40vw;
+  height: calc(100vh - 90px);
+  background-color: $colorNavBg;
+  z-index: 500;
+  transform: translateX(100%);
+  transition: all 0.8s ease;
+  display: none;
+
+  &.active-menu {
+    transform: translateX(0);
+  }
+
+  @include tablet {
+    display: block;
+  }
+
+  .link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .nav-page {
+      margin: 5vh 0;
+      font-size: 22px;
+      text-decoration: none;
+      color: $colorNavText;
+    }
+  }
+}
+

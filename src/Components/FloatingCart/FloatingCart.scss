@@ -1,5 +1,65 @@
-.floating-cart {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+@import "../../global.scss";
+.navbar {
+  .floating-cart {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    text-decoration: none;
+
+    svg {
+      stroke: $colorNavText;
+    }
+
+    .nb-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: orange;
+      top: -15px;
+      right: -15px;
+    }
+  }
+
+  .floating-cart-active {
+    svg {
+      stroke: $colorPointNav;
+    }
+  }
+}
+.home-page {
+  .floating-cart {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    text-decoration: none;
+
+    svg {
+      stroke: white;
+    }
+
+    .nb-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: orange;
+      top: -15px;
+      right: -15px;
+    }
+  }
+
+  .floating-cart-active {
+    svg {
+      stroke: $colorPointNav;
+    }
+  }
 }

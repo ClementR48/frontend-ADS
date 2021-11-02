@@ -1,21 +1,177 @@
+@import "../../global.scss";
+
 .navbar {
   width: 100%;
-  padding: 10px 50px;
-  background-color: transparent;
+  height: 90px;
+  padding: 10px 0px;
+  background-color: $colorNavBg;
   display: flex;
   justify-content: start;
   align-items: center;
   position: relative;
+  font-size: 18px;
+  position: fixed;
+
 
   img {
-    width: 90px;
+    margin-left: 50px;
+    width: 80px;
   }
-  .nav-page{
-    margin-left: 150px;
+
+  .link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: auto;
+    position: relative;
+    margin-left: 10vw;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  .nav-page {
     text-decoration: none;
+    color: $colorNavText;
+  }
+  .nav-page:not(:nth-child(1)) {
+    margin-left: 8vw;
   }
 
   .active-nav-page {
-    color: red;
+    color: $colorPointNav
+  }
+
+  .anim-active {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-color: transparent;
+    bottom: 30%;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  .anim-active-move {
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background-color: $colorPointNav;
+    transition: all 0.5s ease-in;
+  }
+
+  .hamburger {
+    z-index: 1000;
+    position: absolute;
+    right: 10%;
+    width: 32px;
+    height: 27px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    @include tablet {
+      display: flex;
+    }
+
+    span {
+      width: 100%;
+      height: 3px;
+      background-color: blue;
+      transform-origin: left;
+      transition: all 1s ease;
+    }
+  }
+}
+
+.home-page {
+  width: 100%;
+  height: 90px;
+  padding: 10px 0px;
+  background-color: transparent;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 18px;
+  position: fixed;
+
+  img {
+    margin-left: 50px;
+    width: 80px;
+  }
+
+  .link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: auto;
+    position: relative;
+    margin-left: 10vw;
+
+    @include tablet {
+      display: none;
+    }
+  }
+  .nav-page {
+    text-decoration: none;
+    color: white;
+  }
+  .nav-page:not(:nth-child(1)) {
+    margin-left: 8vw;
+  }
+
+  .active-nav-page {
+    color: $colorPointNav
+  }
+  .anim-active {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-color: transparent;
+    bottom: 30%;
+  }
+
+  .anim-active-move {
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background-color: $colorPointNav;
+    transition: all 0.5s ease-in;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  .hamburger {
+    
+    position: absolute;
+    right: 10%;
+    width: 32px;
+    height: 27px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    @include tablet {
+      display: flex;
+    }
+
+    span {
+      width: 100%;
+      height: 3px;
+      background-color: blue;
+      transform-origin: left;
+      transition: all 1s ease;
+    }
   }
 }
