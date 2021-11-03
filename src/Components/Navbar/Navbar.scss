@@ -3,27 +3,26 @@
 .navbar {
   width: 100%;
   height: 90px;
-  padding: 10px 0px;
-  background-color: $colorNavBg;
   display: flex;
   justify-content: start;
   align-items: center;
-  position: relative;
-  font-size: 18px;
+  font-size: 20px;
   position: fixed;
+  z-index: 500;
+  background-color: $colorNavBg;
 
   img {
-    margin-left: 50px;
+    margin-left: 5vw;
     width: 80px;
   }
 
   .link {
     width: 100%;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     height: auto;
     position: relative;
-    margin-left: 10vw;
 
     @include tablet {
       display: none;
@@ -35,7 +34,7 @@
     color: $colorNavText;
   }
   .nav-page:not(:nth-child(1)) {
-    margin-left: 8vw;
+    margin-left: 10vw;
   }
 
   .active-nav-page {
@@ -61,13 +60,15 @@
     border-radius: 50%;
     transform: translateX(-50%);
     background-color: $colorPointNav;
-    transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in-out;
+
+
   }
 
   .hamburger {
     z-index: 1000;
     position: absolute;
-    right: 10%;
+    right: 5vw;
     width: 32px;
     height: 27px;
     display: none;
@@ -82,20 +83,20 @@
     span {
       width: 100%;
       height: 3px;
-      background-color: blue;
+      background-color: $colorNavText;
       transform-origin: left;
-      transition: all 1s ease;
+      transition: all 0.7s ease;
     }
   }
   .floating-cart {
-    position: absolute;
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
+    margin: 0 5vw 0 10vw;
+    position: relative;
     text-decoration: none;
 
     svg {
       stroke: $colorNavText;
+      fill: $colorNavText;
+      width: 20px;
     }
 
     .nb-items {
@@ -106,7 +107,7 @@
       border-radius: 50%;
       width: 20px;
       height: 20px;
-      background-color: orange;
+      color: black;
       top: -15px;
       right: -15px;
     }
@@ -121,14 +122,14 @@
     .hamburger {
       span {
         &:first-child {
-          background-color: blue;
+          background-color: $colorPointNav;
           transform: rotate(45deg);
         }
         &:nth-child(2) {
           opacity: 0;
         }
         &:last-child {
-          background-color: blue;
+          background-color: $colorPointNav;
           transform: rotate(-45deg);
         }
       }
@@ -136,29 +137,30 @@
   }
 }
 
+/* PAGE D'ACCEUIL */
+
 .home-page {
   width: 100%;
   height: 90px;
-  padding: 10px 0px;
-  background-color: transparent;
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 18px;
+  font-size: 20px;
   position: fixed;
+  z-index: 500;
 
   img {
-    margin-left: 50px;
+    margin-left: 5vw;
     width: 80px;
   }
 
   .link {
     width: 100%;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     height: auto;
     position: relative;
-    margin-left: 10vw;
 
     @include tablet {
       display: none;
@@ -169,11 +171,11 @@
     color: white;
   }
   .nav-page:not(:nth-child(1)) {
-    margin-left: 8vw;
+    margin-left: 10vw;
   }
 
   .active-nav-page {
-    color: $colorPointNav;
+    color: white;
   }
   .anim-active {
     position: absolute;
@@ -189,8 +191,8 @@
     width: 8px;
     border-radius: 50%;
     transform: translateX(-50%);
-    background-color: $colorPointNav;
-    transition: all 0.5s ease-in;
+    background-color: white;
+    transition: all 0.5s ease-in-out;
 
     @include tablet {
       display: none;
@@ -198,8 +200,9 @@
   }
 
   .hamburger {
+    z-index: 1000;
     position: absolute;
-    right: 10%;
+    right: 5vw;
     width: 32px;
     height: 27px;
     display: none;
@@ -214,21 +217,21 @@
     span {
       width: 100%;
       height: 3px;
-      background-color: blue;
+      background-color: $colorNavText;
       transform-origin: left;
-      transition: all 1s ease;
+      transition: all 0.7s ease;
     }
   }
 
   .floating-cart {
-    position: absolute;
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
+    margin: 0 5vw 0 10vw;
+    position: relative;
     text-decoration: none;
 
     svg {
       stroke: white;
+      fill: white;
+      width: 20px;
     }
 
     .nb-items {
@@ -239,7 +242,7 @@
       border-radius: 50%;
       width: 20px;
       height: 20px;
-      background-color: orange;
+      color: white;
       top: -15px;
       right: -15px;
     }
@@ -247,7 +250,7 @@
 
   .floating-cart-active {
     svg {
-      stroke: $colorPointNav;
+      stroke: white;
     }
   }
 
@@ -255,14 +258,14 @@
     .hamburger {
       span {
         &:first-child {
-          background-color: blue;
+          background-color: $colorPointNav;
           transform: rotate(45deg);
         }
         &:nth-child(2) {
           opacity: 0;
         }
         &:last-child {
-          background-color: blue;
+          background-color: $colorPointNav;
           transform: rotate(-45deg);
         }
       }

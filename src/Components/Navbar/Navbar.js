@@ -18,8 +18,6 @@ const Navbar = () => {
     ...state.cartReducer,
   }));
 
-
-
   /* Ref */
 
   const allLink = useRef([]);
@@ -49,6 +47,57 @@ const Navbar = () => {
 
   /* History */
   const history = useHistory();
+
+  const hover = (e) => {
+    if (e.target.innerText === "Acceuil") {
+      let ref1 = allLink.current[0].getBoundingClientRect();
+      setActiveAnim(ref1.left + ref1.width / 2);
+    }
+    if (e.target.innerText === "Shop") {
+      let ref2 = allLink.current[1].getBoundingClientRect();
+      setActiveAnim(ref2.left + ref2.width / 2);
+    }
+    if (e.target.innerText === "A propos") {
+      let ref3 = allLink.current[2].getBoundingClientRect();
+      setActiveAnim(ref3.left + ref3.width / 2);
+    }
+    if (e.target.innerText === "Contact") {
+      let ref4 = allLink.current[3].getBoundingClientRect();
+      setActiveAnim(ref4.left + ref4.width / 2);
+    }
+
+    if (e.target.className === "floating-cart") {
+      let ref5 = allLink.current[4].getBoundingClientRect();
+      setActiveAnim(ref5.left + ref5.width / 2);
+    }
+  };
+
+  const hoverOff = () => {
+    if (history.location.pathname === "/") {
+      let ref1 = allLink.current[0].getBoundingClientRect();
+      setActiveAnim(ref1.left + ref1.width / 2);
+    }
+
+    if (history.location.pathname === "/produits") {
+      let ref2 = allLink.current[1].getBoundingClientRect();
+
+      setActiveAnim(ref2.left + ref2.width / 2);
+    }
+    if (history.location.pathname === "/à-propos") {
+      let ref3 = allLink.current[2].getBoundingClientRect();
+
+      setActiveAnim(ref3.left + ref3.width / 2);
+    }
+    if (history.location.pathname === "/contact") {
+      let ref4 = allLink.current[3].getBoundingClientRect();
+
+      setActiveAnim(ref4.left + ref4.width / 2);
+    }
+    if (history.location.pathname === "/panier") {
+      let cartRefe = allLink.current[4].getBoundingClientRect();
+      setActiveAnim(cartRefe.left + cartRefe.width / 2);
+    }
+  };
 
   useEffect(() => {
     if (history.location.pathname === "/") {
@@ -109,6 +158,8 @@ const Navbar = () => {
           exact
           to="/"
           ref={addRefLink}
+          onMouseEnter={(e) => hover(e)}
+          onMouseLeave={hoverOff}
           onClick={() => {
             changePageFunc(1);
           }}
@@ -120,6 +171,8 @@ const Navbar = () => {
           activeClassName="active-nav-page"
           to="/produits"
           ref={addRefLink}
+          onMouseEnter={(e) => hover(e)}
+          onMouseLeave={hoverOff}
           onClick={() => {
             changePageFunc(2);
           }}
@@ -131,6 +184,8 @@ const Navbar = () => {
           activeClassName="active-nav-page"
           to="/à-propos"
           ref={addRefLink}
+          onMouseEnter={(e) => hover(e)}
+          onMouseLeave={hoverOff}
           onClick={() => {
             changePageFunc(3);
           }}
@@ -142,6 +197,8 @@ const Navbar = () => {
           activeClassName="active-nav-page"
           to="/contact"
           ref={addRefLink}
+          onMouseEnter={(e) => hover(e)}
+          onMouseLeave={hoverOff}
           onClick={() => {
             changePageFunc(4);
           }}
@@ -149,12 +206,13 @@ const Navbar = () => {
           Contact
         </NavLink>
 
-        
         <NavLink
           className="floating-cart"
           activeClassName="floating-cart-active"
           to="/panier"
           ref={addRefLink}
+          onMouseEnter={(e) => hover(e)}
+          onMouseLeave={hoverOff}
           onClick={() => changePageFunc(5)}
         >
           <ShoppingCart />

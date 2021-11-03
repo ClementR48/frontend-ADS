@@ -1,0 +1,30 @@
+.image-home-container {
+  width: 100vw;
+
+  position: relative;
+
+  img {
+    width: 100%;
+    min-width: 1200px;
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .text {
+    width: 90%;
+    margin: 0 5%;
+    display: flex;
+    position: absolute;
+    bottom: 30%;
+
+    li {
+      text-transform: uppercase;
+      list-style: none;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: clamp(35px, 7vw, 60px);
+      opacity: 0;
+    }
+  }
+}

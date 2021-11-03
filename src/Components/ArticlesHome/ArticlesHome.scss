@@ -1,0 +1,397 @@
+
+
+
+.home-article {
+  margin: 5% 5%;
+
+  /* =============article 1=============== */
+
+  .article {
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    margin: 20% 0;
+
+    .informations {
+      text-align: right;
+      width: 50%;
+      padding-right: 5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-end;
+
+      .title {
+        
+      }
+
+      .text {
+        width: 400px;
+        line-height: 23px;
+        color: rgba(134, 90, 71, 1);
+        text-align: right;
+      }
+
+      a{
+        border-radius: 10% 30% 50% 70%;
+        padding: 20px;
+        background-color: blue;
+        color: green;
+        text-decoration: none;
+        animation: back 15s infinite alternate;
+        transition: all 0.4s;
+
+        &:hover {
+          border-radius: 75% 50% 30% 10%;
+          background-color: grey;
+          color: white;
+          transition: all 0.4s;
+        }
+      }
+
+      
+    }
+ 
+    .picture {
+      width: 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 80%;
+        border-radius: 50%;
+        opacity: 0.85;
+      }
+    }
+  }
+ @keyframes back {
+   0% {
+     border-radius: 10% 30% 50% 70% ;
+   }
+   10% {
+    border-radius: 70% 10% 30% 50% ;
+   }
+   20% {
+     border-radius: 50% 70% 10% 30% ;
+   }
+   30% {
+    border-radius: 30% 50% 70% 10% ;
+   }
+   40% {
+     border-radius: 10% 30% 50% 70% ;
+   }
+   50% {
+    border-radius: 70% 10% 30% 50% ;
+   }
+   60% {
+     border-radius: 50% 70% 10% 30% ;
+   }
+   70% {
+    border-radius: 30% 50% 70% 10% ;
+   }
+   80% {
+     border-radius: 10% 30% 50% 70% ;
+   }
+   90% {
+    border-radius: 70% 10% 30% 50% ;
+   }
+   100% {
+    border-radius: 50% 70% 10% 30% ;
+   }
+
+ }
+
+  /* =============article 2=============== */
+
+  .article2 {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    margin: 20% 0;
+
+    .informations {
+      text-align: left;
+      width: 50%;
+      padding-left: 5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .title {
+      }
+
+      .text {
+        width: 500px;
+        line-height: 23px;
+        color: rgba(134, 90, 71, 1);
+        text-align: left;
+      }
+
+      a{
+        border-radius: 10% 30% 50% 70%;
+        padding: 20px;
+        background-color: blue;
+        color: grey;
+        text-decoration: none;
+        animation: back 15s infinite alternate;
+        transition: all 0.4s;
+        width: fit-content;
+
+        &:hover {
+          border-radius: 75% 50% 30% 10%;
+          background-color: blue;
+          color: white;
+          transition: all 0.4s;
+        }
+      }
+    }
+
+    .picture {
+      width: 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 80%;
+        border-radius: 50%;
+        opacity: 0.85;
+      }
+    }
+  }
+}
+
+@media (max-width: 1220px) {
+  .home-article {
+    .article {
+      .informations {
+        width: 60%;
+
+        .title {
+        }
+
+        .text {
+        }
+
+        a {
+        }
+      }
+
+      .picture {
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .article2 {
+      .informations {
+        width: 60%;
+
+        .title {
+        }
+
+        .text {
+        }
+
+        a {
+        }
+      }
+
+      .picture {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1104px) {
+  .home-article {
+    .article {
+      .informations {
+        .title {
+          font-size: 3em;
+        }
+
+        .text {
+        }
+
+        a {
+        }
+      }
+
+      .picture {
+        
+        img {
+          
+        }
+      }
+    }
+
+    .article2 {
+      .informations {
+        .title {
+          font-size: 3em;
+        }
+
+        .text {
+        }
+
+        a {
+        }
+      }
+
+      .picture {
+        img {
+        }
+      }
+    }
+  }
+}
+
+
+
+@media (max-width: 1006px) {
+  .home-article {
+    margin: 15% 1%;
+
+    .article {
+      flex-direction: column-reverse;
+      align-items: center;
+
+      .informations {
+        width: 90%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        padding: 5%;
+
+        .title {
+          text-align: center;
+          padding: 5%;
+        }
+
+        .text {
+          text-align: center;
+          width: 100%;
+          padding: 5%;
+        }
+
+        a {
+          text-align: center;
+          
+        }
+      }
+
+      .picture {
+        width: 50%;
+
+        img {
+        }
+      }
+    }
+
+    .article2 {
+      flex-direction: column-reverse;
+      align-items: center;
+
+      .informations {
+        width: 90%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        padding: 5%;
+
+        .title {
+          text-align: center;
+          padding: 5%;
+        }
+
+        .text {
+          width: 100%;
+          text-align: center;
+          padding: 5%;
+        }
+
+        a {
+          text-align: center;
+          
+        }
+      }
+
+      .picture {
+        width: 50%;
+
+        img {
+        }
+      }
+    }
+  }
+} 
+
+@media (max-width: 426px) {
+  .home-article {
+    
+
+    .article {
+    
+
+      .informations {
+
+
+        .title {
+          font-size: 30px;
+
+        }
+
+        .text {
+          font-size: 18px;
+        }
+
+        a {
+          text-align: center;
+          
+        }
+      }
+
+      .picture {
+        width: 200px;
+
+        img {
+        }
+      }
+    }
+
+    .article2 {
+     
+
+      .informations {
+        
+
+        .title {
+          font-style: 30px;
+        }
+
+        .text {
+          font-style: 18px;
+        }
+
+        a {
+          
+          
+        }
+      }
+
+      .picture {
+        width: 200px;
+
+        img {
+        }
+      }
+    }
+  }
+} 

@@ -13,6 +13,8 @@ import Products from "./Pages/Products/Products";
 import ProductShowcase from "./Pages/ProductShowcase/ProductShowcase";
 
 function App() {
+
+ 
   /* History */
   const history = useHistory();
   const dispatch = useDispatch();
@@ -27,13 +29,19 @@ function App() {
     ...state.appReducer,
   }));
 
+
+
   useEffect(() => {
     if (history.location.pathname === "/") {
       homePageFalse(true);
+      window.addEventListener('scroll', (e) => {
+        console.log(window.scrollY);
+      })
     }
 
     if (history.location.pathname === "/produits") {
       homePageFalse(false);
+      
     }
     if (history.location.pathname === "/à-propos") {
       homePageFalse(false);
@@ -45,6 +53,8 @@ function App() {
       homePageFalse(false);
     }
   }, [changePage]);
+
+
   
   return (
     <>
