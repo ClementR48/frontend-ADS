@@ -1,19 +1,19 @@
 @import "../../global.scss";
 
 .menu-responsive {
-  position: absolute;
-  right: 0;
+  position: fixed;
+  right: -100%;
   bottom: 0;
   width: 40vw;
   height: calc(100vh - 90px);
   background-color: $colorNavBg;
   z-index: 500;
-  transform: translateX(100%);
+
   transition: all 0.8s ease;
   display: none;
 
   &.active-menu {
-    transform: translateX(0);
+    right: 0;
   }
 
   @include tablet {
@@ -34,6 +34,40 @@
       text-decoration: none;
       color: $colorNavText;
     }
+
+    .active-nav-page {
+      color: $colorPointNav;
+    }
+
+    .floating-cart {
+      margin: 5vh 0;
+      top: 10%;
+      right: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+  
+      svg {
+        stroke: $colorNavText;
+      }
+  
+      .nb-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: orange;
+        top: -15px;
+        right: -15px;
+      }
+    }
+  
+    .floating-cart-active {
+      svg {
+        stroke: $colorPointNav;
+      }
+    }
   }
 }
-

@@ -1,20 +1,53 @@
-
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import './App.scss';
-import MenuResponsive from './Components/MenuReponsive/MenuResponsive';
-import Navbar from './Components/Navbar/Navbar';
-import About from './Pages/About/About';
-import Cart from './Pages/Cart/Cart';
-import Contact from './Pages/Contact/Contact';
-import Home from './Pages/Home/Home';
-import Products from './Pages/Products/Products';
-import ProductShowcase from './Pages/ProductShowcase/ProductShowcase';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import "./App.scss";
+import MenuResponsive from "./Components/MenuReponsive/MenuResponsive";
+import Navbar from "./Components/Navbar/Navbar";
+import About from "./Pages/About/About";
+import Cart from "./Pages/Cart/Cart";
+import Contact from "./Pages/Contact/Contact";
+import Home from "./Pages/Home/Home";
+import Products from "./Pages/Products/Products";
+import ProductShowcase from "./Pages/ProductShowcase/ProductShowcase";
 
 function App() {
-  
+  /* History */
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const homePageFalse = (bool) => {
+    dispatch({
+      type: "HOMEPAGE",
+      payload: bool,
+    });
+  };
+
+  const { changePage } = useSelector((state) => ({
+    ...state.appReducer,
+  }));
+
+  useEffect(() => {
+    if (history.location.pathname === "/") {
+      homePageFalse(true);
+    }
+
+    if (history.location.pathname === "/produits") {
+      homePageFalse(false);
+    }
+    if (history.location.pathname === "/à-propos") {
+      homePageFalse(false);
+    }
+    if (history.location.pathname === "/contact") {
+      homePageFalse(false);
+    }
+    if (history.location.pathname === "/panier") {
+      homePageFalse(false);
+    }
+  }, [changePage]);
   
   return (
-    <Router>
+    <>
       <Navbar />
       <MenuResponsive />
       <Switch>
@@ -25,7 +58,7 @@ function App() {
         <Route exact path="/panier" component={Cart} />
         <Route exact path="/à-propos" component={About} />
       </Switch>
-    </Router>
+    </>
   );
 }
 

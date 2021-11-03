@@ -12,7 +12,6 @@
   font-size: 18px;
   position: fixed;
 
-
   img {
     margin-left: 50px;
     width: 80px;
@@ -40,7 +39,7 @@
   }
 
   .active-nav-page {
-    color: $colorPointNav
+    color: $colorPointNav;
   }
 
   .anim-active {
@@ -88,6 +87,53 @@
       transition: all 1s ease;
     }
   }
+  .floating-cart {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    text-decoration: none;
+
+    svg {
+      stroke: $colorNavText;
+    }
+
+    .nb-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: orange;
+      top: -15px;
+      right: -15px;
+    }
+  }
+
+  .floating-cart-active {
+    svg {
+      stroke: $colorPointNav;
+    }
+  }
+  &.active {
+    .hamburger {
+      span {
+        &:first-child {
+          background-color: blue;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          background-color: blue;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
 }
 
 .home-page {
@@ -127,7 +173,7 @@
   }
 
   .active-nav-page {
-    color: $colorPointNav
+    color: $colorPointNav;
   }
   .anim-active {
     position: absolute;
@@ -152,7 +198,6 @@
   }
 
   .hamburger {
-    
     position: absolute;
     right: 10%;
     width: 32px;
@@ -172,6 +217,55 @@
       background-color: blue;
       transform-origin: left;
       transition: all 1s ease;
+    }
+  }
+
+  .floating-cart {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    text-decoration: none;
+
+    svg {
+      stroke: white;
+    }
+
+    .nb-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: orange;
+      top: -15px;
+      right: -15px;
+    }
+  }
+
+  .floating-cart-active {
+    svg {
+      stroke: $colorPointNav;
+    }
+  }
+
+  &.active {
+    .hamburger {
+      span {
+        &:first-child {
+          background-color: blue;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          background-color: blue;
+          transform: rotate(-45deg);
+        }
+      }
     }
   }
 }
