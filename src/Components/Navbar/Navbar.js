@@ -4,11 +4,15 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCart } from "react-feather";
+import { gsap } from "gsap";
 
-const Navbar = () => {
+const Navbar = ({ color }) => {
   /* States */
 
   const [activeAnim, setActiveAnim] = useState();
+
+
+  /* Selector  */
 
   const { homePage, openMenu } = useSelector((state) => ({
     ...state.appReducer,
@@ -21,6 +25,8 @@ const Navbar = () => {
   /* Ref */
 
   const allLink = useRef([]);
+  const anim = useRef();
+  const navbar = useRef();
 
   const addRefLink = (el) => {
     if (el && !allLink.current.includes(el)) {
@@ -28,7 +34,8 @@ const Navbar = () => {
     }
   };
 
-  const anim = useRef();
+
+  /* Dispatch */
 
   const dispatch = useDispatch();
 
@@ -47,6 +54,8 @@ const Navbar = () => {
 
   /* History */
   const history = useHistory();
+
+    /* Animation au enter du hover */
 
   const hover = (e) => {
     if (e.target.innerText === "Acceuil") {
@@ -71,6 +80,8 @@ const Navbar = () => {
       setActiveAnim(ref5.left + ref5.width / 2);
     }
   };
+
+  /* Animation au leave du hover */
 
   const hoverOff = () => {
     if (history.location.pathname === "/") {
@@ -99,10 +110,18 @@ const Navbar = () => {
     }
   };
 
+
+
   useEffect(() => {
     if (history.location.pathname === "/") {
       let ref1 = allLink.current[0].getBoundingClientRect();
       setActiveAnim(ref1.left + ref1.width / 2);
+
+      gsap.to(navbar.current, {
+        opacity: 1,
+        duration: 1,
+        delay: 2,
+      });
     }
 
     if (history.location.pathname === "/produits") {
@@ -130,23 +149,44 @@ const Navbar = () => {
     anim.current.style.left = `${activeAnim}px  `;
   }, [activeAnim]);
 
+  
+  
+
+
+  /* Nombre items dans le cart */
+
   let totalItems = 0;
   for (const item of shoppingCart.cart) {
     totalItems += item.quantity;
   }
 
-  return (
-    <nav
-      className={
-        homePage
-          ? openMenu
-            ? "home-page active"
-            : "home-page"
-          : openMenu
-          ? "navbar active"
-          : "navbar"
+  /* Classe de la nav  */
+
+  let classe = "";
+  if (homePage) {
+    if (color) {
+      if (openMenu) {
+        classe = "navbar active";
+      } else {
+        classe = "navbar";
       }
-    >
+    } else {
+      if (openMenu) {
+        classe = "home-page active";
+      } else {
+        classe = "home-page";
+      }
+    }
+  } else {
+    if (openMenu) {
+      classe = "navbar active";
+    } else {
+      classe = "navbar";
+    }
+  }
+
+  return (
+    <nav ref={navbar} className={classe}>
       <img
         src={process.env.PUBLIC_URL + "/assets/images/logo2petit.png"}
         alt="logo"

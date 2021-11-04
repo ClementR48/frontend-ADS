@@ -10,6 +10,7 @@
   position: fixed;
   z-index: 500;
   background-color: $colorNavBg;
+  transition: all 0.5s;
 
   img {
     margin-left: 5vw;
@@ -137,7 +138,7 @@
   }
 }
 
-/* PAGE D'ACCEUIL */
+/* PAGE D'ACCEUIL NAV */
 
 .home-page {
   width: 100%;
@@ -148,6 +149,8 @@
   font-size: 20px;
   position: fixed;
   z-index: 500;
+  opacity: 0;
+  transition: all 0.5s;
 
   img {
     margin-left: 5vw;

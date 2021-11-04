@@ -1,0 +1,45 @@
+@import '../../global.scss';
+.footer {
+  padding: 2%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 5vh;
+
+  @include mobile {
+    flex-direction: column;
+  }
+
+  img {
+    width: 100px;
+
+    @include mobile {
+      width: 70px;
+    }
+  }
+
+  .listSocialNetwork {
+    line-height: 2;
+    
+    @include tablet {
+      line-height: 1.5;
+    }
+
+    @include mobile {
+      margin-top: 5vh;
+      text-align: center;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      color: white;
+
+      span {
+        padding-right: 30px;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
+}

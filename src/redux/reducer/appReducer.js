@@ -2,7 +2,8 @@ const INITIAL_STATE = {
   openMenu: false,
   homePage: true,
   changePage : 0,
-  underlineNav : ''
+  colorFooter: "",
+  background : "bgHome"
 
 }
 
@@ -24,6 +25,19 @@ export default function appReducer(state = INITIAL_STATE, action) {
       return {
         ...state, 
         homePage: action.payload
+      }
+    }
+    case "COLORFOOTER": {
+      return {
+        ...state, 
+        colorFooter: action.payload
+      }
+    }
+
+    case "BACKGROUND" : {
+      return {
+        ...state, 
+        background: action.payload
       }
     }
     

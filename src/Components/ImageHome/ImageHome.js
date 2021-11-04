@@ -6,7 +6,7 @@ const ImageHome = () => {
   const text = "La céramique inspirée";
   const textSplit = text.split("");
   let elements = useRef([]);
-  let image = useRef()
+  let image = useRef();
 
   useEffect(() => {
     let d = 0.05;
@@ -25,7 +25,7 @@ const ImageHome = () => {
       gsap.to(elements.current[i], {
         y: (y = y + 10),
         duration: 0.6,
-        delay:1 + d * i,
+        delay: 1 + d * i,
         opacity: 1,
         ease: "power4",
       });
@@ -34,7 +34,7 @@ const ImageHome = () => {
       gsap.to(elements.current[i], {
         y: (y = y - 10),
         duration: 0.6,
-        delay:1 + d * i,
+        delay: 1 + d * i,
         opacity: 1,
         ease: "power4",
       });
@@ -43,7 +43,7 @@ const ImageHome = () => {
       gsap.to(elements.current[i], {
         y: (y = y + 10),
         duration: 0.6,
-        delay:1 + d * i,
+        delay: 1 + d * i,
         opacity: 1,
         ease: "power4",
       });
@@ -51,10 +51,12 @@ const ImageHome = () => {
 
     gsap.to(image.current, {
       opacity: 1,
-      duration : 2,
-      scale: 1
-    })
+      duration: 1,
+      x: 0,
+      ease: "ease"
+    });
   }, []);
+
   return (
     <div className="image-home-container">
       <img

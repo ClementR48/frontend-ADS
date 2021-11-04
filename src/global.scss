@@ -13,8 +13,22 @@ $colorNavBg : rgb(255, 250, 244);
 $colorButtonProduitBg : rgba(255, 212, 189, 0.7);
 $colorButtonProduitText: $colorNavText;
 
-@mixin tablet  {
-  @media screen and (max-width: 769px) {
+
+
+@mixin desktop {
+  @media screen and (max-width: 1200px) {
     @content
   }
-}
+};
+
+@mixin tablet  {
+  @media screen and (max-width: 770px) {
+    @content
+  }
+};
+
+@mixin mobile {
+  @media screen and (max-width: 426px) {
+    @content
+  }
+};

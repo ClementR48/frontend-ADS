@@ -2,13 +2,13 @@
 const homeData =  [
   {
     titre:'Parler avec la nature',
-    description:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
-    image: './assets/images/logo2petit.png'
+    description:'Avoir les mains dans la terre et se laisser guider par elle. Parler avec la terre, mais aussi dire la terre. Pour moi il s’agit d’une démarche profondément instinctive et libre. Grâce à la technique des terres mêlées, ou nériage, je laisse les terres se mélanger et dessiner des marbrures uniques.',
+    image: './assets/images/homeImage1.JPG'
   },
   {
     titre: 'Valoriser l\'artisanat',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting',
-    image: 'http://image.noelshack.com/fichiers/2021/27/6/1625913756-homeimage2bis.jpg'
+    description: 'Créer du durable et du lien social. Respecter la terre, valoriser l’humain, perpétuer les savoir-faires. Proposer la céramique comme alternative au plastique et réapprendre à créer avec ses mains, réapprendre le collectif.',
+    image: './assets/images/homeImage2.JPG'
   },
 ]
 

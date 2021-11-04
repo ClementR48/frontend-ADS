@@ -5,12 +5,11 @@ import ImageHome from "../../Components/ImageHome/ImageHome";
 import { Parallax } from "react-parallax";
 
 const Home = () => {
-
   return (
-    <Parallax  bgImage="/assets/images/background/bgContact.png" bgImageAlt="the cat" strength={700}z>
-      <ImageHome  />
+    <>
+      <ImageHome />
       <ArticlesHome />
-    </Parallax>
+    </>
   );
 };
 
