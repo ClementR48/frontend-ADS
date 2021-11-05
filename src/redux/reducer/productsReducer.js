@@ -3,6 +3,8 @@ import { collection, getDocs } from "firebase/firestore";
 
 const INITIAL_STATE = {
   products: [],
+  productsToShow: [],
+  category :''
 };
 
 export default function productReducer(state = INITIAL_STATE, action) {
@@ -30,6 +32,26 @@ export default function productReducer(state = INITIAL_STATE, action) {
       return {
         products: newArr,
       };
+    }
+    case "PRODUCTSTOSHOW": {
+      if(action.payload !== 'tout'){
+
+        const newArr = state.products.filter((product) => 
+        product.category === action.payload
+        )
+        
+        return {
+          ...state,
+          productsToShow: newArr,
+          category : action.payload
+        }
+      }else if(action.payload === 'tout') {
+        return {
+          ...state,
+          productsToShow: state.products,
+          category : action.payload
+        }
+      }
     }
     
     default: {

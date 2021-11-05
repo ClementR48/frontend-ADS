@@ -1,0 +1,24 @@
+.loader {
+  
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 150px;
+    animation: turn 1s infinite linear;
+    
+  }
+
+  @keyframes turn {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+}

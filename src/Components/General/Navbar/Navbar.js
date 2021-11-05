@@ -188,7 +188,7 @@ const Navbar = ({ color }) => {
   return (
     <nav ref={navbar} className={classe}>
       <img
-        src={process.env.PUBLIC_URL + "/assets/images/logo2petit.png"}
+        src={process.env.PUBLIC_URL + "/assets/images/logoBlanc.png"}
         alt="logo"
       />
       <div className="link">

@@ -1,0 +1,48 @@
+@import "../../../global.scss";
+.categories {
+  margin: 10% 5vw;
+  width: 70%;
+
+  @include desktop {
+    width: calc(100% - 10vw);
+  }
+
+  .list-categ {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .categ {
+      color: $colorNavText;
+      cursor: pointer;
+      background-color: $colorCategBg;
+      font-size: 18px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: $colorNavText;
+        color: $colorCategBg; 
+      }
+    }
+
+    .selected {
+      color: $colorCategBg;
+      cursor: pointer;
+      background-color: $colorNavText; 
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

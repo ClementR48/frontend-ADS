@@ -111,7 +111,7 @@ function App() {
       <Navbar color= {navi}/>
       <MenuResponsive />
       <Switch>
-        <Route exact path="/" component={ Home} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/produits" component={Products} />
         <Route exact path="/produits/:id" component={ProductShowcase} />
         <Route exact path="/contact" component={Contact} />
