@@ -2,7 +2,7 @@ import React from "react";
 import "./ArticlesHome.scss";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import homeData from "../../utils/homeData";
+import homeData from "../../../utils/homeData";
 
 
 const ArticlesHome = () => {

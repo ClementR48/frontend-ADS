@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Home.scss";
-import ArticlesHome from "../../Components/ArticlesHome/ArticlesHome";
-import ImageHome from "../../Components/ImageHome/ImageHome";
+import ArticlesHome from "../../Components/HomeComponents/ArticlesHome/ArticlesHome";
+import ImageHome from "../../Components/HomeComponents/ImageHome/ImageHome";
 import { Parallax } from "react-parallax";
 
 const Home = () => {
