@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   openMenu: false,
   homePage: true,
-  changePage : 0,
+  changePage : true,
   colorFooter: "",
   background : "bgHome"
 
@@ -12,7 +12,7 @@ export default function appReducer(state = INITIAL_STATE, action) {
     case "CHANGEPAGE" : {
       return {
         ...state,
-        changePage : action.payload
+        changePage : !state.changePage
       }
     }
     case "OPENMENU": {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import "./App.scss";
 import Footer from "./Components/General/Footer/Footer";
@@ -12,17 +12,18 @@ import Contact from "./Pages/Contact/Contact";
 import Home from "./Pages/Home/Home";
 import Products from "./Pages/Products/Products";
 import ProductShowcase from "./Pages/ProductShowcase/ProductShowcase";
-import './App.scss';
+import "./App.scss";
 import { Parallax } from "react-parallax";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  /* Barba */
 
- 
   /* History */
   const history = useHistory();
-  const {background} = useSelector((state) =>({
-    ...state.appReducer
-  }))
+  const { background } = useSelector((state) => ({
+    ...state.appReducer,
+  }));
   const dispatch = useDispatch();
   const homePageFalse = (bool) => {
     dispatch({
@@ -33,91 +34,86 @@ function App() {
   const colorFooter = (color) => {
     dispatch({
       type: "COLORFOOTER",
-      payload: color
-    })
-  }
+      payload: color,
+    });
+  };
 
   const backgroundImage = (bg) => {
     dispatch({
       type: "BACKGROUND",
-      payload: bg
-    })
-  }
+      payload: bg,
+    });
+  };
 
   const { changePage } = useSelector((state) => ({
     ...state.appReducer,
   }));
 
-  const [navi, setNavi] = useState(false)
+  const [navi, setNavi] = useState(false);
+
+  const location = useLocation()
 
   useEffect(() => {
-    
-
-    
-      window.addEventListener('scroll', (e) => {
-        if (history.location.pathname === "/") {
-          if(document.documentElement.scrollTop > 90) {
-            setNavi(true)
-          } 
-          if(document.documentElement.scrollTop < 90) {
-            setNavi(false)
-          } 
+    window.addEventListener("scroll", (e) => {
+      if (history.location.pathname === "/") {
+        if (document.documentElement.scrollTop > 90) {
+          setNavi(true);
         }
-      })
-    
-    
-    
-  }, [])
-
-
+        if (document.documentElement.scrollTop < 90) {
+          setNavi(false);
+        }
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (history.location.pathname === "/") {
       homePageFalse(true);
       colorFooter("rgb(248,190,183)");
-      backgroundImage("bgHome")
-    
+      backgroundImage("bgHome");
     }
 
     if (history.location.pathname.startsWith("/produits")) {
       homePageFalse(false);
-      colorFooter("rgb(233, 242, 198)")
-      backgroundImage("bgProducts")
-      setNavi('')
+      colorFooter("rgb(233, 242, 198)");
+      backgroundImage("bgProducts");
+      setNavi("");
     }
     if (history.location.pathname === "/à-propos") {
       homePageFalse(false);
-      colorFooter("rgb(255, 221, 202)")
-      backgroundImage("bgContact")
+      colorFooter("rgb(255, 221, 202)");
+      backgroundImage("bgContact");
     }
     if (history.location.pathname === "/contact") {
       homePageFalse(false);
-      colorFooter("rgb(255, 221, 202)")
-      backgroundImage("bgContact")
+      colorFooter("rgb(255, 221, 202)");
+      backgroundImage("bgContact");
     }
     if (history.location.pathname === "/panier") {
       homePageFalse(false);
-      colorFooter("rgb(248,190,183)")
-      backgroundImage("bgHome")
+      colorFooter("rgb(248,190,183)");
+      backgroundImage("bgHome");
     }
   }, [changePage]);
 
-
-
-
-  
   return (
-    <Parallax  bgImage={`/assets/images/background/${background}.png`} bgImageAlt="arriere plan coloré" strength={300}>
-      <Navbar color= {navi}/>
+    <Parallax
+      bgImage={`/assets/images/background/${background}.png`}
+      bgImageAlt="arriere plan coloré"
+      strength={300}
+    >
+      <Navbar color={navi} />
       <MenuResponsive />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/produits" component={Products} />
-        <Route exact path="/produits/:id" component={ProductShowcase} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/panier" component={Cart} />
-        <Route exact path="/à-propos" component={About} />
-      </Switch>
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.pathname}>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/produits" component={Products} />
+          <Route exact path="/produits/:id" component={ProductShowcase} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/panier" component={Cart} />
+          <Route exact path="/à-propos" component={About} />
+        </Switch>
+      </AnimatePresence>
       <Footer />
     </Parallax>
   );

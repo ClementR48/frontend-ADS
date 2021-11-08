@@ -1,0 +1,101 @@
+@import '../../global.scss';
+.product-showcase {
+  position: relative;
+  padding: 90px 5vw;
+  display: flex;
+  height: 100vh;
+
+  .product-left {
+    flex: 0.6;
+    overflow-y: scroll;
+
+    height: calc(100vh - 10vh);
+
+    img {
+      width: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+  }
+
+  .product-right {
+    position: relative;
+    flex: 0.4;
+    height: calc(100vh - 10vh);
+    padding: 0 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.1em;
+
+   
+
+    .general-information {
+      flex: 0.8;
+      
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+    }
+
+    .color {
+      
+      
+      ul {
+        display: flex;
+        span {
+          margin-right: 15px;
+        }
+
+        li {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    .add-container {
+      display: flex;
+      flex-direction: column;
+      
+      
+      input {
+        font-size: 1em;
+        padding: 5px;
+        border-radius: 3px;
+        width: 100px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        font-size: 1em;
+        width: fit-content;
+        text-align: right;
+        border-radius: 100px 30px 100px 30px / 80px 30px 80px 30px;
+        padding: 20px 50px;
+        background-color: $colorButtonProduitBg;
+        color: $colorButtonProduitText;
+        text-decoration: none;
+        transition: all 0.4s ease-in-out;
+        border: none;
+        cursor: pointer;
+        &:hover {
+          border-radius: 30px 100px 30px 100px / 30px 80px 30px 80px;
+          background-color: $colorTitle;
+          color: white;
+          transition: all 0.4s ease-in-out;
+        }
+      }
+
+    }
+
+    .navigation {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}

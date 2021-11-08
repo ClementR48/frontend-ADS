@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 const INITIAL_STATE = {
   products: [],
   productsToShow: [],
-  category :''
+  category :'tout'
 };
 
 export default function productReducer(state = INITIAL_STATE, action) {
@@ -53,7 +53,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
         }
       }
     }
-    
+ 
     default: {
       return {
         ...state,

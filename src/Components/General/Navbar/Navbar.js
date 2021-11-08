@@ -14,7 +14,7 @@ const Navbar = ({ color }) => {
 
   /* Selector  */
 
-  const { homePage, openMenu } = useSelector((state) => ({
+  const { homePage, openMenu, changePage } = useSelector((state) => ({
     ...state.appReducer,
   }));
 
@@ -45,10 +45,10 @@ const Navbar = ({ color }) => {
     });
   };
 
-  const changePageFunc = (value) => {
+  const changePageFunc = () => {
     dispatch({
-      type: "CHANGEPAGE",
-      payload: value,
+      type: "CHANGEPAGE"
+      
     });
   };
 
@@ -60,22 +60,27 @@ const Navbar = ({ color }) => {
   const hover = (e) => {
     if (e.target.innerText === "Acceuil") {
       let ref1 = allLink.current[0].getBoundingClientRect();
+      anim.current.style.opacity = 1
       setActiveAnim(ref1.left + ref1.width / 2);
     }
     if (e.target.innerText === "Shop") {
+      anim.current.style.opacity = 1
       let ref2 = allLink.current[1].getBoundingClientRect();
       setActiveAnim(ref2.left + ref2.width / 2);
     }
     if (e.target.innerText === "A propos") {
+      anim.current.style.opacity = 1
       let ref3 = allLink.current[2].getBoundingClientRect();
       setActiveAnim(ref3.left + ref3.width / 2);
     }
     if (e.target.innerText === "Contact") {
+      anim.current.style.opacity = 1
       let ref4 = allLink.current[3].getBoundingClientRect();
       setActiveAnim(ref4.left + ref4.width / 2);
     }
 
     if (e.target.className === "floating-cart") {
+      anim.current.style.opacity = 1
       let ref5 = allLink.current[4].getBoundingClientRect();
       setActiveAnim(ref5.left + ref5.width / 2);
     }
@@ -108,6 +113,10 @@ const Navbar = ({ color }) => {
       let cartRefe = allLink.current[4].getBoundingClientRect();
       setActiveAnim(cartRefe.left + cartRefe.width / 2);
     }
+
+    if(history.location.pathname.startsWith('/produits/')) {
+      anim.current.style.opacity = 0
+    }
   };
 
 
@@ -122,6 +131,7 @@ const Navbar = ({ color }) => {
         duration: 1,
         delay: 2,
       });
+
     }
 
     if (history.location.pathname === "/produits") {
@@ -131,7 +141,7 @@ const Navbar = ({ color }) => {
     }
     if (history.location.pathname === "/à-propos") {
       let ref3 = allLink.current[2].getBoundingClientRect();
-
+     
       setActiveAnim(ref3.left + ref3.width / 2);
     }
     if (history.location.pathname === "/contact") {
@@ -143,11 +153,19 @@ const Navbar = ({ color }) => {
       let cartRefe = allLink.current[4].getBoundingClientRect();
       setActiveAnim(cartRefe.left + cartRefe.width / 2);
     }
-  }, [history.location.pathname]);
+    if(history.location.pathname.startsWith("/produits/")) {
+      anim.current.style.opacity = 0
+    }
+
+    
+  }, [changePage]);
 
   useEffect(() => {
     anim.current.style.left = `${activeAnim}px  `;
+    anim.current.style.opacity = 1
   }, [activeAnim]);
+
+ 
 
   
   
@@ -161,6 +179,7 @@ const Navbar = ({ color }) => {
   }
 
   /* Classe de la nav  */
+
 
   let classe = "";
   if (homePage) {
@@ -201,7 +220,7 @@ const Navbar = ({ color }) => {
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={hoverOff}
           onClick={() => {
-            changePageFunc(1);
+            changePageFunc();
           }}
         >
           Acceuil
@@ -210,11 +229,12 @@ const Navbar = ({ color }) => {
           className="nav-page"
           activeClassName="active-nav-page"
           to="/produits"
+          exact
           ref={addRefLink}
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={hoverOff}
           onClick={() => {
-            changePageFunc(2);
+            changePageFunc();
           }}
         >
           Shop
@@ -227,7 +247,7 @@ const Navbar = ({ color }) => {
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={hoverOff}
           onClick={() => {
-            changePageFunc(3);
+            changePageFunc();
           }}
         >
           A propos
@@ -240,7 +260,7 @@ const Navbar = ({ color }) => {
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={hoverOff}
           onClick={() => {
-            changePageFunc(4);
+            changePageFunc();
           }}
         >
           Contact
@@ -253,7 +273,7 @@ const Navbar = ({ color }) => {
           ref={addRefLink}
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={hoverOff}
-          onClick={() => changePageFunc(5)}
+          onClick={() => changePageFunc()}
         >
           <ShoppingCart />
           <span className="nb-items">{totalItems}</span>

@@ -6,8 +6,13 @@ import { Link } from "react-router-dom";
 import Categories from "../../Components/ProductsComponents/Categories/Categories";
 import ListProducts from "../../Components/ProductsComponents/ListProducts/ListProducts";
 import Loader from "../../Components/Loader/Loader";
+import { motion, useMotionValue } from "framer-motion";
 
 const Products = () => {
+
+  const x = useMotionValue(0)
+
+  x.getVelocity(100)
   const { products } = useSelector((state) => ({
     ...state.productsReducer,
   }));
@@ -19,29 +24,20 @@ const Products = () => {
   }, []);
 
   return (
+    <motion.div
+    initial={{ opacity: 0, translateX: 100}}
+    animate={{ opacity: 1 , translateX: 0}}
+    exit={{ opacity: 0 }}
+  >
     <div className="products">
       {products.length !== 0 ? <> 
         <Categories />
         <ListProducts />
       </> : <Loader />}
      
-      {/* <ul>
-        {products.map((product) => {
-          return (
-            <Link
-              to={{
-                pathname: `/produits/${product.name
-                  .replace(/\s+/g, "")
-                  .trim()}`,
-              }}
-              key={product.id}
-            >
-            product.name
-            </Link>
-          );
-        })}
-      </ul> */}
+     
     </div>
+    </motion.div>
   );
 };
 
