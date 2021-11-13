@@ -62,18 +62,13 @@
       a {
         width: fit-content;
         text-align: right;
-        border-radius: 100px 30px 100px 30px / 80px 30px 80px 30px;
-        padding: 20px 50px;
-        background-color: $colorButtonProduitBg;
         color: $colorButtonProduitText;
-        text-decoration: none;
-        transition: all 0.4s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        font-size: 20px;
 
         &:hover {
-          border-radius: 30px 100px 30px 100px / 30px 80px 30px 80px;
-          background-color: $colorTitle;
-          color: white;
-          transition: all 0.4s ease-in-out;
+          color: $colorTitle;
+          letter-spacing: 5px;
         }
       }
     }

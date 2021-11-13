@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getProducts } from "../../redux/reducer/productsReducer";
 import Loader from "../../Components/Loader/Loader";
+import { motion } from "framer-motion";
 
 const ProductShowcase = () => {
   const [quantity, setQuantity] = useState(1);
@@ -49,15 +50,37 @@ const ProductShowcase = () => {
 
     setQuantity(1);
   };
-  useEffect(() => {}, [products]);
+
+  const inputChange = (e) => {
+    if (e.target.innerText === "-") {
+      if (quantity === 0) {
+        setQuantity(0);
+      } else {
+        setQuantity(quantity - 1);
+      }
+    } else if (e.target.innerText === "+") {
+      console.log(products[indexProductClicked].quantity);
+      if (quantity >= products[indexProductClicked].quantity) {
+        setQuantity(products[indexProductClicked].quantity);
+      } else {
+        setQuantity(quantity + 1);
+      }
+    }
+  };
 
   return (
-    <>
+    <motion.div transition={{delay: 0.5}}>
       {products[indexProductClicked] === undefined ? (
         <Loader />
       ) : (
         <div className="product-showcase">
-          <div className="product-left">
+          <motion.div
+            className="product-left"
+            initial={{ translateX: -300, opacity: 0 }}
+            exit={{ translateX: -300, opacity: 0 }}
+            animate={{ translateX: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
             <img
               src={products[indexProductClicked].image.firstImage}
               alt="produit 1"
@@ -70,8 +93,14 @@ const ProductShowcase = () => {
               src={products[indexProductClicked].image.thirdImage}
               alt="produit 3"
             />
-          </div>
-          <div className="product-right">
+          </motion.div>
+          <motion.div
+            className="product-right"
+            initial={{ translateX: 300, opacity: 0 }}
+            exit={{ translateX: 300, opacity: 0 }}
+            animate={{ translateX: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
             <div className="general-information">
               <h2 className="title-product">
                 {products[indexProductClicked].name}
@@ -99,11 +128,11 @@ const ProductShowcase = () => {
                 <div className="dimensions">
                   <p className="width">
                     {" "}
-                    <span>Largeur:</span>{" "}
+                    <span>Largeur:</span>
                     {products[indexProductClicked].dimensions.width}
                   </p>
                   <p className="height">
-                    <span>Hauteur:</span>{" "}
+                    <span>Hauteur:</span>
                     {products[indexProductClicked].dimensions.height}
                   </p>
                 </div>
@@ -117,25 +146,39 @@ const ProductShowcase = () => {
 
             <form className="add-container" onSubmit={addToCart}>
               {products[indexProductClicked].quantity > 1 && (
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={updateProduct}
-                  min="1"
-                  max={products[indexProductClicked].quantity}
-                />
+                <div className="input-container">
+                  <span
+                    onClick={(e) => {
+                      inputChange(e);
+                    }}
+                  >
+                    -
+                  </span>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={updateProduct}
+                    min="1"
+                    max={products[indexProductClicked].quantity}
+                  />
+                  <span
+                    onClick={(e) => {
+                      inputChange(e);
+                    }}
+                  >
+                    +
+                  </span>
+                </div>
               )}
               <button>Ajouter au panier</button>
             </form>
             <div className="navigation">
-              <button onClick={() => history.push("/produits")}>
-                back to shop
-              </button>
+              <button onClick={() => history.push("/produits")}>shop</button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
-    </>
+    </motion.div>
   );
 };
 

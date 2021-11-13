@@ -2,14 +2,19 @@
 
 .image-home-container {
   width: 100vw;
+  height: 100vh;
   position: relative;
+
+  @include desktop {
+    height: auto;
+  }
 
   img {
     width: 100%;
     min-width: 900px;
     opacity: 0;
     transform: translateX(100%);
-
+    
     
   }
 

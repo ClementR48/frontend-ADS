@@ -13,17 +13,17 @@ import Home from "./Pages/Home/Home";
 import Products from "./Pages/Products/Products";
 import ProductShowcase from "./Pages/ProductShowcase/ProductShowcase";
 import "./App.scss";
-import { Parallax } from "react-parallax";
-import { AnimatePresence } from "framer-motion";
+
+
+
+import { AnimatePresence, useAnimation } from "framer-motion";
 
 function App() {
-  /* Barba */
+  
 
   /* History */
   const history = useHistory();
-  const { background } = useSelector((state) => ({
-    ...state.appReducer,
-  }));
+
   const dispatch = useDispatch();
   const homePageFalse = (bool) => {
     dispatch({
@@ -38,29 +38,24 @@ function App() {
     });
   };
 
-  const backgroundImage = (bg) => {
-    dispatch({
-      type: "BACKGROUND",
-      payload: bg,
-    });
-  };
+ 
 
   const { changePage } = useSelector((state) => ({
     ...state.appReducer,
   }));
 
-  const [navi, setNavi] = useState(false);
+  const [scrollNav, setscrollNav] = useState(false);
 
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
       if (history.location.pathname === "/") {
         if (document.documentElement.scrollTop > 90) {
-          setNavi(true);
+          setscrollNav(true);
         }
         if (document.documentElement.scrollTop < 90) {
-          setNavi(false);
+          setscrollNav(false);
         }
       }
     });
@@ -70,39 +65,34 @@ function App() {
     if (history.location.pathname === "/") {
       homePageFalse(true);
       colorFooter("rgb(248,190,183)");
-      backgroundImage("bgHome");
+      
     }
 
     if (history.location.pathname.startsWith("/produits")) {
       homePageFalse(false);
       colorFooter("rgb(233, 242, 198)");
-      backgroundImage("bgProducts");
-      setNavi("");
+      setscrollNav("");
     }
     if (history.location.pathname === "/à-propos") {
       homePageFalse(false);
       colorFooter("rgb(255, 221, 202)");
-      backgroundImage("bgContact");
+      
     }
     if (history.location.pathname === "/contact") {
       homePageFalse(false);
       colorFooter("rgb(255, 221, 202)");
-      backgroundImage("bgContact");
+     
     }
     if (history.location.pathname === "/panier") {
       homePageFalse(false);
       colorFooter("rgb(248,190,183)");
-      backgroundImage("bgHome");
+      
     }
   }, [changePage]);
 
   return (
-    <Parallax
-      bgImage={`/assets/images/background/${background}.png`}
-      bgImageAlt="arriere plan coloré"
-      strength={300}
-    >
-      <Navbar color={navi} />
+    <>
+      <Navbar color={scrollNav} />
       <MenuResponsive />
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
@@ -115,7 +105,7 @@ function App() {
         </Switch>
       </AnimatePresence>
       <Footer />
-    </Parallax>
+    </>
   );
 }
 

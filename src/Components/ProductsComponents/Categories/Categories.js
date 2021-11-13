@@ -40,7 +40,9 @@ const Categories = () => {
             className={index === activeCateg ? "categ selected" : "categ"}
             onClick={() => {
               setActiveCateg(index);
-              productToDisplay(categorie)
+              setTimeout(() => {
+                productToDisplay(categorie);
+              }, 100);
             }}
           >
             {categorie}
@@ -49,7 +51,10 @@ const Categories = () => {
 
         <li className={activeCateg === -1 ? "categ selected" : "categ"} onClick={() => {
           setActiveCateg(-1)
-          productToDisplay('tout')
+          setTimeout(() => {
+
+            productToDisplay('tout')
+          })
         }}>Tout</li>
       </ul>
     </div>

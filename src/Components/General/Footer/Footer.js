@@ -9,7 +9,7 @@ const Footer = () => {
   }))
   
   return (
-    <footer>
+    
       <footer style={{background: colorFooter}} className="footer">
       <img src='/assets/images/logo2petit.png' alt="logo"></img>
       <ul className="listSocialNetwork">
@@ -18,7 +18,7 @@ const Footer = () => {
         <li><span>Facebook:</span> Atelier Del Sol</li>
       </ul>
     </footer>
-    </footer>
+    
   );
 };
 

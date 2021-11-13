@@ -3,8 +3,7 @@ const INITIAL_STATE = {
   homePage: true,
   changePage : true,
   colorFooter: "",
-  background : "bgHome"
-
+  
 }
 
 export default function appReducer(state = INITIAL_STATE, action) {
@@ -34,12 +33,7 @@ export default function appReducer(state = INITIAL_STATE, action) {
       }
     }
 
-    case "BACKGROUND" : {
-      return {
-        ...state, 
-        background: action.payload
-      }
-    }
+    
     
     default: {
       return {

@@ -6,13 +6,11 @@ import { Link } from "react-router-dom";
 import Categories from "../../Components/ProductsComponents/Categories/Categories";
 import ListProducts from "../../Components/ProductsComponents/ListProducts/ListProducts";
 import Loader from "../../Components/Loader/Loader";
-import { motion, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
+import { Parallax } from "react-parallax";
+
 
 const Products = () => {
-
-  const x = useMotionValue(0)
-
-  x.getVelocity(100)
   const { products } = useSelector((state) => ({
     ...state.productsReducer,
   }));
@@ -25,18 +23,60 @@ const Products = () => {
 
   return (
     <motion.div
-    initial={{ opacity: 0, translateX: 100}}
-    animate={{ opacity: 1 , translateX: 0}}
-    exit={{ opacity: 0 }}
-  >
-    <div className="products">
-      {products.length !== 0 ? <> 
-        <Categories />
-        <ListProducts />
-      </> : <Loader />}
-     
-     
-    </div>
+      className="products"
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+      
+    >
+         <Parallax
+      bgImage={`/assets/images/background/bgProducts.png`}
+      bgImageAlt="arriere plan coloré"
+      strength={1000}
+    >
+      {products.length !== 0 ? (
+        <>
+          <motion.div
+            transition={{ duration:1}}
+            initial={{
+              translateY: -100,
+              opacity: 0,
+            }}
+            animate={{
+              translateY: 0,
+              opacity: 1,
+            }}
+            exit={{
+              translateY: -100,
+              opacity: 0,
+            }}
+          >
+            <Categories />
+          </motion.div>
+
+          <motion.div
+            transition={{ duration:1}}
+            initial={{
+              translateY: 100,
+              opacity: 0,
+            }}
+            animate={{
+              translateY: 0,
+              opacity: 1,
+            }}
+            exit={{
+              translateY: 100,
+              opacity: 0,
+            }}
+            
+          >
+            <ListProducts  />
+          </motion.div>
+        </>
+      ) : (
+        <Loader />
+      )}
+      </Parallax>
     </motion.div>
   );
 };

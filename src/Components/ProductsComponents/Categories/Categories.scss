@@ -27,6 +27,17 @@
       align-items: center;
       transition: all 0.2s;
 
+      @include tablet {
+        width: 70px;
+        height: 70px;
+        
+      }
+      @include mobile {
+        width: 60px;
+        height: 60px;
+        font-size: 17px;
+      }
+
       &:hover {
         background-color: $colorNavText;
         color: $colorCategBg; 
@@ -43,6 +54,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+
+      @include tablet {
+        width: 70px;
+        height: 70px;
+        
+      }
+      @include mobile {
+        width: 60px;
+        height: 60px;
+        font-size: 17px;
+      }
     }
   }
 }

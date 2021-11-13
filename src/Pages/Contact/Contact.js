@@ -2,14 +2,20 @@ import React from "react";
 import { Parallax } from "react-parallax";
 import { motion } from "framer-motion";
 
+ 
+
+
 const Contact = () => {
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{duration: 3, times: [0, 0.2, 1]} }
+      
     >
-      <p>
+      <p >
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla labore
         amet nesciunt dolor quae sequi! Impedit sed tenetur saepe fugiat illum
         eligendi rerum, accusantium error, facilis cum quas ab aliquid velit

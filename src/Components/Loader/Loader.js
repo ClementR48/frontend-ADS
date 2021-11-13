@@ -4,7 +4,7 @@ import './Loader.scss'
 const Loader = () => {
   return (
     <div className="loader">
-      <img src='/assets/images/logo2petit.png' alt="" />
+      <img src='/assets/images/logoRose.png' alt="" />
       <p>Loading ...</p>
     </div>
   );
