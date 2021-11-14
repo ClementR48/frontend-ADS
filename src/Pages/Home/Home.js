@@ -4,6 +4,7 @@ import ArticlesHome from "../../Components/HomeComponents/ArticlesHome/ArticlesH
 import ImageHome from "../../Components/HomeComponents/ImageHome/ImageHome";
 import { Parallax } from "react-parallax";
 import {motion} from 'framer-motion';
+import ScrollToTop from "../../Components/ScrollToTop";
 
 
 
@@ -22,6 +23,7 @@ const Home = () => {
         bgImageAlt="arriere plan coloré"
         strength={1000}
       >
+        <ScrollToTop/>
         <ImageHome />
         <ArticlesHome/>
       </Parallax>

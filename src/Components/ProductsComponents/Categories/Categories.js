@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { Play } from "react-feather";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import "./Categories.scss";
@@ -11,9 +13,9 @@ const Categories = () => {
   const productToDisplay = (categ) => {
     dispatch({
       type: "PRODUCTSTOSHOW",
-      payload: categ
-    })
-  }
+      payload: categ,
+    });
+  };
 
   const { products } = useSelector((state) => ({
     ...state.productsReducer,
@@ -28,8 +30,10 @@ const Categories = () => {
   );
 
   useEffect(() => {
-    productToDisplay('tout')
-  }, [])
+    productToDisplay("tout");
+  }, []);
+
+
 
   return (
     <div className="categories">
@@ -45,17 +49,22 @@ const Categories = () => {
               }, 100);
             }}
           >
-            {categorie}
+            <p>{categorie}</p>
+            <Play size={35}></Play>
           </li>
         ))}
 
-        <li className={activeCateg === -1 ? "categ selected" : "categ"} onClick={() => {
-          setActiveCateg(-1)
-          setTimeout(() => {
-
-            productToDisplay('tout')
-          })
-        }}>Tout</li>
+        <li
+          className={activeCateg === -1 ? "categ selected" : "categ"}
+          onClick={() => {
+            setActiveCateg(-1);
+            setTimeout(() => {
+              productToDisplay("tout");
+            });
+          }}
+        >
+          Tout
+        </li>
       </ul>
     </div>
   );

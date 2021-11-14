@@ -14,6 +14,7 @@
     align-items: center;
 
     .categ {
+      position: relative;
       color: $colorNavText;
       cursor: pointer;
       background-color: $colorCategBg;
@@ -25,7 +26,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all 0.2s;
+      transition: background-color 0.5s ;
+
+      svg {
+        transform: translate(-50%);
+        position: absolute;
+        transform: scale(0);
+        transition: transform 0.5s ease ;
+      }
+      p{
+        transition: opacity 0.5s 0.5s;
+      }
 
       @include tablet {
         width: 70px;
@@ -42,18 +53,33 @@
         background-color: $colorNavText;
         color: $colorCategBg; 
       }
+      &:hover svg {
+        transition: transform 0.5s ease 0.5s;
+        transform: scale(1.2); 
+      }
+      &:hover p {
+        opacity: 0; 
+        transition: opacity 0.5s ;
+      }
     }
 
     .selected {
       color: $colorCategBg;
       cursor: pointer;
-      background-color: $colorNavText; 
+      background-color: grey; 
       width: 100px;
       height: 100px;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      svg {
+        transform: scale(1.2);
+      }
+      p{
+        opacity: 0;
+      }
 
 
       @include tablet {

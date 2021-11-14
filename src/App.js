@@ -18,6 +18,7 @@ import "./App.scss";
 
 import { AnimatePresence, useAnimation } from "framer-motion";
 
+
 function App() {
   
 
@@ -92,6 +93,7 @@ function App() {
 
   return (
     <>
+      
       <Navbar color={scrollNav} />
       <MenuResponsive />
       <AnimatePresence exitBeforeEnter>

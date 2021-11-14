@@ -2,12 +2,9 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./ListProducts.scss";
-import { Grid, Item, ImageList, ImageListItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import Loader from "../../Loader/Loader";
-import { motion } from "framer-motion";
 import gsap from "gsap/all";
-import all from "gsap/all";
 
 const ListProducts = () => {
   const { productsToShow, category } = useSelector((state) => ({
@@ -22,8 +19,9 @@ const ListProducts = () => {
     });
   };
 
+  /* Animation a l'appariton des items  */
+
   const allRef = useRef([]);
-  const ref1 = useRef();
 
   const addRef = (el) => {
     if (el && !allRef.current.includes(el)) {
@@ -35,6 +33,11 @@ const ListProducts = () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = 1;
+        entry.target.style.filter = "blur(0)";
+        
+      } else {
+        entry.target.style.opacity = 0;
+        entry.target.style.filter = "blur(10px)";
       }
     });
   };
@@ -42,29 +45,26 @@ const ListProducts = () => {
   const options = useMemo(() => {
     return {
       root: null,
-      rootMargin: "0px",
+      rootMargin: "10%",
       threshold: 0.3,
     };
   }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(callbackFunction, options);
-    
+
     allRef.current.forEach((ref) => {
       observer.observe(ref);
     });
-    console.log(allRef.current);
-    if(allRef.current == ''){
-      gsap.to('.item', {
-        opacity: 1
-      })
-    }
+  }, [options, allRef, productsToShow]);
 
-  }, [options, allRef]);
+
+
+  /* Animation au changement de la liste  */
 
   useEffect(() => {
     gsap.fromTo(
-      ".grid",
+      `.${classGrid}`,
       {
         opacity: 0,
         y: 100,
@@ -78,11 +78,26 @@ const ListProducts = () => {
     );
   }, [productsToShow]);
 
+  /* Centrage des items quand il y a besoin */
+
+  const grid = useRef()
+  const [classGrid, setClassGrid] = useState('grid')
+
+  useEffect(() => {
+    
+    if(productsToShow.length <= 4) {
+      setClassGrid('second-grid')
+      
+    }else {
+      setClassGrid('grid')
+    }
+  }, [productsToShow])
+
   return (
     <>
       {productsToShow !== undefined ? (
         <>
-          <div className="grid" ref={ref1}>
+          <div className={classGrid} ref={grid}>
             {productsToShow.map((item) => {
               return (
                 <div key={item.id} className="item" ref={addRef}>
@@ -101,6 +116,7 @@ const ListProducts = () => {
                     />
                     <div className="caption">
                       <h3>{item.name}</h3>
+                      <p>{item.price}€</p>
                     </div>
                   </Link>
                 </div>
@@ -112,57 +128,6 @@ const ListProducts = () => {
         <Loader />
       )}
     </>
-    /*     <>
-      {productsToShow === undefined ? (
-        <Loader />
-      ) : (
-        <>
-          {category === "tout" ? (
-            <div className="list-container-first">
-              {productsToShow.map((product) => (
-                
-                  
-                    <Link
-                      className="items"
-                      key={product.id}
-                      onClick={() => {
-                        changePageFunc();
-                      }}
-                      to={`/produits/${product.name
-                        .replace(/\s+/g, "")
-                        .trim()}`}
-                    >
-                      <img
-                        
-                        src={`${product.image.firstImage}`}
-                        alt={product.name}
-                        loading="lazy"
-                      />
-
-                      <h1>{product.name}</h1>
-                    </Link>
-                  
-                
-              ))}
-              </div>
-          ) : (
-            <div className="list-container">
-              {productsToShow.map((product) => (
-                <div className="product-container">
-                  <div className="image-container">
-                    <img
-                      src={product.image.firstImage}
-                      alt={product.name}
-                    ></img>
-                  </div>
-                  <div className="caption"></div>
-                </div>
-              ))}
-            </div>
-          )}
-        </>
-      )}
-    </> */
   );
 };
 

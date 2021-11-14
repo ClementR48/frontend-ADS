@@ -8,6 +8,7 @@ import ListProducts from "../../Components/ProductsComponents/ListProducts/ListP
 import Loader from "../../Components/Loader/Loader";
 import { motion } from "framer-motion";
 import { Parallax } from "react-parallax";
+import ScrollToTop from "../../Components/ScrollToTop";
 
 
 const Products = () => {
@@ -36,6 +37,7 @@ const Products = () => {
     >
       {products.length !== 0 ? (
         <>
+          <ScrollToTop/>
           <motion.div
             transition={{ duration:1}}
             initial={{
