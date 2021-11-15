@@ -7,7 +7,7 @@ import Loader from "../../Loader/Loader";
 import gsap from "gsap/all";
 
 const ListProducts = () => {
-  const { productsToShow, category } = useSelector((state) => ({
+  const { productsToShow } = useSelector((state) => ({
     ...state.productsReducer,
   }));
 
@@ -34,7 +34,6 @@ const ListProducts = () => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = 1;
         entry.target.style.filter = "blur(0)";
-        
       } else {
         entry.target.style.opacity = 0;
         entry.target.style.filter = "blur(10px)";
@@ -58,9 +57,8 @@ const ListProducts = () => {
     });
   }, [options, allRef, productsToShow]);
 
-
-
   /* Animation au changement de la liste  */
+  const [classGrid, setClassGrid] = useState("grid");
 
   useEffect(() => {
     gsap.fromTo(
@@ -76,22 +74,22 @@ const ListProducts = () => {
         y: 0,
       }
     );
-  }, [productsToShow]);
+  }, [productsToShow, classGrid]);
 
   /* Centrage des items quand il y a besoin */
 
-  const grid = useRef()
-  const [classGrid, setClassGrid] = useState('grid')
+  const grid = useRef();
+  
 
   useEffect(() => {
-    
-    if(productsToShow.length <= 4) {
-      setClassGrid('second-grid')
-      
-    }else {
-      setClassGrid('grid')
+    if (productsToShow !== undefined) {
+      if (productsToShow.length <= 4) {
+        setClassGrid("second-grid");
+      } else {
+        setClassGrid("grid");
+      }
     }
-  }, [productsToShow])
+  }, [productsToShow]);
 
   return (
     <>
@@ -118,6 +116,9 @@ const ListProducts = () => {
                       <h3>{item.name}</h3>
                       <p>{item.price}€</p>
                     </div>
+                    {item.quantity == 0 ?<div className="sold-out">
+                      <p>&Eacute;PUIS&Eacute;</p>
+                    </div> : ""}
                   </Link>
                 </div>
               );

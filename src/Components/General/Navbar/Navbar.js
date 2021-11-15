@@ -4,9 +4,8 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCart } from "react-feather";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { easing } from "@mui/material";
-import gsap from "gsap/all";
+import {  motion } from "framer-motion";
+
 
 const Navbar = ({ color }) => {
   /* States */
@@ -27,7 +26,7 @@ const Navbar = ({ color }) => {
 
   const allLink = useRef([]);
   const anim = useRef();
-  const navbar = useRef();
+  
 
   const addRefLink = (el) => {
     if (el && !allLink.current.includes(el)) {
@@ -126,7 +125,7 @@ const Navbar = ({ color }) => {
 
     if (history.location.pathname === "/produits") {
       let ref2 = allLink.current[1].getBoundingClientRect();
-
+      anim.current.style.opacity = 1;
       setActiveAnim(ref2.left + ref2.width / 2);
     }
     if (history.location.pathname === "/à-propos") {
@@ -147,6 +146,8 @@ const Navbar = ({ color }) => {
       anim.current.style.opacity = 0;
     }
   }, [changePage]);
+
+
 
   useEffect(() => {
     anim.current.style.left = `${activeAnim}px  `;
@@ -189,14 +190,21 @@ const Navbar = ({ color }) => {
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      exit={{opacity: 0}}
       transition={{ bounce: 3, duration: 1 }}
-      ref={navbar}
+      
       className={classe}
     >
-      <img
+      {homePage? color ?<img
         src={process.env.PUBLIC_URL + "/assets/images/logoRose.png"}
         alt="logo"
-      />
+      /> : <img
+      src={process.env.PUBLIC_URL + "/assets/images/logoBlanc .png"}
+      alt="logo"
+    /> : <img
+    src={process.env.PUBLIC_URL + "/assets/images/logoRose.png"}
+    alt="logo"
+  />}
       <div className="link">
         <NavLink
           className="nav-page"

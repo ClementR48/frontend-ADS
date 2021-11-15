@@ -81,6 +81,18 @@
     &:hover .caption {
       bottom: 0px;
     }
+
+    .sold-out {
+      position: absolute;
+      top: 50px;
+      right: -20px;
+      transform: rotate(90deg);
+      font-size: 35px;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 3px;
+      
+    }
   }
 }
 .second-grid {
@@ -155,6 +167,18 @@
       }
     }
 
+    .sold-out {
+      position: absolute;
+      top: 50px;
+      right: -20px;
+      transform: rotate(90deg);
+      font-size: 35px;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 3px;
+      
+    }
+
     &:hover img {
       transform: scale(1.1);
       filter: opacity(0.8);
@@ -163,5 +187,6 @@
     &:hover .caption {
       bottom: 0px;
     }
+
   }
 }

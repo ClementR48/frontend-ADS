@@ -1,6 +1,6 @@
 @import "../../../global.scss";
 .footer {
-  padding: 2%;
+  padding: 1%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -10,7 +10,7 @@
   }
 
   img {
-    width: 100px;
+    width: 120px;
 
     @include mobile {
       width: 70px;

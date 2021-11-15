@@ -8,9 +8,11 @@ import { useInView } from "react-intersection-observer";
 
 const ArticlesHome = () => {
   const [ref1, inView] = useInView({
+    rootMargin: "0px",
     threshold: 0.3,
   });
   const [ref2, InView] = useInView({
+    rootMargin: "0px",
     threshold: 0.3,
   });
 
@@ -74,7 +76,7 @@ const ArticlesHome = () => {
         <div className="informations">
           <h2 className="title">{homeData[0].titre}</h2>
           <p className="text">{homeData[0].description}</p>
-          <Link onClick={() => changePageFunc(15)} to="/produits">
+          <Link onClick={() => changePageFunc()} to="/produits">
             Acceder au shop
           </Link>
         </div>
@@ -87,7 +89,7 @@ const ArticlesHome = () => {
         <div className="informations">
           <h2 className="title">{homeData[1].titre}</h2>
           <p className="text">{homeData[1].description}</p>
-          <Link onClick={() => changePageFunc(15)} to="/produits">
+          <Link onClick={() => changePageFunc()} to="/produits">
             Acceder au shop
           </Link>
         </div>

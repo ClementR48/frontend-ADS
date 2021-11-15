@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import "./Cart.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
@@ -7,17 +8,26 @@ const Cart = () => {
   }));
 
   const productState = useSelector((state) => ({
-    ...state.productsReducer
-  }))
+    ...state.productsReducer,
+  }));
+
+ const input = useRef();
+
+  const [productInfoQuantity, setProductInfoQuantity] = useState();
 
   const handleChange = (event, id) => {
     const indexItem = cartState.cart.findIndex((obj) => obj.id === id);
     const productItem = productState.products.findIndex((obj) => obj.id === id);
-
+    const productsBeforeBuyItem = productState.productsBeforeBuy.findIndex(
+      (obj) => obj.id === id
+    );
+    setProductInfoQuantity(
+      productState.productsBeforeBuy[productsBeforeBuyItem].quantity
+    );
 
     const objUpdated = {
       ...cartState.cart[indexItem],
-      quantity:  Number(event.target.value),
+      quantity: Number(event.target.value),
     };
 
     dispatch({
@@ -25,25 +35,35 @@ const Cart = () => {
       payload: objUpdated,
     });
 
-    if(event.target.value === "0") {
-      deleteProductFromCart(id)
+    const productUpdate = {
+      ...productState.products[productItem],
+      quantity: Number(event.target.value),
+    };
+
+    dispatch({
+      type: "UPDATEPRODUCTFROMCART",
+      payload: productUpdate,
+    });
+
+    if (event.target.value == "0") {
+      deleteProductFromCart(id);
     }
-
-
-
+    if(event.target.value === productState.productsBeforeBuy[productsBeforeBuyItem].quantity){
+      
+    }
   };
 
   const deleteProductFromCart = (id) => {
-    const indexItem = cartState.cart.findIndex((obj) => obj.id === id)
+    const indexItem = cartState.cart.findIndex((obj) => obj.id === id);
 
     const objDeleted = {
-      ...cartState.cart[indexItem]
-    }
+      ...cartState.cart[indexItem],
+    };
     dispatch({
       type: "DELETEITEM",
-      payload: objDeleted
-    })
-  }
+      payload: objDeleted,
+    });
+  };
 
   const dispatch = useDispatch();
 
@@ -55,7 +75,7 @@ const Cart = () => {
     }
   }
 
-  
+ 
 
   return (
     <div>
@@ -70,9 +90,11 @@ const Cart = () => {
             </div>
             <div>
               <input
+                ref={input}
                 type="number"
                 onChange={(e) => handleChange(e, item.id)}
                 min="0"
+                max= {productInfoQuantity}
                 value={item.quantity}
               ></input>
             </div>

@@ -16,7 +16,7 @@ import "./App.scss";
 
 
 
-import { AnimatePresence, useAnimation } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 
 function App() {

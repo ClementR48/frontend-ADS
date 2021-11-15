@@ -19,7 +19,7 @@ ul {
 h2 {
   font-size: clamp(35px, 4vw, 70px);
   color: $colorTitle;
-  font-family: 'Caladea', serif;;
+  font-family: 'Caladea', serif;
 }
 
 ::-webkit-scrollbar {
@@ -31,7 +31,7 @@ h2 {
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: blue;
+  background: $colorTitle;
   border: 31px none #ffffff;
   border-radius: 5px;
 }

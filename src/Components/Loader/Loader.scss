@@ -1,8 +1,9 @@
+@import '../../global.scss';
 .loader {
   
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color:$colorNavBg;
   z-index: 1000;
 
   display: flex;
@@ -10,8 +11,8 @@
   align-items: center;
 
   img {
-    width: 150px;
-    animation: turn 1s infinite linear;
+    width: 300px;
+    animation: turn 10s infinite linear;
     
   }
 

@@ -2,7 +2,7 @@
 .product-showcase {
   position: relative;
   padding: 90px 5vw;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   display: flex;
   height: 100vh;
 
@@ -12,8 +12,9 @@
   }
 
   .product-left {
+    cursor: all-scroll;
     width: 50%;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: calc(100vh - 10vh);
     position: relative;
 
@@ -25,17 +26,23 @@
     img {
       width: 100%;
     }
-    .scroll-down {
+
+    p{
       position: fixed;
-      bottom: 3vh;
-      left: 50%;
+      left: 25%;
+      top: 100px;
       transform: translateX(-50%);
-      color: black;
+
+      @include tablet {
+        left: 50%;
+      }
     }
+
+    
   }
 
   ::-webkit-scrollbar {
-    width: 1px;
+    width: 3px;
     height: 1px;
   }
 
@@ -44,11 +51,11 @@
     position: relative;
     width: 50%;
     height: calc(100vh - 10vh);
-    padding: 5vh 5vw;
+    padding: 7vh 5vw 7vh 5vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 1.1em;
+    font-size: 1em;
 
     @include tablet {
       width: 100%;
@@ -85,7 +92,7 @@
         margin: 5vh 0;
       }
       span {
-        letter-spacing: 3px;
+        letter-spacing: 1px;
         margin-right: 15px;
       }
       ul {
@@ -107,7 +114,7 @@
 
     .dimensions {
       span {
-        letter-spacing: 3px;
+        letter-spacing: 1px;
       }
 
       p{
@@ -120,7 +127,7 @@
 
     .price {
       span {
-        letter-spacing: 3px;
+        letter-spacing: 1px;
       }
     }
 
@@ -130,7 +137,8 @@
       justify-content: space-around;
       align-items: center;
       .input-container {
-       background-color: $colorTitle; 
+        
+       /* background-color: $colorTitle; 
        height: 20px;
        
        display: flex;
@@ -154,10 +162,11 @@
         &:hover {
           transform: scale(1.1);
         }
-       }
+       } */
       }
       input {
         padding: 5px;
+        /* padding: 5px;
         border-radius: 10px;
         flex: 0.7;
         text-align: center;
@@ -170,12 +179,52 @@
 
         &::-webkit-inner-spin-button {
           appearance: none;
-        }
+        } */
         
       }
 
       button {
+        width: 200px;
+        height: 50px;
         background-color: transparent;
+        padding: 10px 17px;
+        cursor: pointer;
+        border: 1px $colorTitle solid;
+        position: relative;
+        overflow: hidden;
+        transition: 0.5s all;
+        &:hover {
+          transform: scale(1.1);
+        }
+ 
+
+        span {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 18px;
+          
+         
+        }
+
+        &::before {
+          position: absolute;
+          content: "";
+          top: 0;
+          left: -100%;
+          width: 100%;
+          bottom: 0;
+          background-color: $colorTitle;
+          transition: left 0.5s ease;
+        }
+
+        &:hover::before {
+          left: 0;
+        }
+
+        /* background-color: transparent;
         padding: 10px 17px;
         border: 1px solid $colorTitle;
         font-size: 1.1em;
@@ -186,13 +235,21 @@
           background-color: $colorTitle;
           color: white;
           
-        }
+        } */
       }
+    }
+
+    .sold-out-showcase {
+      color: rgb(160, 82, 82);
+      font-size: 50px;
+      letter-spacing: 3px;
+      font-weight: bold;
+      text-align: center;
     }
 
     .navigation {
       position: absolute;
-      top: 10px;
+      top: 0px;
       right: 10px;
 
       @include tablet {
