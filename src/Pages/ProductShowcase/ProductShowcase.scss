@@ -27,17 +27,6 @@
       width: 100%;
     }
 
-    p{
-      position: fixed;
-      left: 25%;
-      top: 100px;
-      transform: translateX(-50%);
-
-      @include tablet {
-        left: 50%;
-      }
-    }
-
     
   }
 
@@ -240,6 +229,7 @@
     }
 
     .sold-out-showcase {
+      transition: 0.5s all ease;
       color: rgb(160, 82, 82);
       font-size: 50px;
       letter-spacing: 3px;

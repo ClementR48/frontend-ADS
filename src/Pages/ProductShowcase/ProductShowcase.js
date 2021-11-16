@@ -106,7 +106,7 @@ const ProductShowcase = () => {
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ duration: 1 }}
               >
-                <p>scroll</p>
+                
                 <img
                   src={products[indexProductClicked].image.firstImage}
                   alt="produit 1"

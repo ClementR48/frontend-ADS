@@ -1,0 +1,254 @@
+@import "../../global.scss";
+
+.contact-page {
+  padding-top: 90px;
+  margin: 10% 5vw;
+
+  h2 {
+    padding: 0 5vw;
+    width: 100%;
+    text-align: left;
+  }
+
+  .introduction {
+    margin: 10vh 0 10vh 0;
+    padding: 0 5vw;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: flex-start;
+
+   
+
+    p {
+      font-size: 18px;
+
+      @include mobile {
+        text-align: justify;
+        font-size: 16px;
+      }
+    }
+  }
+  .formulaire {
+    transition: all 1s ease;
+    margin: 0 auto 0 auto;
+    width: 90%;
+    display: flex;
+    box-shadow: -10px 10px 10px #865a4742;
+
+    @include tablet {
+      flex-direction: column;
+    }
+
+    .left {
+      z-index: 4;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      
+
+      @include tablet {
+        width: 100%;
+      }
+
+      img {
+        width: 150px;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        @include tablet {
+          top: 300px;
+        }
+      }
+
+      .hello {
+        border: 5px dashed $colorTitle;
+        background-color: #ffd4bd;
+        height: 70%;
+        
+        color: rgb(235, 244, 205);
+        position: relative;
+        @include tablet {
+          height: 300px;
+          width: 100%;
+        }
+
+        .container-hello {
+          position: absolute;
+          width: 90%;
+          height: 50%;
+          top: 40%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+         
+
+          @include desktop {
+            width: 100%;
+          }
+          @include tablet {
+            width: 60%;
+          }
+          @include tablet {
+            width: 100%;
+          }
+
+        }
+
+        .just {
+          position: absolute;
+          font-size: 70px;
+
+          @include desktop {
+            font-size: 45px;
+          }
+          @include tablet {
+            
+            font-size: 30px;
+          }
+          @include mobile {
+            font-size: 40px;
+          }
+          
+        }
+
+        .say-hi {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          font-family: "caladea";
+          font-size: 90px;
+          padding-left: 30%;
+
+          @include tablet {
+            
+            
+            font-size: 40px;
+          }
+
+          @include mobile {
+            font-size: 55px;
+          }
+        }
+      }
+
+      .contact {
+        background-color: #ffd4bd;
+        background-color: $colorNavText;
+        background-color: $colorTitle;
+        height: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include tablet {
+          height: 150px;
+        }
+
+        a {
+          padding-top: 60px;
+          color: $colorNavText;
+
+          svg {
+            width: 30px;
+            height: 30px;
+
+            &:hover {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    .right {
+      background-color: rgb(212, 194, 253);
+      background-color: $colorNavText;
+      background-color: rgb(253, 176, 162);
+      background-color: $colorTextMain;
+      background-color: #ffd4bd;
+      background-color: $colorNavBg;
+      background-color: white;
+      transition: all 1s ease;
+      z-index: 3;
+      position: relative;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      padding: 5vw 5vw 0 5vw;
+
+      @include tablet {
+        width: 100%;
+      }
+      label {
+        color: $colorNavBg;
+        color: black;
+        letter-spacing: 2px;
+        font-size: 20px;
+        /*  color: $colorNavText; */
+        font-weight: 900;
+      }
+
+      input {
+        padding: 10px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: black;
+
+        margin-bottom: 20px;
+        border-bottom: 1px $colorNavBg solid;
+
+        &:focus {
+          font-size: 1.1em;
+        }
+      }
+
+      textarea {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: black;
+        padding: 10px 10px 15% 10px;
+        margin-bottom: 50px;
+        border-bottom: 1px $colorNavBg solid;
+        resize: none;
+
+        &:focus {
+          font-size: 1.1em;
+          color: black;
+        }
+      }
+
+      button {
+        text-align: right;
+        font-size: 1.1em;
+        width: fit-content;
+        padding: 10px 25px;
+        background-color: blue;
+        border: none;
+        color: $colorTextMain;
+        cursor: pointer;
+        background-color: $colorNavBg;
+
+        &:hover {
+          background-color: $colorTitle;
+        }
+      }
+
+      .form-message {
+        position: absolute;
+        transition: all 0.5s;
+        font-style: italic;
+        text-align: center;
+        padding: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        opacity: 0;
+      }
+    }
+  }
+}
