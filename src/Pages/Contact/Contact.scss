@@ -34,13 +34,14 @@
     margin: 0 auto 0 auto;
     width: 90%;
     display: flex;
-    box-shadow: -10px 10px 10px #865a4742;
+    /* box-shadow: -10px 10px 10px #865a4742; */
 
     @include tablet {
       flex-direction: column;
     }
 
     .left {
+      
       z-index: 4;
       width: 50%;
       display: flex;
@@ -65,8 +66,8 @@
       }
 
       .hello {
-        border: 5px dashed $colorTitle;
-        background-color: #ffd4bd;
+        
+        /* background-color: #ffd4bd; */
         height: 70%;
         
         color: rgb(235, 244, 205);
@@ -135,9 +136,8 @@
       }
 
       .contact {
-        background-color: #ffd4bd;
-        background-color: $colorNavText;
-        background-color: $colorTitle;
+
+        /* background-color: $colorTitle; */
         height: 30%;
         display: flex;
         align-items: center;
@@ -149,7 +149,7 @@
 
         a {
           padding-top: 60px;
-          color: $colorNavText;
+          color: white;
 
           svg {
             width: 30px;
@@ -164,42 +164,52 @@
     }
 
     .right {
-      background-color: rgb(212, 194, 253);
-      background-color: $colorNavText;
-      background-color: rgb(253, 176, 162);
-      background-color: $colorTextMain;
-      background-color: #ffd4bd;
-      background-color: $colorNavBg;
+
       background-color: white;
       transition: all 1s ease;
+      opacity: 0;
+      transform: translateX(-100%);
       z-index: 3;
       position: relative;
       width: 50%;
       display: flex;
       flex-direction: column;
-      padding: 5vw 5vw 0 5vw;
+      padding: 5vw ;
 
       @include tablet {
         width: 100%;
+        transform: translateX(0) translateY(-100%);
+
       }
+
+      &.active {
+        transform: translateX(0);
+        opacity: 1;
+        
+        @include tablet {
+          transform: translateY(0);
+        }
+      }
+
+      
       label {
-        color: $colorNavBg;
-        color: black;
+        color: $colorNavText;
         letter-spacing: 2px;
         font-size: 20px;
-        /*  color: $colorNavText; */
-        font-weight: 900;
+      
+ 
       }
 
       input {
         padding: 10px;
         border: none;
         outline: none;
+        background-color: rgb(255, 246, 246);
+        color:$colorNavText;
         background-color: transparent;
-        color: black;
 
         margin-bottom: 20px;
-        border-bottom: 1px $colorNavBg solid;
+        border-bottom: 1px $colorNavText solid;
 
         &:focus {
           font-size: 1.1em;
@@ -209,6 +219,7 @@
       textarea {
         border: none;
         outline: none;
+        background-color: rgb(255, 246, 246);
         background-color: transparent;
         color: black;
         padding: 10px 10px 15% 10px;
@@ -227,14 +238,14 @@
         font-size: 1.1em;
         width: fit-content;
         padding: 10px 25px;
-        background-color: blue;
-        border: none;
-        color: $colorTextMain;
+        border: 1px $colorNavText solid;
+        background-color: transparent;
+        color: $colorNavText;
         cursor: pointer;
-        background-color: $colorNavBg;
 
         &:hover {
-          background-color: $colorTitle;
+          background-color: $colorNavText;
+          color: whitesmoke;
         }
       }
 

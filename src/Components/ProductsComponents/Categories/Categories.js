@@ -24,16 +24,16 @@ const Categories = () => {
   // recuperation des catégories
   const allCategoriesWithDouble = products.map((product) => product.category);
 
-  // eviter doublons des categories
+  /* Eviter doublons */
   const categories = allCategoriesWithDouble.filter(
-    (ele, pos) => allCategoriesWithDouble.indexOf(ele) === pos
+    (ele, index, self) =>
+      index === self.findIndex((categ) => categ.name === ele.name)
   );
+
 
   useEffect(() => {
     productToDisplay("tout");
   }, []);
-
-
 
   return (
     <div className="categories">
@@ -45,12 +45,12 @@ const Categories = () => {
             onClick={() => {
               setActiveCateg(index);
               setTimeout(() => {
-                productToDisplay(categorie);
+                productToDisplay(categorie.name);
               }, 100);
             }}
           >
-            <p>{categorie}</p>
-            <Play size={35}></Play>
+            <p>{categorie.name}</p>
+            <img src={categorie.logo} alt={`${categorie.name} logo`} />
           </li>
         ))}
 

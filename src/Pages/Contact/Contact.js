@@ -9,33 +9,16 @@ import { useRef } from "react";
 
 const Contact = () => {
   const formRef = useRef();
+  const [classForm, setClassForm] = useState("right");
 
   /* apparition au scroll */
 
   const callbackFunction = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        if (entry.boundingClientRect.left > 80) {
-          entry.target.children[1].style.opacity = 1;
-          entry.target.children[1].style.transform = "translateX(0)";
-          entry.target.style.boxShadow = "-10px 10px 10px #865a4742";
-        } else {
-          entry.target.children[1].style.opacity = 1;
-          entry.target.children[1].style.transform = "translateY(0)";
-          entry.target.style.boxShadow = "-10px 10px 10px #865a4742";
-        }
-      } else {
-        if (entry.boundingClientRect.left > 80) {
-          entry.target.children[1].style.opacity = 1;
-          entry.target.children[1].style.transform = "translateX(-100%)";
-          entry.target.style.boxShadow = "none";
-        } else {
-          entry.target.children[1].style.opacity = 0;
-          entry.target.children[1].style.transform = "translateY(-300px)";
-          entry.target.style.boxShadow = "none";
-        }
-      }
-    });
+    if (entries[0].isIntersecting) {
+      setClassForm("right active");
+    } else {
+      setClassForm("right");
+    }
   };
 
   const options = useMemo(() => {
@@ -54,57 +37,69 @@ const Contact = () => {
 
   /* Validation Form */
 
+  const allValidateRef = useRef([]);
+
+  const addValidateRef = (el) => {
+    if (el && !allValidateRef.current.includes(el)) {
+      allValidateRef.current.push(el);
+    }
+  };
+
   const [name, setName] = useState("");
   const [objet, setObjet] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const validateEmail = () => {
-    let element = document.querySelector(".label-email");
+  const validateEmail = (emailValue) => {
     let regex = "[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+";
     if (email.match(regex)) {
-      element.style.color = "";
+      allValidateRef.current[1].style.fontWeight = "400";
+      allValidateRef.current[1].style.fontStyle = "normal";
+
       return true;
     } else {
-      element.style.color = "rgb(253,87,87)";
+      allValidateRef.current[1].style.fontWeight = "bold";
+      allValidateRef.current[1].style.fontStyle = "italic";
+
       return false;
     }
   };
 
   const failMessage = () => {
     if (name === "") {
-      let nameLabelElement = document.querySelector(".label-name");
-      nameLabelElement.style.color = "red";
+      allValidateRef.current[0].style.fontWeight = "bold";
+      allValidateRef.current[0].style.fontStyle = "italic";
     } else {
-      let nameLabelElement = document.querySelector(".label-name");
-      nameLabelElement.style.color = "blue";
+      allValidateRef.current[0].style.fontWeight = "400";
+      allValidateRef.current[0].style.fontStyle = "normal";
     }
     if (email === "") {
-      let nameLabelElement = document.querySelector(".label-email");
-      nameLabelElement.style.color = "red";
+      allValidateRef.current[1].style.fontWeight = "bold";
+      allValidateRef.current[1].style.fontStyle = "italic";
+    } else {
+      allValidateRef.current[1].style.fontWeight = "400";
+      allValidateRef.current[1].style.fontStyle = "normal";
     }
     if (objet === "") {
-      let nameLabelElement = document.querySelector(".label-objet");
-      nameLabelElement.style.color = "red";
+      allValidateRef.current[2].style.fontWeight = "bold";
+      allValidateRef.current[2].style.fontStyle = "italic";
+    } else {
+      allValidateRef.current[2].style.fontWeight = "400";
+      allValidateRef.current[2].style.fontStyle = "normal";
     }
     if (message === "") {
-      let nameLabelElement = document.querySelector(".label-message");
-      nameLabelElement.style.color = "red";
+      allValidateRef.current[3].style.fontWeight = "bold";
+      allValidateRef.current[3].style.fontStyle = "italic";
+    } else {
+      allValidateRef.current[3].style.fontWeight = "400";
+      allValidateRef.current[3].style.fontStyle = "normal";
     }
-  };
-
-  const successMessage = () => {
-    let formMessageElement = document.querySelector(".form-message");
-    formMessageElement.innerHTML =
-      "Message envoyé, nous vons recontacterons au plus vite :)";
-    formMessageElement.style.background = "rgb(8,43,177)";
-    formMessageElement.style.opacity = "1";
   };
 
   function sendEmail(e) {
     e.preventDefault();
     if (name && email && message) {
-      if (name && validateEmail() && message) {
+      if (validateEmail()) {
         emailjs
           .sendForm(
             "service_p1h4m9i",
@@ -114,21 +109,20 @@ const Contact = () => {
           )
           .then(
             (result) => {
-              formRef.current.children[1].style.opacity = 0;
-              formRef.current.children[1].style.transform =
-                "translateX(-300px)";
-              formRef.current.style.boxShadow = "none";
+              setClassForm("right");
               setName("");
               setObjet("");
               setMessage("");
               setEmail("");
+              
             },
             (error) => {
               console.log(error.text);
             }
           );
       } else {
-        alert("bellecek");
+        allValidateRef.current[1].style.fontWeight = "bold";
+        allValidateRef.current[1].style.fontStyle = "italic";
       }
     } else {
       failMessage();
@@ -168,9 +162,17 @@ const Contact = () => {
             exit={{ opacity: 0, translateX: -200 }}
             transition={{ delay: 0.5, duration: 1 }}
             className="formulaire"
-            ref={formRef}
           >
-            <div className="left">
+            <div
+              className="left"
+              style={{
+                backgroundImage:
+                  "url(/assets/images/PhotoFormulaireContact.jpg)",
+                backgroundOrigin: "border-box",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
+            >
               <div className="hello">
                 <div className="container-hello">
                   <p className="just">just</p>
@@ -187,12 +189,12 @@ const Contact = () => {
                 </a>
               </div>
               <img
-                src={process.env.PUBLIC_URL + "/assets/images/logoRose.png"}
+                src={process.env.PUBLIC_URL + "/assets/images/logoBlanc .png"}
                 alt="logo"
               ></img>
             </div>
-            <form className="right" onSubmit={sendEmail}>
-              <label className="label-name" htmlFor="name">
+            <form className={classForm} onSubmit={sendEmail} ref={formRef}>
+              <label ref={addValidateRef} htmlFor="name">
                 Nom
               </label>
               <input
@@ -204,22 +206,21 @@ const Contact = () => {
                   setName(event.target.value);
                 }}
               ></input>
-              <label className="label-email" htmlFor="email">
+              <label ref={addValidateRef} htmlFor="email">
                 Email
               </label>
               <input
                 id="email"
                 className="input-email"
-                type="mail"
                 value={email}
+                type="mail"
                 name="email"
                 onChange={(event) => {
-                  console.log(event.target.value);
-                  validateEmail();
+                  validateEmail(event.target.value);
                   setEmail(event.target.value);
                 }}
               ></input>
-              <label className="label-objet" htmlFor="objet">
+              <label ref={addValidateRef} htmlFor="objet">
                 Objet
               </label>
               <input
@@ -231,7 +232,7 @@ const Contact = () => {
                   setObjet(event.target.value);
                 }}
               ></input>
-              <label className="label-message" htmlFor="message">
+              <label ref={addValidateRef} htmlFor="message">
                 Message
               </label>
               <textarea

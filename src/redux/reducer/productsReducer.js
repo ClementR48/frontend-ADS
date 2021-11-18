@@ -44,9 +44,6 @@ export default function productReducer(state = INITIAL_STATE, action) {
         (obj) => obj.id === action.payload.id
       );
      
-     
-      console.log(state.products[indexProduct]);
-      console.log(state.productsBeforeBuy[indexProduct]);
 
       const updateQuantity = {
         ...state.products[indexProduct],
@@ -66,7 +63,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
       if(action.payload !== 'tout'){
 
         const newArr = state.products.filter((product) => 
-        product.category === action.payload
+        product.category.name === action.payload
         )
         
         return {
