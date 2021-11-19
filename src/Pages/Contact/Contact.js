@@ -6,8 +6,22 @@ import emailjs from "emailjs-com";
 import "./Contact.scss";
 import { Instagram } from "react-feather";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getContactData } from "../../redux/reducer/appReducer";
+import Loader from "../../Components/Loader/Loader";
+import Navbar from "../../Components/General/Navbar/Navbar";
 
 const Contact = () => {
+  const { contactData } = useSelector((state) => ({
+    ...state.appReducer,
+  }));
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (contactData.length === 0) {
+      dispatch(getContactData());
+    }
+  }, []);
   const formRef = useRef();
   const [classForm, setClassForm] = useState("right");
 
@@ -30,10 +44,16 @@ const Contact = () => {
   }, []);
 
   useEffect(() => {
+    console.log(formRef);
     const observer = new IntersectionObserver(callbackFunction, options);
-
-    observer.observe(formRef.current);
-  }, [options, formRef]);
+    if (formRef.length !== 0) {
+      if (formRef.current !== undefined) {
+        observer.observe(formRef.current);
+      }
+    } else {
+      return <Loader />;
+    }
+  }, [formRef, callbackFunction]);
 
   /* Validation Form */
 
@@ -50,7 +70,7 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const validateEmail = (emailValue) => {
+  const validateEmail = () => {
     let regex = "[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+";
     if (email.match(regex)) {
       allValidateRef.current[1].style.fontWeight = "400";
@@ -114,7 +134,6 @@ const Contact = () => {
               setObjet("");
               setMessage("");
               setEmail("");
-              
             },
             (error) => {
               console.log(error.text);
@@ -129,127 +148,131 @@ const Contact = () => {
     }
   }
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ delay: 0.5 }}
-    >
-      <ScrollToTop />
-      <Parallax
-        bgImage={`/assets/images/background/bgContact.png`}
-        bgImageAlt="arriere plan coloré"
-        strength={1000}
-      >
-        <div className="contact-page">
-          <h2>Demande de contact</h2>
-          <motion.div
-            initial={{ opacity: 0, translateX: 200 }}
-            animate={{ opacity: 1, translateX: 0 }}
-            exit={{ opacity: 0, translateX: 200 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="introduction"
+    <>
+      {contactData.length !== 0 ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <ScrollToTop />
+          <Parallax
+            bgImage={contactData[0].backgroundImage}
+            bgImageAlt="arriere plan coloré"
+            strength={1000}
           >
-            <p>
-              Que vous soyez un particulier ou un professionnel, si vous avez
-              une demande particulière ou besoin d’informations, n’hésitez pas à
-              me contacter via ce formulaire et j’y répondrai avec plaisir.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, translateX: -200 }}
-            animate={{ opacity: 1, translateX: 0 }}
-            exit={{ opacity: 0, translateX: -200 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="formulaire"
-          >
-            <div
-              className="left"
-              style={{
-                backgroundImage:
-                  "url(/assets/images/PhotoFormulaireContact.jpg)",
-                backgroundOrigin: "border-box",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-              }}
-            >
-              <div className="hello">
-                <div className="container-hello">
-                  <p className="just">just</p>
-                  <p className="say-hi">say hi !</p>
-                </div>
-              </div>
-              <div className="contact">
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://www.instagram.com/mariefekceramics/?hl=fr"
+            <Navbar/>
+            <div className="contact-page">
+              <h2>Demande de contact</h2>
+              <motion.div
+                initial={{ opacity: 0, translateX: 200 }}
+                animate={{ opacity: 1, translateX: 0 }}
+                exit={{ opacity: 0, translateX: 200 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="introduction"
+              >
+                <p>{contactData[0].txt}</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, translateX: -200 }}
+                animate={{ opacity: 1, translateX: 0 }}
+                exit={{ opacity: 0, translateX: -200 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="formulaire"
+              >
+                <div
+                  className="left"
+                  style={{
+                    backgroundImage: `url(${contactData[0].formImage})`,
+                    backgroundOrigin: "border-box",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                  }}
                 >
-                  <Instagram />
-                </a>
-              </div>
-              <img
-                src={process.env.PUBLIC_URL + "/assets/images/logoBlanc .png"}
-                alt="logo"
-              ></img>
+                  <div className="hello">
+                    <div className="container-hello">
+                      <p className="just">just</p>
+                      <p className="say-hi">say hi !</p>
+                    </div>
+                  </div>
+                  <div className="contact">
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://www.instagram.com/mariefekceramics/?hl=fr"
+                    >
+                      <Instagram />
+                    </a>
+                  </div>
+                  <img
+                    src={
+                      process.env.PUBLIC_URL + "/assets/images/logoBlanc .png"
+                    }
+                    alt="logo"
+                  ></img>
+                </div>
+                <form className={classForm} onSubmit={sendEmail} ref={formRef}>
+                  <label ref={addValidateRef} htmlFor="name">
+                    Nom
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={(event) => {
+                      setName(event.target.value);
+                    }}
+                  ></input>
+                  <label ref={addValidateRef} htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    className="input-email"
+                    value={email}
+                    type="mail"
+                    name="email"
+                    onChange={(event) => {
+                      validateEmail(event.target.value);
+                      setEmail(event.target.value);
+                    }}
+                  ></input>
+                  <label ref={addValidateRef} htmlFor="objet">
+                    Objet
+                  </label>
+                  <input
+                    id="objet"
+                    type="text"
+                    value={objet}
+                    name="objet"
+                    onChange={(event) => {
+                      setObjet(event.target.value);
+                    }}
+                  ></input>
+                  <label ref={addValidateRef} htmlFor="message">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    value={message}
+                    name="message"
+                    onChange={(event) => {
+                      setMessage(event.target.value);
+                    }}
+                  ></textarea>
+                  <button type="submit">Envoyer</button>
+                  <div className="form-message"></div>
+                </form>
+              </motion.div>
             </div>
-            <form className={classForm} onSubmit={sendEmail} ref={formRef}>
-              <label ref={addValidateRef} htmlFor="name">
-                Nom
-              </label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                value={name}
-                onChange={(event) => {
-                  setName(event.target.value);
-                }}
-              ></input>
-              <label ref={addValidateRef} htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                className="input-email"
-                value={email}
-                type="mail"
-                name="email"
-                onChange={(event) => {
-                  validateEmail(event.target.value);
-                  setEmail(event.target.value);
-                }}
-              ></input>
-              <label ref={addValidateRef} htmlFor="objet">
-                Objet
-              </label>
-              <input
-                id="objet"
-                type="text"
-                value={objet}
-                name="objet"
-                onChange={(event) => {
-                  setObjet(event.target.value);
-                }}
-              ></input>
-              <label ref={addValidateRef} htmlFor="message">
-                Message
-              </label>
-              <textarea
-                id="message"
-                value={message}
-                name="message"
-                onChange={(event) => {
-                  setMessage(event.target.value);
-                }}
-              ></textarea>
-              <button type="submit">Envoyer</button>
-              <div className="form-message"></div>
-            </form>
-          </motion.div>
-        </div>
-      </Parallax>
-    </motion.div>
+          </Parallax>
+        </motion.div>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 };
 

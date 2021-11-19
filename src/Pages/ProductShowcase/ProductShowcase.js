@@ -7,6 +7,7 @@ import Loader from "../../Components/Loader/Loader";
 import { motion } from "framer-motion";
 import { Parallax } from "react-parallax";
 import ScrollToTop from "../../Components/ScrollToTop";
+import Navbar from "../../Components/General/Navbar/Navbar";
 
 const ProductShowcase = () => {
   const [quantity, setQuantity] = useState(1);
@@ -97,8 +98,9 @@ const ProductShowcase = () => {
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
+            <ScrollToTop />
+            <Navbar />
             <div className="product-showcase">
-              <ScrollToTop />
               <motion.div
                 className="product-left"
                 initial={{ translateX: -300, opacity: 0 }}
@@ -106,7 +108,6 @@ const ProductShowcase = () => {
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ duration: 1 }}
               >
-                
                 <img
                   src={products[indexProductClicked].image.firstImage}
                   alt="produit 1"

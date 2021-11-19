@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import "./ImageHome.scss";
 
-const ImageHome = () => {
+const ImageHome = ({dataImage}) => {
+  
   const text = "La céramique inspirée";
   const textSplit = text.split("");
   let elements = useRef([]);
@@ -56,7 +57,7 @@ const ImageHome = () => {
     <div className="image-home-container">
       <img
         src={
-          process.env.PUBLIC_URL + "/assets/images/homeMainImage2Moyenne.jpg"
+          dataImage
         }
         ref={image}
         alt="vases présentés"

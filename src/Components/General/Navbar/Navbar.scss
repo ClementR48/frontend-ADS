@@ -1,7 +1,6 @@
 @import "../../../global.scss";
 
 .navbar {
-  
   width: 100%;
   height: 90px;
   display: flex;
@@ -11,15 +10,12 @@
   position: fixed;
   z-index: 500;
   background-color: $colorNavBg;
-  transition: all 0.5s ;
+  transition: all 0.5s;
 
   img {
     margin-left: 5vw;
     width: 100px;
-   
   }
-
- 
 
   .link {
     width: 100%;
@@ -66,8 +62,6 @@
     transform: translateX(-50%);
     background-color: $colorPointNav;
     transition: all 0.5s ease-in-out;
-
-
   }
 
   .hamburger {
@@ -145,7 +139,6 @@
 /* PAGE D'ACCEUIL NAV */
 
 .home-page {
-  
   width: 100%;
   height: 90px;
   display: flex;
@@ -154,8 +147,7 @@
   font-size: 20px;
   position: fixed;
   z-index: 500;
-  transition: all 0.5s ;
-  
+  transition: all 0.5s;
 
   img {
     margin-left: 5vw;

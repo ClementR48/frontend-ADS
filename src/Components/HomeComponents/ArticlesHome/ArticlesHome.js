@@ -6,7 +6,7 @@ import homeData from "../../../utils/homeData";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-const ArticlesHome = () => {
+const ArticlesHome = ({dataArticles}) => {
   const [ref1, inView] = useInView({
     rootMargin: "0px",
     threshold: 0.3,
@@ -74,27 +74,27 @@ const ArticlesHome = () => {
     <main className="home-article">
       <motion.div ref={ref1} className="article" animate={animation1}>
         <div className="informations">
-          <h2 className="title">{homeData[0].titre}</h2>
-          <p className="text">{homeData[0].description}</p>
+          <h2 className="title">{dataArticles[0].firstArticle.title}</h2>
+          <p className="text">{dataArticles[0].firstArticle.txt}</p>
           <Link onClick={() => changePageFunc()} to="/produits">
             Acceder au shop
           </Link>
         </div>
         <div className="picture">
-          <img src={homeData[0].image} alt="vase"></img>
+          <img src={dataArticles[0].firstArticle.picture} alt="vase"></img>
         </div>
       </motion.div>
 
       <motion.div ref={ref2} animate={animation2} className="article2">
         <div className="informations">
-          <h2 className="title">{homeData[1].titre}</h2>
-          <p className="text">{homeData[1].description}</p>
+          <h2 className="title">{dataArticles[0].secondArticle.title}</h2>
+          <p className="text">{dataArticles[0].secondArticle.txt}</p>
           <Link onClick={() => changePageFunc()} to="/produits">
             Acceder au shop
           </Link>
         </div>
         <div className="picture">
-          <img src={homeData[1].image} alt="vase"></img>
+          <img src={dataArticles[0].secondArticle.picture} alt="vase"></img>
         </div>
       </motion.div>
     </main>

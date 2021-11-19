@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import "./App.scss";
 import Footer from "./Components/General/Footer/Footer";
 import MenuResponsive from "./Components/General/MenuReponsive/MenuResponsive";
-import Navbar from "./Components/General/Navbar/Navbar";
+
 import About from "./Pages/About/About";
 import Cart from "./Pages/Cart/Cart";
 import Contact from "./Pages/Contact/Contact";
@@ -49,7 +49,7 @@ function App() {
 
   const location = useLocation();
 
-  useEffect(() => {
+  /* useEffect(() => {
     window.addEventListener("scroll", (e) => {
       if (history.location.pathname === "/") {
         if (document.documentElement.scrollTop > 90) {
@@ -60,9 +60,9 @@ function App() {
         }
       }
     });
-  }, []);
+  }, []); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (history.location.pathname === "/") {
       homePageFalse(true);
       colorFooter("rgb(248,190,183)");
@@ -89,12 +89,12 @@ function App() {
       colorFooter("rgb(248,190,183)");
       
     }
-  }, [changePage]);
+  }, [changePage]); */
 
   return (
     <>
       
-      <Navbar color={scrollNav} />
+      
       <MenuResponsive />
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>

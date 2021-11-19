@@ -8,6 +8,7 @@ import Loader from "../../Components/Loader/Loader";
 import { motion } from "framer-motion";
 import { Parallax } from "react-parallax";
 import ScrollToTop from "../../Components/ScrollToTop";
+import Navbar from "../../Components/General/Navbar/Navbar";
 
 const Products = () => {
   const { products } = useSelector((state) => ({
@@ -30,12 +31,13 @@ const Products = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
+          <Navbar />
+          <ScrollToTop />
           <Parallax
             bgImage={`/assets/images/background/bgProducts.png`}
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
-            <ScrollToTop />
             <motion.div
               transition={{ duration: 1 }}
               initial={{

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./Cart.scss";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from "../../Components/General/Navbar/Navbar";
 
 const Cart = () => {
   const cartState = useSelector((state) => ({
@@ -79,6 +80,7 @@ const Cart = () => {
 
   return (
     <div>
+      <Navbar/>
       <ul>
         {cartState.cart.map((item) => (
           <li key={item.id}>
