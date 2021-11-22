@@ -1,0 +1,49 @@
+@import "../../../global.scss";
+.cart-empty {
+  .text-empty {
+    display: flex;
+  }
+  .carousel-empty {
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+
+    @include mobile {
+      padding: 10px;
+    }
+
+    .carousel-container {
+      display: flex;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .image-container {
+      display: flex;
+      align-items: center;
+      animation: carousel infinite linear 20s;
+      margin: 0;
+
+      img {
+        width: 15vw;
+        height: 15vw;
+        margin: 20px;
+        @include tablet {
+          width: 20vw;
+          height: 20vw;
+        }
+        @include mobile {
+          width: 100px;
+          height: 100px;
+          margin: 10px;
+        }
+      }
+    }
+
+    @keyframes carousel {
+      to {
+        transform: translateX(-100%);
+      }
+    }
+  }
+}

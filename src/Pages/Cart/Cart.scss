@@ -1,3 +1,14 @@
-img {
-  width: 350px;
+@import '../../global.scss';
+
+.cart {
+  position: relative;
+
+  .parallax {
+    min-height: 100vh;
+  }
+  .container-cart {
+    margin: 180px 5vw 220px;
+
+    
+  }
 }

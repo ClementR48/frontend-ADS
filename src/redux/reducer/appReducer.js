@@ -3,66 +3,56 @@ import { collection, getDocs } from "firebase/firestore";
 
 const INITIAL_STATE = {
   openMenu: false,
-  homePage: true,
-  changePage : true,
-  colorFooter: "",
+  changePage: true,
   homeData: [],
   aboutData: [],
-  contactData: []
-}
+  contactData: [],
+  cartData: [],
+};
 
 export default function appReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case "LOADDATAHOME" : {
+    case "LOADDATAHOME": {
       return {
         ...state,
-        homeData: action.payload
-      }
+        homeData: action.payload,
+      };
     }
-    case "LOADDATAABOUT" : {
+    case "LOADDATAABOUT": {
       return {
         ...state,
-        aboutData: action.payload
-      }
+        aboutData: action.payload,
+      };
     }
-    case "LOADDATACONTACT" : {
+    case "LOADDATACONTACT": {
       return {
         ...state,
-        contactData: action.payload
-      }
+        contactData: action.payload,
+      };
     }
-    case "CHANGEPAGE" : {
+    case "LOADDATACART": {
       return {
         ...state,
-        changePage : !state.changePage
-      }
+        cartData: action.payload,
+      };
+    }
+    case "CHANGEPAGE": {
+      return {
+        ...state,
+        changePage: !state.changePage,
+      };
     }
     case "OPENMENU": {
       return {
         ...state,
-        openMenu: !state.openMenu 
-      }
+        openMenu: !state.openMenu,
+      };
     }
-    case "HOMEPAGE": {
-      return {
-        ...state, 
-        homePage: action.payload
-      }
-    }
-    case "COLORFOOTER": {
-      return {
-        ...state, 
-        colorFooter: action.payload
-      }
-    }
-    
 
-    
-    
     default: {
       return {
-        ...state
-      }
+        ...state,
+      };
     }
   }
 }
@@ -91,6 +81,15 @@ export const getContactData = () => async (dispatch) => {
   const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
   await dispatch({
     type: "LOADDATACONTACT",
+    payload: newData,
+  });
+};
+const cartCollectionRef = collection(db, "Cart");
+export const getCartData = () => async (dispatch) => {
+  const data = await getDocs(cartCollectionRef);
+  const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  await dispatch({
+    type: "LOADDATACART",
     payload: newData,
   });
 };

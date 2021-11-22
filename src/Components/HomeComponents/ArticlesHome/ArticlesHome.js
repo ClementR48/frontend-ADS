@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./ArticlesHome.scss";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import homeData from "../../../utils/homeData";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 

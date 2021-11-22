@@ -1,7 +1,6 @@
 import { Route, Switch, useLocation } from "react-router-dom";
 
 import "./App.scss";
-import Footer from "./Components/General/Footer/Footer";
 import MenuResponsive from "./Components/General/MenuReponsive/MenuResponsive";
 
 import About from "./Pages/About/About";
