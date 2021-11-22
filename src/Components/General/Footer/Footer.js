@@ -1,15 +1,18 @@
-
 import React from "react";
-import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
+
 import "./Footer.scss";
 
-const Footer = () => {
-  const { colorFooter } = useSelector((state) => ({
-    ...state.appReducer,
-  }));
-
+const Footer = ({footerColor}) => {
   return (
-    <footer style={{ background: colorFooter }} className="footer">
+    <motion.footer
+      initial={{ translateY: 100, opacity: 0 }}
+      animate={{ translateY: 0, opacity: 1 }}
+      exit={{ translateY: 100, opacity: 0 }}
+      transition={{duration: 1}}
+      style={{ background: `${footerColor ? footerColor : 'rgb(235,244,205)'}` }}
+      className="footer"
+    >
       <img src="/assets/images/logoRose.png" alt="logo"></img>
       <ul className="listSocialNetwork">
         <li>
@@ -22,7 +25,7 @@ const Footer = () => {
           <span>Facebook:</span> Atelier Del Sol
         </li>
       </ul>
-    </footer>
+    </motion.footer>
   );
 };
 

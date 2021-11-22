@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getContactData } from "../../redux/reducer/appReducer";
 import Loader from "../../Components/Loader/Loader";
 import Navbar from "../../Components/General/Navbar/Navbar";
+import Footer from "../../Components/General/Footer/Footer";
 
 const Contact = () => {
   const { contactData } = useSelector((state) => ({
@@ -155,15 +156,16 @@ const Contact = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ delay: 0.5 }}
+          className="contact-page"
         >
           <ScrollToTop />
+          <Navbar/>
           <Parallax
             bgImage={contactData[0].backgroundImage}
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
-            <Navbar/>
-            <div className="contact-page">
+            <main className="container-contact" >
               <h2>Demande de contact</h2>
               <motion.div
                 initial={{ opacity: 0, translateX: 200 }}
@@ -207,7 +209,7 @@ const Contact = () => {
                   </div>
                   <img
                     src={
-                      process.env.PUBLIC_URL + "/assets/images/logoBlanc .png"
+                      process.env.PUBLIC_URL + "/assets/images/logoBlanc.png"
                     }
                     alt="logo"
                   ></img>
@@ -266,8 +268,10 @@ const Contact = () => {
                   <div className="form-message"></div>
                 </form>
               </motion.div>
-            </div>
+            </main>
+            
           </Parallax>
+          <Footer footerColor={contactData[0].footerColor} />
         </motion.div>
       ) : (
         <Loader />

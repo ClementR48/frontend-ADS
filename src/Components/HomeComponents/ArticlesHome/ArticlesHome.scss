@@ -1,7 +1,7 @@
 @import "../../../global.scss";
 
 .home-article {
-  margin: 5vw;
+  margin: 5vw 5vw calc((5vw + 180px)) 5vw;
 
   @include mobile {
     margin: 5vw 0;

@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { Parallax } from "react-parallax";
 import ScrollToTop from "../../Components/ScrollToTop";
 import Navbar from "../../Components/General/Navbar/Navbar";
+import Footer from "../../Components/General/Footer/Footer";
 
 const Products = () => {
   const { products } = useSelector((state) => ({
@@ -34,6 +35,7 @@ const Products = () => {
           <Navbar />
           <ScrollToTop />
           <Parallax
+          className='parallax'
             bgImage={`/assets/images/background/bgProducts.png`}
             bgImageAlt="arriere plan coloré"
             strength={1000}
@@ -74,6 +76,7 @@ const Products = () => {
               <ListProducts />
             </motion.div>
           </Parallax>
+          <Footer/>
         </motion.div>
       ) : (
         <Loader />

@@ -1,9 +1,11 @@
 @import "../../global.scss";
 
 .contact-page {
-  padding-top: 90px;
-  margin: 10% 5vw;
-
+  position: relative;
+  
+  .container-contact {
+    margin: 180px 5vw 220px;
+  }
   h2 {
     padding: 0 5vw;
     width: 100%;

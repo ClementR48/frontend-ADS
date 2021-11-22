@@ -4,17 +4,17 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCart } from "react-feather";
-import {  motion } from "framer-motion";
+import { motion } from "framer-motion";
 
-
-const Navbar = ({ color }) => {
+const Navbar = ({ isHomePage, changeNavScroll }) => {
+  
   /* States */
 
   const [activeAnim, setActiveAnim] = useState();
 
   /* Selector  */
 
-  const { homePage, openMenu, changePage } = useSelector((state) => ({
+  const { changePage } = useSelector((state) => ({
     ...state.appReducer,
   }));
 
@@ -26,7 +26,6 @@ const Navbar = ({ color }) => {
 
   const allLink = useRef([]);
   const anim = useRef();
-  
 
   const addRefLink = (el) => {
     if (el && !allLink.current.includes(el)) {
@@ -145,14 +144,33 @@ const Navbar = ({ color }) => {
     if (history.location.pathname.startsWith("/produits/")) {
       anim.current.style.opacity = 0;
     }
-  }, [changePage]);
-
-
+  }, [history.location.pathname, changePage]);
 
   useEffect(() => {
     anim.current.style.left = `${activeAnim}px  `;
     anim.current.style.opacity = 1;
   }, [activeAnim]);
+
+  /* dynamisation de la classe de la nav et du logo a afficher en fonction de la page */
+
+  let classe = ''
+  let logoNav = ""
+
+  if (isHomePage) {
+    if (changeNavScroll) {
+      classe = "navbar";
+      logoNav = "logoRose"
+    } else {
+      classe = "home-page";
+      logoNav = "logoBlanc"
+    }
+  } else {
+    classe = "navbar";
+    logoNav = "logoRose"
+  }
+
+
+
 
   /* Nombre items dans le cart */
 
@@ -161,50 +179,20 @@ const Navbar = ({ color }) => {
     totalItems += item.quantity;
   }
 
-  /* Classe de la nav  */
-
-  let classe = "";
-  if (homePage) {
-    if (color) {
-      if (openMenu) {
-        classe = "navbar active";
-      } else {
-        classe = "navbar";
-      }
-    } else {
-      if (openMenu) {
-        classe = "home-page active";
-      } else {
-        classe = "home-page";
-      }
-    }
-  } else {
-    if (openMenu) {
-      classe = "navbar active";
-    } else {
-      classe = "navbar";
-    }
-  }
+  
 
   return (
     <motion.nav
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{opacity: 0}}
-      transition={{ bounce: 3, duration: 1 }}
-      
+      initial={{ opacity: 0 , translateY: -100 }}
+      animate={{ opacity: 1, translateY: 0}}
+      exit={{ opacity: 0, translateY: -100 }}
+      transition={{  duration: 0.5, delay: 0.5}}
       className={classe}
     >
-      {homePage? color ?<img
-        src={process.env.PUBLIC_URL + "/assets/images/logoRose.png"}
+      <img
+        src={`${process.env.PUBLIC_URL}/assets/images/${logoNav}.png`}
         alt="logo"
-      /> : <img
-      src={process.env.PUBLIC_URL + "/assets/images/logoBlanc .png"}
-      alt="logo"
-    /> : <img
-    src={process.env.PUBLIC_URL + "/assets/images/logoRose.png"}
-    alt="logo"
-  />}
+      />
       <div className="link">
         <NavLink
           className="nav-page"

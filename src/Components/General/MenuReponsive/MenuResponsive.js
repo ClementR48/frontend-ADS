@@ -12,10 +12,10 @@ const MenuResponsive = () => {
 
   const dispatch = useDispatch();
 
-  const changePageFunc = (value) => {
+  const changePageFunc = () => {
     dispatch({
       type: "CHANGEPAGE",
-      payload: value,
+      
     });
   };
 
@@ -45,7 +45,7 @@ const MenuResponsive = () => {
           exact
           to="/"
           onClick={() => {
-            changePageFunc(1)
+            changePageFunc()
             openMenuFunc()
           } }
         >
@@ -56,7 +56,7 @@ const MenuResponsive = () => {
           activeClassName="active-nav-page"
           to="/produits"
           onClick={() => {
-            changePageFunc(2)
+            changePageFunc()
             openMenuFunc()
           } }
         >
@@ -67,7 +67,7 @@ const MenuResponsive = () => {
           activeClassName="active-nav-page"
           to="/à-propos"
           onClick={() => {
-            changePageFunc(3)
+            changePageFunc()
             openMenuFunc()
           } }
         >
@@ -78,7 +78,7 @@ const MenuResponsive = () => {
           activeClassName="active-nav-page"
           to="/contact"
           onClick={() => {
-            changePageFunc(4)
+            changePageFunc()
             openMenuFunc()
           } }
         >
@@ -91,7 +91,7 @@ const MenuResponsive = () => {
           
           onClick={() => {
             openMenuFunc()
-            changePageFunc(5)}}
+            changePageFunc()}}
         >
           <ShoppingCart />
           <span className="nb-items">{totalItems}</span>

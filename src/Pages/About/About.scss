@@ -1,19 +1,15 @@
 @import "../../global.scss";
 .about-me {
-  padding-top: 90px;
-  margin: 10% 5vw;
+  position: relative;
 
+  .container-page-about {
+   margin: 180px 5vw 220px;
+  }
   h2 {
     padding: 0 10vw;
     text-align: right;
     margin-bottom: 50px;
-    font-size: 50px;
-
-    @include tablet {
-      
-      width: 100%;
-      
-    }
+    
   }
 
   .container-about {

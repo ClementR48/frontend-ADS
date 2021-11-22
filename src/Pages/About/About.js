@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Parallax } from "react-parallax";
 import { useDispatch, useSelector } from "react-redux";
+import Footer from "../../Components/General/Footer/Footer";
 import Navbar from "../../Components/General/Navbar/Navbar";
 import Loader from "../../Components/Loader/Loader";
 import ScrollToTop from "../../Components/ScrollToTop";
@@ -14,31 +15,30 @@ const About = () => {
     ...state.appReducer,
   }));
 
-  console.log(aboutData);
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (aboutData.length === 0) {
       dispatch(getAboutData());
     }
-  }, []);
+  }, [dispatch, aboutData.length]);
   return (
     <>
-      <ScrollToTop />
       {aboutData.length !== 0 ? (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ delay: 0.5 }}
+          className="about-me"
         >
+          <ScrollToTop />
+          <Navbar />
           <Parallax
             bgImage={aboutData[0].backgroundImage}
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
-            <Navbar />
-            <main className="about-me">
+            <main className="container-page-about" >
               <motion.h2
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -68,6 +68,7 @@ const About = () => {
               </div>
             </main>
           </Parallax>
+          <Footer footerColor = {aboutData[0].footerColor} />
         </motion.div>
       ) : (
         <Loader />

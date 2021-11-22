@@ -1,7 +1,7 @@
 @import "../../../global.scss";
 
 .grid {
-  margin: 0 auto;
+  margin: 0 auto 180px;
   padding: 0 5vw;
   -webkit-column-count: 3;
   -moz-column-count: 3;
@@ -10,6 +10,7 @@
   margin-bottom: 10%;
   column-fill: balance;
   column-width: 10%;
+  background-color: red;
 
   @include tablet {
     -webkit-column-count: 2;
@@ -100,7 +101,7 @@
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 0 auto 180px;
   padding: 0 5vw;
 
   .item {
