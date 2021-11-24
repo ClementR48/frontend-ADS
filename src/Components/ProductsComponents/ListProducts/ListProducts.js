@@ -44,7 +44,7 @@ const ListProducts = () => {
   const options = useMemo(() => {
     return {
       root: null,
-      rootMargin: "10%",
+      rootMargin: "0%",
       threshold: 0.3,
     };
   }, []);

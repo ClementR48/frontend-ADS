@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ProductShowcase.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Parallax } from "react-parallax";
 import ScrollToTop from "../../Components/ScrollToTop";
 import Navbar from "../../Components/General/Navbar/Navbar";
+import Footer from "../../Components/General/Footer/Footer";
 
 const ProductShowcase = () => {
   const [quantity, setQuantity] = useState(1);
@@ -43,7 +44,6 @@ const ProductShowcase = () => {
 
   let timerInfo;
   let display = true;
-  const [textButton, setTextButton] = useState("Ajouter au panier");
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -62,13 +62,9 @@ const ProductShowcase = () => {
       payload: productAdded,
     });
 
-    setTextButton("attrapey");
-
     if (display) {
       display = false;
       timerInfo = setTimeout(() => {
-        setTextButton("Ajouter au panier");
-
         display = true;
       }, 1500);
     }
@@ -82,6 +78,24 @@ const ProductShowcase = () => {
     };
   }, []);
 
+  const buttonAddProduct = "Ajouter au panier";
+
+  const textButtonLetters = buttonAddProduct.split("");
+
+  let cursorRef = useRef();
+
+  const mousepos = (e) => {
+    cursorRef.current.setAttribute(
+      "style",
+      `top:${e.pageY - 25}px ; left:${e.pageX - 25}px; opacity:1`
+    );
+  };
+
+  const mouseLeave = () => {
+    cursorRef.current.setAttribute("style", "opacity: 0");
+  };
+
+
   return (
     <>
       {products[indexProductClicked] === undefined ? (
@@ -92,22 +106,26 @@ const ProductShowcase = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-        >
+          className="product-showcase"
+          >
+          <Navbar />
           <Parallax
             bgImage={`/assets/images/background/bgProducts.png`}
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
             <ScrollToTop />
-            <Navbar />
-            <div className="product-showcase">
+            <div className="product-showcase-container">
               <motion.div
+                onMouseLeave={mouseLeave}
+                onMouseMove={mousepos}
                 className="product-left"
                 initial={{ translateX: -300, opacity: 0 }}
                 exit={{ translateX: -300, opacity: 0 }}
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ duration: 1 }}
               >
+                <div ref={cursorRef} className="cursor">Scroll</div>
                 <img
                   src={products[indexProductClicked].image.firstImage}
                   alt="produit 1"
@@ -128,61 +146,54 @@ const ProductShowcase = () => {
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ duration: 1 }}
               >
-                <div className="general-information">
-                  <h2 className="title-product">
-                    {products[indexProductClicked].name}
-                  </h2>
+                <h2 className="title-product">
+                  {products[indexProductClicked].name}
+                </h2>
+                <div className="characteristic-product">
                   <p className="description-product">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Amet veniam ipsam nostrum dolorum. Quisquam sint hic
-                    veritatis aspernatur ab quia neque vitae pariatur
-                    repudiandae magni odio possimus numquam nam sit, porro
-                    delectus? Voluptatibus modi impedit ipsa, laborum ratione
-                    molestias sunt.
                     {products[indexProductClicked].description}
                   </p>
-                  <div className="characteristic-product">
-                    <div className="color">
-                      <span>Couleurs: </span>
-                      <ul>
+                  <div className="color">
+                    <span>Couleurs: </span>
+                    <ul>
+                      {/* {products[indexProductClicked].color.map((color) => {
+                        return (
+
+                          <li>{color}</li>
+                          )
+                        })} */}
+                      <li>
+                        {`${products[indexProductClicked].color.firstColor},`}
+                      </li>
+
+                      {products[indexProductClicked].color.secondColor !==
+                      "" ? (
                         <li>
-                          {products[indexProductClicked].color.firstColor}
+                          {`${products[indexProductClicked].color.secondColor},`}
                         </li>
-                        <li>rouge</li>
-                        <li>rouge</li>
-
-                        {products[indexProductClicked].color.secondColor !==
-                        "" ? (
-                          <li>
-                            {products[indexProductClicked].color.secondColor}
-                          </li>
-                        ) : (
-                          ""
-                        )}
-                        {products[indexProductClicked].color.thirdColor !==
-                        "" ? (
-                          <li>
-                            {products[indexProductClicked].color.thirdColor}
-                          </li>
-                        ) : (
-                          ""
-                        )}
-                      </ul>
-                    </div>
-                    <div className="dimensions">
-                      <p className="width">
-                        <span>Largeur:</span>
-                        {products[indexProductClicked].dimensions.width}cm
-                      </p>
-                      <p className="height">
-                        <span>Hauteur:</span>
-                        {products[indexProductClicked].dimensions.height}cm
-                      </p>
-                    </div>
+                      ) : (
+                        ""
+                      )}
+                      {products[indexProductClicked].color.thirdColor !== "" ? (
+                        <li>
+                          {`${products[indexProductClicked].color.thirdColor}`}
+                        </li>
+                      ) : (
+                        ""
+                      )}
+                    </ul>
                   </div>
-
+                  <div className="dimensions">
+                    <p className="height">
+                      <span>Hauteur:</span>
+                      {products[indexProductClicked].dimensions.height}cm
+                    </p>
+                    <p className="width">
+                      <span>Largeur:</span>
+                      {products[indexProductClicked].dimensions.width}cm
+                    </p>
+                  </div>
                   <p className="price">
-                    <span>Prix:</span>
                     {products[indexProductClicked].price}€
                   </p>
                 </div>
@@ -200,8 +211,58 @@ const ProductShowcase = () => {
                         />
                       </div>
                     )}
-                    <button>
-                      <span>{textButton}</span>
+
+                    <button className="checkout">
+                      <div className="span-container s1">
+                        {textButtonLetters.map((letter, index) => {
+                          return (
+                            <>
+                              {letter !== " " ? (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  {letter}
+                                </span>
+                              ) : (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  &nbsp;
+                                </span>
+                              )}
+                            </>
+                          );
+                        })}
+                      </div>
+                      <div className="span-container s2">
+                        {textButtonLetters.map((letter, index) => {
+                          return (
+                            <>
+                              {letter !== " " ? (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  {letter}
+                                </span>
+                              ) : (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  &nbsp;
+                                </span>
+                              )}
+                            </>
+                          );
+                        })}
+                      </div>
                     </button>
                   </form>
                 ) : (
@@ -222,6 +283,7 @@ const ProductShowcase = () => {
               </motion.div>
             </div>
           </Parallax>
+          <Footer />
         </motion.div>
       )}
     </>
