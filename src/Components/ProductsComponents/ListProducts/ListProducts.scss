@@ -1,17 +1,12 @@
 @import "../../../global.scss";
 
 .grid {
-  margin: 0 auto 180px;
-  padding: 0 5vw;
   -webkit-column-count: 3;
   -moz-column-count: 3;
   column-count: 3;
   column-gap: 80px;
-  margin-bottom: 10%;
   column-fill: balance;
   column-width: 10%;
-  
-
 
   @include tablet {
     -webkit-column-count: 2;
@@ -45,10 +40,10 @@
     }
 
     .caption {
-      padding: 10px;
+      padding: 7px;
       display: flex;
       flex-direction: column;
-      
+
       justify-content: space-between;
       position: absolute;
       bottom: -100%;
@@ -61,12 +56,11 @@
 
       @include tablet {
         position: relative;
-        bottom: 0;
+        bottom: 5px;
         background-color: white;
-        
       }
       h3 {
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 400;
         @include tablet {
           font-size: 15px;
@@ -74,7 +68,7 @@
       }
 
       p {
-        font-size: 20px;
+        font-size: 18px;
         @include tablet {
           font-size: 15px;
         }
@@ -83,7 +77,7 @@
 
     &:hover img {
       transform: scale(1.1);
-      filter: opacity(0.8) ;
+      
     }
 
     &:hover .caption {
@@ -99,7 +93,6 @@
       color: white;
       font-weight: bold;
       letter-spacing: 3px;
-      
     }
   }
 }
@@ -108,11 +101,10 @@
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 0 auto 180px;
-  padding: 0 5vw;
+
+  
 
   .item {
-    
     width: 30%;
     transition: all 350ms ease;
     cursor: pointer;
@@ -123,7 +115,6 @@
     opacity: 0;
     filter: blur(10px);
     transition: all 1s ease;
-    
 
     .item-link {
       text-decoration: none;
@@ -144,34 +135,38 @@
     }
 
     .caption {
-      padding: 20px;
+      padding: 7px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+
       justify-content: space-between;
       position: absolute;
-      bottom: -100px;
+      bottom: -100%;
       right: 0;
       left: 0;
       background-color: white;
       transition: all 0.5s ease;
-      color: black;
+      text-decoration: none;
+      color: $colorTextMain;
 
       @include tablet {
         position: relative;
-        bottom: 0;
+        bottom: 5px;
         background-color: white;
       }
-
       h3 {
-        font-size: 22px;
-        
-        font-weight: 500;
-        text-decoration: none;
+        font-size: 18px;
+        font-weight: 400;
+        @include tablet {
+          font-size: 15px;
+        }
       }
 
       p {
-        font-size: 20px;
-        
+        font-size: 18px;
+        @include tablet {
+          font-size: 15px;
+        }
       }
     }
 
@@ -184,17 +179,15 @@
       color: white;
       font-weight: bold;
       letter-spacing: 3px;
-      
     }
 
     &:hover img {
       transform: scale(1.1);
-      filter: opacity(0.8);
+      
     }
 
     &:hover .caption {
       bottom: 0px;
     }
-
   }
 }

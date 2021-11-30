@@ -3,9 +3,11 @@
   position: relative;
 
   .container-page-about {
-   margin: 180px 5vw 220px;
+   padding: 180px 5vw 220px;
+   min-height: 100vh;
   }
   h2 {
+    font-size: 60px;
     padding: 0 10vw;
     text-align: right;
     margin-bottom: 50px;
@@ -26,6 +28,7 @@
 
     img {
       width: 50%;
+      max-width: 700px;
       border-radius: 50%;
       box-shadow: 55px 60px rgba(255, 239, 168, 1);
       float: left;
@@ -40,13 +43,15 @@
         box-shadow: 30px 35px rgba(255, 239, 168, 1);
       }
       @include mobile {
-        width: 100%;
-        box-shadow: 10px 15px rgba(255, 239, 168, 1);
+        width: 70%;
+        box-shadow: 20px 25px rgba(255, 239, 168, 1);
       }
     }
     .text {
    
-
+      @include mobile {
+        padding: 0 8vw;
+      }
       p {
         padding-top: 100px;
         color: $colorTextMain;

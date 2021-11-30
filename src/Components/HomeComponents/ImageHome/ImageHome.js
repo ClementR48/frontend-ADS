@@ -1,75 +1,42 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import React from "react";
 import "./ImageHome.scss";
 
-const ImageHome = ({dataImage}) => {
-  
-  const text = "La céramique inspirée";
-  const textSplit = text.split("");
-  let elements = useRef([]);
-  let image = useRef();
-
-  useEffect(() => {
-    let d = 0.05;
-    let y = -100;
-
-    for (let i = 0; i < 5; i++) {
-      gsap.to(elements.current[i], {
-        y: (y = y - 10),
-        duration: 0.6,
-        delay: 1.5 + d * i,
-        opacity: 1,
-        ease: "power4",
-      });
-    }
-    for (let i = 5; i < 10; i++) {
-      gsap.to(elements.current[i], {
-        y: (y = y + 10),
-        duration: 0.6,
-        delay: 1.5 + d * i,
-        opacity: 1,
-        ease: "power4",
-      });
-    }
-    for (let i = 10; i < 15; i++) {
-      gsap.to(elements.current[i], {
-        y: (y = y - 10),
-        duration: 0.6,
-        delay: 1.5 + d * i,
-        opacity: 1,
-        ease: "power4",
-      });
-    }
-    for (let i = 15; i < 21; i++) {
-      gsap.to(elements.current[i], {
-        y: (y = y + 10),
-        duration: 0.6,
-        delay: 1.5 + d * i,
-        opacity: 1,
-        ease: "power4",
-      });
-    }
-
-    
-  }, []);
-
+const ImageHome = ({ dataImage }) => {
   return (
     <div className="image-home-container">
-      <img
-        src={
-          dataImage
-        }
-        ref={image}
-        alt="vases présentés"
-      />
+      <img src={dataImage} alt="vases présentés" />
       <div className="text">
-        {textSplit.map((letter, index) => {
-          return (
-            <li ref={(el) => (elements.current[index] = el)} key={index}>
-              {letter}
-            </li>
-          );
-        })}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="-6548.5 -1361.5 13910 2575"
+          height="500px"
+          width="1500px"
+        >
+          <path
+            id="curve"
+            d=" M -6547 -61.087 Q -4237.024 -2651.516 125.459 -75.839 Q 4487.942 2499.839 7360 -75.839 L 7360 -75.839 L 7360 -75.839"
+            fill="none"
+            stroke="transparent"
+          />
+          <text x="7%" filter="blur(20px)">
+            <animate
+              attributeName="x"
+              from="100%"
+              to="7%"
+              begin="0s"
+              dur="2s"
+            />
+
+            <textPath
+              fontSize="500"
+              fill="white"
+              letterSpacing="350px"
+              href="#curve"
+            >
+              LA CERAMIQUE INSPIREE
+            </textPath>
+          </text>
+        </svg>
       </div>
     </div>
   );

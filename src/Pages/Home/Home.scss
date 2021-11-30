@@ -1,8 +1,6 @@
 @import "../../global.scss";
 .home {
  position: relative;
-  @include mobile {
-    padding-bottom: 300px;
-  }
+
  
 }

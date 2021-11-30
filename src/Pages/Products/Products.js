@@ -20,7 +20,7 @@ const Products = () => {
     if (products.length === 0) {
       dispatch(getProducts());
     }
-  }, []);
+  }, [products.length, dispatch]);
 
   return (
     <>
@@ -32,51 +32,55 @@ const Products = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Navbar />
           <ScrollToTop />
           <Parallax
-          className='parallax'
-            bgImage={`/assets/images/background/bgProducts.png`}
+            className="parallax"
+           /*  bgImage={
+              "http://image.noelshack.com/fichiers/2021/46/5/1637336855-bgcontact.png"
+            } */
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
-            <motion.div
-              transition={{ duration: 1 }}
-              initial={{
-                translateY: -100,
-                opacity: 0,
-              }}
-              animate={{
-                translateY: 0,
-                opacity: 1,
-              }}
-              exit={{
-                translateY: -100,
-                opacity: 0,
-              }}
-            >
-              <Categories />
-            </motion.div>
+            <Navbar />
+            <main className="products-container">
+              <motion.div
+                transition={{ duration: 1 }}
+                initial={{
+                  translateY: -100,
+                  opacity: 0,
+                }}
+                animate={{
+                  translateY: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  translateY: -100,
+                  opacity: 0,
+                }}
+              >
+                <Categories />
+              </motion.div>
 
-            <motion.div
-              transition={{ duration: 1 }}
-              initial={{
-                translateY: 100,
-                opacity: 0,
-              }}
-              animate={{
-                translateY: 0,
-                opacity: 1,
-              }}
-              exit={{
-                translateY: 100,
-                opacity: 0,
-              }}
-            >
-              <ListProducts />
-            </motion.div>
+              <motion.div
+                transition={{ duration: 1 }}
+                initial={{
+                  translateY: 100,
+                  opacity: 0,
+                }}
+                animate={{
+                  translateY: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  translateY: 100,
+                  opacity: 0,
+                }}
+              >
+                <ListProducts />
+              </motion.div>
+            </main>
+            <Footer />
           </Parallax>
-          <Footer/>
         </motion.div>
       ) : (
         <Loader />

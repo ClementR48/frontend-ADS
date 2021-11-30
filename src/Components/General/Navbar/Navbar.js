@@ -7,7 +7,6 @@ import { ShoppingCart } from "react-feather";
 import { motion } from "framer-motion";
 
 const Navbar = ({ isHomePage, changeNavScroll }) => {
-  
   /* States */
 
   const [activeAnim, setActiveAnim] = useState();
@@ -153,24 +152,21 @@ const Navbar = ({ isHomePage, changeNavScroll }) => {
 
   /* dynamisation de la classe de la nav et du logo a afficher en fonction de la page */
 
-  let classe = ''
-  let logoNav = ""
+  let classe = "";
+  let logoNav = "";
 
   if (isHomePage) {
     if (changeNavScroll) {
       classe = "navbar";
-      logoNav = "logoRose"
+      logoNav = "logoRose";
     } else {
       classe = "home-page";
-      logoNav = "logoBlanc"
+      logoNav = "logoBlanc";
     }
   } else {
     classe = "navbar";
-    logoNav = "logoRose"
+    logoNav = "logoRose";
   }
-
-
-
 
   /* Nombre items dans le cart */
 
@@ -179,14 +175,12 @@ const Navbar = ({ isHomePage, changeNavScroll }) => {
     totalItems += item.quantity;
   }
 
-  
-
   return (
     <motion.nav
-      initial={{ opacity: 0 , translateY: -100 }}
-      animate={{ opacity: 1, translateY: 0}}
+      initial={{ opacity: 0, translateY: -100 }}
+      animate={{ opacity: 1, translateY: 0 }}
       exit={{ opacity: 0, translateY: -100 }}
-      transition={{  duration: 0.5, delay: 0.5}}
+      transition={{ duration: 0.5, delay: 0.5 }}
       className={classe}
     >
       <img

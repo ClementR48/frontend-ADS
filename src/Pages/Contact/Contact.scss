@@ -2,28 +2,32 @@
 
 .contact-page {
   position: relative;
-  
+
   .container-contact {
-    margin: 180px 5vw 220px;
+    padding: 180px 5vw 220px;
   }
   h2 {
     padding: 0 5vw;
     width: 100%;
     text-align: left;
+    font-size: 60px;
+
+    @include mobile {
+      font-size: 45px;
+    }
   }
 
   .introduction {
-    margin: 10vh 0 10vh 0;
+    margin: 5vh 0 10vh 0;
     padding: 0 5vw;
     width: 100%;
     max-width: 900px;
     display: flex;
     justify-content: flex-start;
 
-   
-
     p {
       font-size: 18px;
+      color: $colorTextMain;
 
       @include mobile {
         text-align: justify;
@@ -43,13 +47,11 @@
     }
 
     .left {
-      
       z-index: 4;
       width: 50%;
       display: flex;
       flex-direction: column;
       position: relative;
-      
 
       @include tablet {
         width: 100%;
@@ -68,11 +70,10 @@
       }
 
       .hello {
-        
-        /* background-color: #ffd4bd; */
         height: 70%;
-        
+
         color: rgb(235, 244, 205);
+        color: $colorNavBg;
         position: relative;
         @include tablet {
           height: 300px;
@@ -86,18 +87,16 @@
           top: 40%;
           left: 50%;
           transform: translate(-50%, -50%);
-         
 
           @include desktop {
-            width: 100%;
+            width: 80%;
           }
           @include tablet {
             width: 60%;
           }
-          @include tablet {
-            width: 100%;
+          @include mobile {
+            width: 80%;
           }
-
         }
 
         .just {
@@ -107,14 +106,10 @@
           @include desktop {
             font-size: 45px;
           }
-          @include tablet {
-            
-            font-size: 30px;
-          }
+
           @include mobile {
             font-size: 40px;
           }
-          
         }
 
         .say-hi {
@@ -122,13 +117,11 @@
           bottom: 0;
           right: 0;
           font-family: "caladea";
-          font-size: 90px;
+          font-size: 110px;
           padding-left: 30%;
 
-          @include tablet {
-            
-            
-            font-size: 40px;
+          @include desktop {
+            font-size: 70px;
           }
 
           @include mobile {
@@ -138,7 +131,6 @@
       }
 
       .contact {
-
         /* background-color: $colorTitle; */
         height: 30%;
         display: flex;
@@ -166,7 +158,6 @@
     }
 
     .right {
-
       background-color: white;
       transition: all 1s ease;
       opacity: 0;
@@ -176,30 +167,32 @@
       width: 50%;
       display: flex;
       flex-direction: column;
-      padding: 5vw ;
+      padding: 5vw;
 
       @include tablet {
         width: 100%;
         transform: translateX(0) translateY(-100%);
-
+        
       }
 
       &.active {
         transform: translateX(0);
         opacity: 1;
-        
+
         @include tablet {
           transform: translateY(0);
+
         }
       }
 
-      
       label {
         color: $colorNavText;
         letter-spacing: 2px;
         font-size: 20px;
-      
- 
+
+        @include mobile {
+          font-size: 16px;
+        }
       }
 
       input {
@@ -207,7 +200,7 @@
         border: none;
         outline: none;
         background-color: rgb(255, 246, 246);
-        color:$colorNavText;
+        color: $colorNavText;
         background-color: transparent;
 
         margin-bottom: 20px;
@@ -235,21 +228,53 @@
         }
       }
 
-      button {
-        text-align: right;
-        font-size: 1.1em;
-        width: fit-content;
-        padding: 10px 25px;
-        border: 1px $colorNavText solid;
-        background-color: transparent;
-        color: $colorNavText;
+      .checkout {
+        background-color: white;
+        position: relative;
         cursor: pointer;
+        border: 1px solid $colorNavText;
+        outline: none;
 
-        &:hover {
-          background-color: $colorNavText;
-          color: whitesmoke;
+        &:hover .s1 span {
+          transform: translateY(-100%) rotateX(-90deg);
+        }
+        &:hover .s2 span {
+          transform: translateY(0%) rotateX(0deg);
+        }
+
+        .span-container {
+          padding: 10px 17px;
         }
       }
+
+      .checkout span {
+        font-family: "Caladea", sans-serif;
+        color: $colorNavText;
+        transition: 0.4s;
+        will-change: transform;
+        display: inline-block;
+        font-size: 25px;
+        @include mobile {
+          font-size: 20px;
+        }
+      }
+
+      .s1 span {
+        transform-origin: bottom;
+      }
+
+      .s2 span {
+        transform-origin: top;
+        transform: translateY(100%) rotateX(-90deg);
+      }
+
+      .s2 {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    
 
       .form-message {
         position: absolute;

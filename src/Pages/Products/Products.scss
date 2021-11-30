@@ -1,7 +1,9 @@
 .products {
-  padding-bottom: 130px;
-  
   position: relative;
+
+  .products-container {
+    padding: 180px 5vw 220px;
+  }
   .parallax {
     min-height: 100vh;
   }

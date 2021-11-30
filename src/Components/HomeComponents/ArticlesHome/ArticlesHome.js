@@ -37,7 +37,7 @@ const ArticlesHome = ({dataArticles}) => {
         opacity: 0,
       });
     }
-  }, [inView]);
+  }, [inView, animation1]);
 
   useEffect(() => {
     if (InView) {
@@ -58,7 +58,7 @@ const ArticlesHome = ({dataArticles}) => {
         opacity: 0,
       });
     }
-  }, [InView]);
+  }, [InView, animation2]);
 
   const dispatch = useDispatch();
 
@@ -76,7 +76,7 @@ const ArticlesHome = ({dataArticles}) => {
           <h2 className="title">{dataArticles[0].firstArticle.title}</h2>
           <p className="text">{dataArticles[0].firstArticle.txt}</p>
           <Link onClick={() => changePageFunc()} to="/produits">
-            Acceder au shop
+            Accedér au shop
           </Link>
         </div>
         <div className="picture">
@@ -89,7 +89,7 @@ const ArticlesHome = ({dataArticles}) => {
           <h2 className="title">{dataArticles[0].secondArticle.title}</h2>
           <p className="text">{dataArticles[0].secondArticle.txt}</p>
           <Link onClick={() => changePageFunc()} to="/produits">
-            Acceder au shop
+            Accéder au shop
           </Link>
         </div>
         <div className="picture">

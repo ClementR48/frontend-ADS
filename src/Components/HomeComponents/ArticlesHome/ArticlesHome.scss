@@ -1,7 +1,7 @@
 @import "../../../global.scss";
 
 .home-article {
-  margin: 5vw 5vw calc((5vw + 180px)) 5vw;
+  padding: 5vw 5vw calc((5vw + 180px)) 5vw;
 
   @include mobile {
     margin: 5vw 0;
@@ -66,10 +66,10 @@
 
       a {
         width: fit-content;
-        height: 25px;
+        height: 40px;
         text-align: right;
         color: $colorTitle;
-        
+
         transition: letter-spacing 0.3s ease-in-out;
         font-size: 20px;
         text-decoration: none;
@@ -87,17 +87,13 @@
           transition: all 0.3s ease-in-out;
         }
 
-
         &:hover {
-          
+          font-weight: bolder;
           letter-spacing: 1px;
         }
-        &:hover::before{
+        &:hover::before {
           left: 0;
-          
         }
-
-        
       }
     }
 
@@ -128,7 +124,7 @@
 
     @include tablet {
       flex-direction: column-reverse;
-      
+
       align-items: center;
       margin-top: 100px;
       height: auto;
@@ -177,10 +173,10 @@
 
       a {
         width: fit-content;
-        height: 25px;
+        height: 40px;
         text-align: right;
         color: $colorTitle;
-        
+
         transition: letter-spacing 0.3s ease-in-out;
         font-size: 20px;
         text-decoration: none;
@@ -198,17 +194,13 @@
           transition: all 0.3s ease-in-out;
         }
 
-
         &:hover {
-          
+          font-weight: bolder;
           letter-spacing: 1px;
         }
-        &:hover::before{
+        &:hover::before {
           left: 0;
-          
         }
-
-        
       }
     }
 
@@ -228,237 +220,3 @@
     }
   }
 }
-
-/* @media (max-width: 1220px) {
-  .home-article {
-    .article {
-      .informations {
-        width: 60%;
-
-        .title {
-        }
-
-        .text {
-        }
-
-        a {
-        }
-      }
-
-      .picture {
-        img {
-          width: 100%;
-        }
-      }
-    }
-
-    .article2 {
-      .informations {
-        width: 60%;
-
-        .title {
-        }
-
-        .text {
-        }
-
-        a {
-        }
-      }
-
-      .picture {
-        img {
-          width: 100%;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1104px) {
-  .home-article {
-    .article {
-      .informations {
-        .title {
-          font-size: 3em;
-        }
-
-        .text {
-        }
-
-        a {
-        }
-      }
-
-      .picture {
-        
-        img {
-          
-        }
-      }
-    }
-
-    .article2 {
-      .informations {
-        .title {
-          font-size: 3em;
-        }
-
-        .text {
-        }
-
-        a {
-        }
-      }
-
-      .picture {
-        img {
-        }
-      }
-    }
-  }
-}
-
-
-
-@media (max-width: 1006px) {
-  .home-article {
-    margin: 15% 1%;
-
-    .article {
-      flex-direction: column-reverse;
-      align-items: center;
-
-      .informations {
-        width: 90%;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        padding: 5%;
-
-        .title {
-          text-align: center;
-          padding: 5%;
-        }
-
-        .text {
-          text-align: center;
-          width: 100%;
-          padding: 5%;
-        }
-
-        a {
-          text-align: center;
-          
-        }
-      }
-
-      .picture {
-        width: 50%;
-
-        img {
-        }
-      }
-    }
-
-    .article2 {
-      flex-direction: column-reverse;
-      align-items: center;
-
-      .informations {
-        width: 90%;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        padding: 5%;
-
-        .title {
-          text-align: center;
-          padding: 5%;
-        }
-
-        .text {
-          width: 100%;
-          text-align: center;
-          padding: 5%;
-        }
-
-        a {
-          text-align: center;
-          
-        }
-      }
-
-      .picture {
-        width: 50%;
-
-        img {
-        }
-      }
-    }
-  }
-} 
-
-@media (max-width: 426px) {
-  .home-article {
-    
-
-    .article {
-    
-
-      .informations {
-
-
-        .title {
-          font-size: 30px;
-
-        }
-
-        .text {
-          font-size: 18px;
-        }
-
-        a {
-          text-align: center;
-          
-        }
-      }
-
-      .picture {
-        width: 200px;
-
-        img {
-        }
-      }
-    }
-
-    .article2 {
-     
-
-      .informations {
-        
-
-        .title {
-          font-style: 30px;
-        }
-
-        .text {
-          font-style: 18px;
-        }
-
-        a {
-          
-          
-        }
-      }
-
-      .picture {
-        width: 200px;
-
-        img {
-        }
-      }
-    }
-  }
-} 
- */

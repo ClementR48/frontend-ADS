@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Trash } from "react-feather";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,6 @@ const FullCart = () => {
     ...state.cartReducer,
   }));
 
-  const [productInfoQuantity, setProductInfoQuantity] = useState();
 
   const dispatch = useDispatch();
 
@@ -45,15 +44,12 @@ const FullCart = () => {
       totalPrice += itemPrice;
     }
   }
+
   const handleChange = (event, id) => {
     const indexItem = cartState.cart.findIndex((obj) => obj.id === id);
     const productItem = productState.products.findIndex((obj) => obj.id === id);
-    const productsBeforeBuyItem = productState.productsBeforeBuy.findIndex(
-      (obj) => obj.id === id
-    );
-    setProductInfoQuantity(
-      productState.productsBeforeBuy[productsBeforeBuyItem].quantity
-    );
+    
+    
 
     const objUpdated = {
       ...cartState.cart[indexItem],
@@ -75,103 +71,63 @@ const FullCart = () => {
       payload: productUpdate,
     });
 
-    if (event.target.value == 0) {
+    if (event.target.value === 0) {
       deleteProductFromCart(id);
     }
   };
 
   const textButton = "Paiement";
-  
+
   const textButtonLetters = textButton.split("");
 
-  
+  const maxValueInput = (id) => {
+    const productFiltered = productState.productsBeforeBuy.filter(
+      (product) => product.id === id
+    );
+    return productFiltered[0].quantity;
+  };
 
   return (
-    <motion.div className="cart-articles">
+    <motion.div
+      initial={{ opacity: 0, translateX: -100 }}
+      animate={{ opacity: 1, translateX: 0 }}
+      exit={{ opacity: 0, translateX: -100 }}
+      transition={{delay: 0.5, duration: 1}}
+      className="cart-articles"
+    >
       <ul>
-        <li>
-          <img src="/assets/images/logoBlanc.png" alt="" />
-          <a href="">
-            <h3>Vase a anse</h3>
-          </a>
-          <p>80€</p>
-
-          <p>
-            Quantité :
-            <input
-              type="number"
-              min="0"
-              max={productInfoQuantity}
-              value="2"
-            ></input>
-          </p>
-          <div className="trash">
-            <Trash />
-          </div>
-        </li>
-        <li>
-          <img src="/assets/images/logoBlanc.png" alt="" />
-          <h3>Vase a anse</h3>
-          <p>80€</p>
-
-          <p>
-            Quantité :
-            <input
-              type="number"
-              min="0"
-              max={productInfoQuantity}
-              value="2"
-            ></input>
-          </p>
-
-          <Trash />
-        </li>
-        <li>
-          <img src="/assets/images/logoBlanc.png" alt="" />
-          <h3>Vase a anse</h3>
-          <p>80€</p>
-
-          <p>
-            Quantité :
-            <input
-              type="number"
-              min="0"
-              max={productInfoQuantity}
-              value="2"
-            ></input>
-          </p>
-
-          <Trash />
-        </li>
-        <li>
-          <img src="/assets/images/logoBlanc.png" alt="" />
-          <h3>Vase a anse</h3>
-          <p>80€</p>
-          <p>Quantité: 2</p>
-          <Trash />
-        </li>
+       
         {cartState.cart.map((item) => (
-          <li key={item.id}>
-            <img src={item.image.firstImage} alt="" />
-            <Link to={`/produits/${item.name.replace(/\s+/g, "").trim()}`}>
-              <h3>{item.name}</h3>
-            </Link>
-            <p>{item.price * item.quantity}€</p>
-            <p>
-              Quantité :
-              <input
-                type="number"
-                onChange={(e) => {
-                  handleChange(e, item.id);
-                }}
-                min="0"
-                max={productInfoQuantity}
-                value={item.quantity}
-              ></input>
-            </p>
+          <>
+            <li key={item.id}>
+              <div className="image-cart">
+                <img src={item.image.firstImage} alt="" />
+              </div>
+              <div className="info-product">
+                <Link to={`/produits/${item.name.replace(/\s+/g, "").trim()}`}>
+                  <h3>{item.name}</h3>
+                </Link>
+                <p>{item.price * item.quantity}€</p>
 
-            <Trash onClick={() => deleteProductFromCart(item.id)} />
-          </li>
+                <p>
+                  <input
+                    data-id={item.id}
+                    type="number"
+                    onChange={(e) => {
+                      handleChange(e, item.id);
+                    }}
+                    min="0"
+                    max={maxValueInput(item.id)}
+                    value={item.quantity}
+                  ></input>
+                </p>
+
+                <div className="trash">
+                  <Trash onClick={() => deleteProductFromCart(item.id)} />
+                </div>
+              </div>
+            </li>
+          </>
         ))}
       </ul>
       <div className="total-information">

@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ListProducts.scss";
 import { Link } from "react-router-dom";
 import Loader from "../../Loader/Loader";
-import gsap from "gsap/all";
+
 
 const ListProducts = () => {
   const { productsToShow } = useSelector((state) => ({
     ...state.productsReducer,
   }));
+
+
 
   const dispatch = useDispatch();
   const changePageFunc = (value) => {
@@ -59,26 +61,14 @@ const ListProducts = () => {
 
   /* Animation au changement de la liste  */
   const [classGrid, setClassGrid] = useState("grid");
+  const grid = useRef();
+  
 
-  useEffect(() => {
-    gsap.fromTo(
-      `.${classGrid}`,
-      {
-        opacity: 0,
-        y: 100,
-      },
-      {
-        duration: 1,
-
-        opacity: 1,
-        y: 0,
-      }
-    );
-  }, [productsToShow, classGrid]);
+ 
 
   /* Centrage des items quand il y a besoin */
 
-  const grid = useRef();
+  
   
 
   useEffect(() => {
@@ -116,7 +106,7 @@ const ListProducts = () => {
                       <h3>{item.name}</h3>
                       <p>{item.price}€</p>
                     </div>
-                    {item.quantity == 0 ?<div className="sold-out">
+                    {item.quantity === 0 ?<div className="sold-out">
                       <p>&Eacute;PUIS&Eacute;</p>
                     </div> : ""}
                   </Link>

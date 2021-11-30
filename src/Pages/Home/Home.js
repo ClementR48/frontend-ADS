@@ -19,7 +19,7 @@ const Home = () => {
     ...state.appReducer,
   }));
 
-  console.log(homeData);
+  
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,7 +30,7 @@ const Home = () => {
 
   /* States */
 
-  const [homePage, setHomePage] = useState(true);
+  const [homePage] = useState(true);
   const [changeNavScroll, setChangeNavScroll] = useState(false);
 
   /* Animation au scroll de la nav */
@@ -38,7 +38,7 @@ const Home = () => {
   const history = useHistory();
 
   useEffect(() => {
-    window.addEventListener("scroll", (e) => {
+    window.addEventListener("scroll", () => {
       if (history.location.pathname === "/") {
         if (document.documentElement.scrollTop > 90) {
           setChangeNavScroll(true);
@@ -60,7 +60,6 @@ const Home = () => {
           transition={{ delay: 0.5 }}
           className="home"
         >
-          <Navbar isHomePage={homePage} changeNavScroll={changeNavScroll} />
           <ScrollToTop />
           <Parallax
             bgImage={homeData[0].backgroundImage}
@@ -68,6 +67,7 @@ const Home = () => {
             strength={1000}
             className='parallax'
           >
+          <Navbar isHomePage={homePage} changeNavScroll={changeNavScroll} />
 
             <motion.div
               initial={{ opacity: 0, translateX: 300 }}
@@ -83,8 +83,8 @@ const Home = () => {
             >
               <ArticlesHome dataArticles={homeData} />
             </motion.div>
-          </Parallax>
           <Footer footerColor={homeData[0].footerColor}/>
+          </Parallax>
         </motion.div>
       ) : (
         <Loader />

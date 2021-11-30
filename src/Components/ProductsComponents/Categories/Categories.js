@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+
 import React, { useEffect, useState } from "react";
-import { Play } from "react-feather";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import "./Categories.scss";
@@ -29,7 +29,6 @@ const Categories = () => {
     (ele, index, self) =>
       index === self.findIndex((categ) => categ.name === ele.name)
   );
-
 
   useEffect(() => {
     productToDisplay("tout");
@@ -63,7 +62,7 @@ const Categories = () => {
             });
           }}
         >
-          Tout
+          tout
         </li>
       </ul>
     </div>

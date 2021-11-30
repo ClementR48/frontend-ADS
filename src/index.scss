@@ -6,12 +6,8 @@
 }
 
 html body {
-  /* font-family: 'Inconsolata', monospace; */
-  /* font-family: 'Nanum Myeongjo', serif; */
-  /* font-family: 'Prata', serif; */
-  /* font-family: 'Frank Ruhl Libre', serif; */
-  font-family: 'M PLUS 1', sans-serif;
- /*  font-family: 'Raleway', sans-serif; */
+
+  font-family: $mainFont;
   overflow-x: hidden;
   font-size: 18px;
   background-color: $colorNavBg;
@@ -24,7 +20,7 @@ ul {
 h2 {
   font-size: clamp(35px, 5vw, 90px);
   color: $colorTitle;
-  font-family: 'Caladea', serif;
+  font-family: $fontTitle;
 }
 
 ::-webkit-scrollbar {

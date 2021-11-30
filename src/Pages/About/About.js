@@ -32,12 +32,12 @@ const About = () => {
           className="about-me"
         >
           <ScrollToTop />
-          <Navbar />
           <Parallax
             bgImage={aboutData[0].backgroundImage}
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
+          <Navbar />
             <main className="container-page-about" >
               <motion.h2
                 initial={{ opacity: 0 }}
@@ -67,8 +67,8 @@ const About = () => {
                 </motion.div>
               </div>
             </main>
-          </Parallax>
           <Footer footerColor = {aboutData[0].footerColor} />
+          </Parallax>
         </motion.div>
       ) : (
         <Loader />

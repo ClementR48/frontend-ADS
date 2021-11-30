@@ -3,12 +3,22 @@
 .cart {
   position: relative;
 
-  .parallax {
-    min-height: 100vh;
-  }
+  
   .container-cart {
-    margin: 180px 5vw 220px;
-
     
+    padding: 180px 5vw 220px;
+    min-height: 100vh;
+
+    h2 {
+      margin: 0 0 5vw 0;
+      padding: 0 5vw;
+      width: 100%;
+      text-align: left;
+      font-size: 60px;
+  
+      @include mobile {
+        font-size: 45px;
+      }
+    }
   }
 }

@@ -5,7 +5,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { getProducts } from "../../redux/reducer/productsReducer";
 import Loader from "../../Components/Loader/Loader";
 import { motion } from "framer-motion";
-import { Parallax } from "react-parallax";
 import ScrollToTop from "../../Components/ScrollToTop";
 import Navbar from "../../Components/General/Navbar/Navbar";
 import Footer from "../../Components/General/Footer/Footer";
@@ -30,7 +29,7 @@ const ProductShowcase = () => {
     if (products.length === 0) {
       dispatch(getProducts());
     }
-  }, []);
+  }, [dispatch, products.length]);
 
   const indexProductClicked = products.findIndex(
     (obj) => obj.name.replace(/\s+/g, "").trim() === id
@@ -76,7 +75,7 @@ const ProductShowcase = () => {
     return () => {
       clearTimeout(timerInfo);
     };
-  }, []);
+  }, [timerInfo]);
 
   const buttonAddProduct = "Ajouter au panier";
 
@@ -87,14 +86,13 @@ const ProductShowcase = () => {
   const mousepos = (e) => {
     cursorRef.current.setAttribute(
       "style",
-      `top:${e.pageY - 25}px ; left:${e.pageX - 25}px; opacity:1`
+      `top:${e.pageY - 40}px ; left:${e.pageX - 40}px; opacity:1`
     );
   };
 
   const mouseLeave = () => {
     cursorRef.current.setAttribute("style", "opacity: 0");
   };
-
 
   return (
     <>
@@ -107,182 +105,173 @@ const ProductShowcase = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="product-showcase"
-          >
+        >
           <Navbar />
-          <Parallax
-            bgImage={`/assets/images/background/bgProducts.png`}
-            bgImageAlt="arriere plan coloré"
-            strength={1000}
-          >
-            <ScrollToTop />
-            <div className="product-showcase-container">
-              <motion.div
-                onMouseLeave={mouseLeave}
-                onMouseMove={mousepos}
-                className="product-left"
-                initial={{ translateX: -300, opacity: 0 }}
-                exit={{ translateX: -300, opacity: 0 }}
-                animate={{ translateX: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
-              >
-                <div ref={cursorRef} className="cursor">Scroll</div>
-                <img
-                  src={products[indexProductClicked].image.firstImage}
-                  alt="produit 1"
-                />
-                <img
-                  src={products[indexProductClicked].image.secondImage}
-                  alt="produit 2"
-                />
-                <img
-                  src={products[indexProductClicked].image.thirdImage}
-                  alt="produit 3"
-                />
-              </motion.div>
-              <motion.div
-                className="product-right"
-                initial={{ translateX: 300, opacity: 0 }}
-                exit={{ translateX: 300, opacity: 0 }}
-                animate={{ translateX: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
-              >
-                <h2 className="title-product">
-                  {products[indexProductClicked].name}
-                </h2>
-                <div className="characteristic-product">
-                  <p className="description-product">
-                    {products[indexProductClicked].description}
-                  </p>
-                  <div className="color">
-                    <span>Couleurs: </span>
-                    <ul>
-                      {/* {products[indexProductClicked].color.map((color) => {
-                        return (
+          <ScrollToTop />
+          <div className="product-showcase-container">
+            <motion.div
+              onMouseLeave={mouseLeave}
+              onMouseMove={mousepos}
+              className="product-left"
+              initial={{ translateX: -300, opacity: 0 }}
+              exit={{ translateX: -300, opacity: 0 }}
+              animate={{ translateX: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <div ref={cursorRef} className="cursor">
+                <span>Scroll</span>
+              </div>
+              <img
+                src={products[indexProductClicked].image.firstImage}
+                alt="produit 1"
+              />
+              <img
+                src={products[indexProductClicked].image.secondImage}
+                alt="produit 2"
+              />
+              <img
+                src={products[indexProductClicked].image.thirdImage}
+                alt="produit 3"
+              />
+            </motion.div>
+            <motion.div
+              className="product-right"
+              initial={{ translateX: 300, opacity: 0 }}
+              exit={{ translateX: 300, opacity: 0 }}
+              animate={{ translateX: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <h2 className="title-product">
+                {products[indexProductClicked].name}
+              </h2>
+              <div className="characteristic-product">
+                <p className="description-product">
+                  {products[indexProductClicked].description}
+                </p>
+                <div className="color">
+                  <span>Couleurs: </span>
+                  <ul>
+                    <li key={products[indexProductClicked].color.firstColor}>
+                      {`${products[indexProductClicked].color.firstColor},`}
+                    </li>
 
-                          <li>{color}</li>
-                          )
-                        })} */}
-                      <li>
-                        {`${products[indexProductClicked].color.firstColor},`}
+                    {products[indexProductClicked].color.secondColor !== "" ? (
+                      <li key={products[indexProductClicked].color.secondColor}>
+                        {`${products[indexProductClicked].color.secondColor},`}
                       </li>
-
-                      {products[indexProductClicked].color.secondColor !==
-                      "" ? (
-                        <li>
-                          {`${products[indexProductClicked].color.secondColor},`}
-                        </li>
-                      ) : (
-                        ""
-                      )}
-                      {products[indexProductClicked].color.thirdColor !== "" ? (
-                        <li>
-                          {`${products[indexProductClicked].color.thirdColor}`}
-                        </li>
-                      ) : (
-                        ""
-                      )}
-                    </ul>
-                  </div>
-                  <div className="dimensions">
-                    <p className="height">
-                      <span>Hauteur:</span>
-                      {products[indexProductClicked].dimensions.height}cm
-                    </p>
-                    <p className="width">
-                      <span>Largeur:</span>
-                      {products[indexProductClicked].dimensions.width}cm
-                    </p>
-                  </div>
-                  <p className="price">
-                    {products[indexProductClicked].price}€
+                    ) : (
+                      ""
+                    )}
+                    {products[indexProductClicked].color.thirdColor !== "" ? (
+                      <li key={products[indexProductClicked].color.thirdColor}>
+                        {`${products[indexProductClicked].color.thirdColor}`}
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                  </ul>
+                </div>
+                <div className="dimensions">
+                  <p className="height">
+                    <span>Hauteur:</span>
+                    {products[indexProductClicked].dimensions.height}cm
+                  </p>
+                  <p className="width">
+                    <span>Largeur:</span>
+                    {products[indexProductClicked].dimensions.width}cm
                   </p>
                 </div>
+                <p className="price">{products[indexProductClicked].price}€</p>
+              </div>
 
-                {products[indexProductClicked].quantity !== 0 ? (
-                  <form className="add-container" onSubmit={addToCart}>
-                    {products[indexProductClicked].quantity > 1 && (
-                      <div className="input-container">
-                        <input
-                          type="number"
-                          value={quantity}
-                          onChange={updateProduct}
-                          min="1"
-                          max={products[indexProductClicked].quantity}
-                        />
-                      </div>
-                    )}
+              {products[indexProductClicked].quantity !== 0 ? (
+                <form className="add-container" onSubmit={addToCart}>
+                  {products[indexProductClicked].quantity > 1 && (
+                    <div className="input-container">
+                      <input
+                        type="number"
+                        value={quantity}
+                        onChange={updateProduct}
+                        min="1"
+                        max={products[indexProductClicked].quantity}
+                      />
+                    </div>
+                  )}
 
-                    <button className="checkout">
-                      <div className="span-container s1">
-                        {textButtonLetters.map((letter, index) => {
-                          return (
-                            <>
-                              {letter !== " " ? (
-                                <span
-                                  style={{
-                                    transitionDelay: ` ${0.05 * index}s`,
-                                  }}
-                                >
-                                  {letter}
-                                </span>
-                              ) : (
-                                <span
-                                  style={{
-                                    transitionDelay: ` ${0.05 * index}s`,
-                                  }}
-                                >
-                                  &nbsp;
-                                </span>
-                              )}
-                            </>
-                          );
-                        })}
-                      </div>
-                      <div className="span-container s2">
-                        {textButtonLetters.map((letter, index) => {
-                          return (
-                            <>
-                              {letter !== " " ? (
-                                <span
-                                  style={{
-                                    transitionDelay: ` ${0.05 * index}s`,
-                                  }}
-                                >
-                                  {letter}
-                                </span>
-                              ) : (
-                                <span
-                                  style={{
-                                    transitionDelay: ` ${0.05 * index}s`,
-                                  }}
-                                >
-                                  &nbsp;
-                                </span>
-                              )}
-                            </>
-                          );
-                        })}
-                      </div>
-                    </button>
-                  </form>
-                ) : (
-                  <div className="sold-out-showcase">
-                    <p>&Eacute;PUIS&Eacute;</p>
-                  </div>
-                )}
-                <div className="navigation">
-                  <button
-                    onClick={() => {
-                      changePageFunc();
-                      history.push("/produits");
-                    }}
-                  >
-                    Shop
+                  <button className="checkout">
+                    <div className="span-container s1">
+                      {textButtonLetters.map((letter, index) => {
+                        return (
+                          <>
+                            {letter !== " " ? (
+                              <span
+                                key={index}
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                {letter}
+                              </span>
+                            ) : (
+                              <span
+                                key={index}
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                &nbsp;
+                              </span>
+                            )}
+                          </>
+                        );
+                      })}
+                    </div>
+                    <div className="span-container s2">
+                      {textButtonLetters.map((letter, index) => {
+                        return (
+                          <>
+                            {letter !== " " ? (
+                              <span
+                                key={index}
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                {letter}
+                              </span>
+                            ) : (
+                              <span
+                                key={index}
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                &nbsp;
+                              </span>
+                            )}
+                          </>
+                        );
+                      })}
+                    </div>
                   </button>
+                </form>
+              ) : (
+                <div className="sold-out-showcase">
+                  <p>&Eacute;PUIS&Eacute;</p>
                 </div>
-              </motion.div>
-            </div>
-          </Parallax>
+              )}
+              <div className="navigation">
+                <button
+                  onClick={() => {
+                    changePageFunc();
+                    history.push("/produits");
+                  }}
+                >
+                  Shop
+                </button>
+              </div>
+            </motion.div>
+          </div>
           <Footer />
         </motion.div>
       )}

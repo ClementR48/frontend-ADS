@@ -22,7 +22,7 @@ const Contact = () => {
     if (contactData.length === 0) {
       dispatch(getContactData());
     }
-  }, []);
+  }, [contactData.length, dispatch]);
   const formRef = useRef();
   const [classForm, setClassForm] = useState("right");
 
@@ -45,7 +45,7 @@ const Contact = () => {
   }, []);
 
   useEffect(() => {
-    console.log(formRef);
+    
     const observer = new IntersectionObserver(callbackFunction, options);
     if (formRef.length !== 0) {
       if (formRef.current !== undefined) {
@@ -54,7 +54,7 @@ const Contact = () => {
     } else {
       return <Loader />;
     }
-  }, [formRef, callbackFunction]);
+  }, [formRef, callbackFunction, options]);
 
   /* Validation Form */
 
@@ -137,7 +137,7 @@ const Contact = () => {
               setEmail("");
             },
             (error) => {
-              console.log(error.text);
+              
             }
           );
       } else {
@@ -148,6 +148,10 @@ const Contact = () => {
       failMessage();
     }
   }
+
+  const buttonSendProduct = "Envoyer";
+
+  const sendButtonLetters = buttonSendProduct.split("");
   return (
     <>
       {contactData.length !== 0 ? (
@@ -159,13 +163,13 @@ const Contact = () => {
           className="contact-page"
         >
           <ScrollToTop />
-          <Navbar/>
           <Parallax
-            bgImage={contactData[0].backgroundImage}
+           /*  bgImage={contactData[0].backgroundImage} */
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
-            <main className="container-contact" >
+            <Navbar />
+            <main className="container-contact">
               <h2>Demande de contact</h2>
               <motion.div
                 initial={{ opacity: 0, translateX: 200 }}
@@ -264,14 +268,65 @@ const Contact = () => {
                       setMessage(event.target.value);
                     }}
                   ></textarea>
-                  <button type="submit">Envoyer</button>
+                  <button className="checkout">
+                    <div className="span-container s1">
+                      {sendButtonLetters.map((letter, index) => {
+                        return (
+                          <>
+                            {letter !== " " ? (
+                              <span
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                {letter}
+                              </span>
+                            ) : (
+                              <span
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                &nbsp;
+                              </span>
+                            )}
+                          </>
+                        );
+                      })}
+                    </div>
+                    <div className="span-container s2">
+                      {sendButtonLetters.map((letter, index) => {
+                        return (
+                          <>
+                            {letter !== " " ? (
+                              <span
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                {letter}
+                              </span>
+                            ) : (
+                              <span
+                                style={{
+                                  transitionDelay: ` ${0.05 * index}s`,
+                                }}
+                              >
+                                &nbsp;
+                              </span>
+                            )}
+                          </>
+                        );
+                      })}
+                    </div>
+                  </button>
                   <div className="form-message"></div>
                 </form>
               </motion.div>
             </main>
-            
+
+            <Footer footerColor={contactData[0].footerColor} />
           </Parallax>
-          <Footer footerColor={contactData[0].footerColor} />
         </motion.div>
       ) : (
         <Loader />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect} from "react";
 import "./Cart.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../Components/General/Navbar/Navbar";
@@ -16,7 +16,6 @@ const Cart = () => {
     ...state.appReducer,
   }));
 
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (cartData.length === 0) {
@@ -28,11 +27,6 @@ const Cart = () => {
     ...state.cartReducer,
   }));
 
-
-
-
-  
-
   return (
     <>
       {cartData.length !== 0 ? (
@@ -43,7 +37,6 @@ const Cart = () => {
           transition={{ delay: 0.5 }}
           className="cart"
         >
-          <Navbar />
           <ScrollToTop />
           <Parallax
             bgImage={cartData[0].backgroundImage}
@@ -51,6 +44,7 @@ const Cart = () => {
             strength={1000}
             className="parallax"
           >
+            <Navbar />
             <main className="container-cart">
               <motion.h2
                 initial={{ opacity: 0 }}
@@ -60,14 +54,14 @@ const Cart = () => {
               >
                 Votre panier
               </motion.h2>
-              {cartState.cart.length == 0 ? (
+              {cartState.cart.length !== 0 ? (
                 <FullCart />
               ) : (
-                <EmptyCart cartData={cartData}/>
+                <EmptyCart cartData={cartData} />
               )}
             </main>
+            <Footer footerColor={cartData[0].footerColor} />
           </Parallax>
-          <Footer footerColor={cartData[0].footerColor} />
         </motion.div>
       ) : (
         <Loader />
