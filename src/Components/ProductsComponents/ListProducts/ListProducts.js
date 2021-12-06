@@ -13,6 +13,7 @@ const ListProducts = () => {
 
 
 
+
   const dispatch = useDispatch();
   const changePageFunc = (value) => {
     dispatch({
@@ -53,11 +54,13 @@ const ListProducts = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(callbackFunction, options);
-
-    allRef.current.forEach((ref) => {
-      observer.observe(ref);
-    });
-  }, [options, allRef, productsToShow]);
+   
+      allRef.current.forEach((ref) => {
+        observer.observe(ref);
+      });
+    
+    
+  }, [options, allRef, productsToShow.length, productsToShow]);
 
   /* Animation au changement de la liste  */
   const [classGrid, setClassGrid] = useState("grid");
@@ -73,13 +76,15 @@ const ListProducts = () => {
 
   useEffect(() => {
     if (productsToShow !== undefined) {
-      if (productsToShow.length <= 4) {
+      if (productsToShow.length <= 3) {
         setClassGrid("second-grid");
+       
       } else {
         setClassGrid("grid");
       }
+      
     }
-  }, [productsToShow]);
+  }, [productsToShow.length, productsToShow]);
 
   return (
     <>

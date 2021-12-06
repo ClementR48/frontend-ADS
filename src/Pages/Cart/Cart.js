@@ -10,13 +10,30 @@ import { getCartData } from "../../redux/reducer/appReducer";
 import Loader from "../../Components/Loader/Loader";
 import EmptyCart from "../../Components/CartComponents/EmptyCart/EmptyCart";
 import FullCart from "../../Components/CartComponents/FullCart/FullCart";
+import { getProducts } from "../../redux/reducer/productsReducer";
 
 const Cart = () => {
   const { cartData } = useSelector((state) => ({
     ...state.appReducer,
   }));
+  const { products } = useSelector((state) => ({
+    ...state.productsReducer,
+  }));
+  const { openCheckout } = useSelector((state) => ({
+    ...state.cartReducer,
+  }));
+
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products.length]);
+
+  
+ 
+  
   useEffect(() => {
     if (cartData.length === 0) {
       dispatch(getCartData());
@@ -35,7 +52,7 @@ const Cart = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ delay: 0.5 }}
-          className="cart"
+          className={openCheckout ? "cart active" : "cart"}
         >
           <ScrollToTop />
           <Parallax
@@ -54,6 +71,7 @@ const Cart = () => {
               >
                 Votre panier
               </motion.h2>
+              
               {cartState.cart.length !== 0 ? (
                 <FullCart />
               ) : (

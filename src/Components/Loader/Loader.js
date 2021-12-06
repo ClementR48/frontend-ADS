@@ -6,7 +6,7 @@ const Loader = () => {
   return (
     <div className="loader">
       <ScrollToTop/>
-      <img src='/assets/images/logoRose.png' alt="" />
+      <img src='/assets/images/logoRose.png' alt="logo" />
       
     </div>
   );

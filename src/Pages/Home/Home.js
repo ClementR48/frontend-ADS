@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import ArticlesHome from "../../Components/HomeComponents/ArticlesHome/ArticlesHome";
 import ImageHome from "../../Components/HomeComponents/ImageHome/ImageHome";
-import { Parallax } from "react-parallax";
+import { Background, Parallax } from "react-parallax";
 import { motion } from "framer-motion";
 import ScrollToTop from "../../Components/ScrollToTop";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,14 +19,12 @@ const Home = () => {
     ...state.appReducer,
   }));
 
-  
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (homeData.length === 0) {
       dispatch(getHomeData());
     }
-  }, [homeData.length, dispatch ]);
+  }, [homeData.length, dispatch]);
 
   /* States */
 
@@ -53,21 +51,20 @@ const Home = () => {
   return (
     <>
       {homeData.length !== 0 ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ delay: 0.5 }}
-          className="home"
-        >
-          <ScrollToTop />
-          <Parallax
-            bgImage={homeData[0].backgroundImage}
-            bgImageAlt="arriere plan coloré"
-            strength={1000}
-            className='parallax'
+        <Parallax strength={500}>
+          <Background className="bg-custom">
+            <img src={homeData[0].backgroundImage} alt="" />
+          </Background>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.5 }}
+            className="home"
           >
-          <Navbar isHomePage={homePage} changeNavScroll={changeNavScroll} />
+            <ScrollToTop />
+
+            <Navbar isHomePage={homePage} changeNavScroll={changeNavScroll} />
 
             <motion.div
               initial={{ opacity: 0, translateX: 300 }}
@@ -83,9 +80,9 @@ const Home = () => {
             >
               <ArticlesHome dataArticles={homeData} />
             </motion.div>
-          <Footer footerColor={homeData[0].footerColor}/>
-          </Parallax>
-        </motion.div>
+            <Footer footerColor={homeData[0].footerColor} />
+          </motion.div>
+        </Parallax>
       ) : (
         <Loader />
       )}

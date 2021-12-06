@@ -1,0 +1,141 @@
+@import "../../../global.scss";
+.checkout-page {
+  position: fixed;
+  width: 40vw;
+  height: 100vh;
+  background-color: rgb(241, 204, 204);
+  top: 0;
+  right: 0;
+  opacity: 1;
+  transform: translateX(100%);
+  transition-delay: 0.5s;
+
+  overflow: hidden;
+
+  @include tablet {
+    width: 50vw;
+  }
+  @include mobile {
+    width: 100vw;
+  }
+  &.active {
+    transition-delay: 0s;
+
+    transform: translateX(0);
+  }
+
+  label {
+    color: $colorTextMain;
+    font-size: 16px;
+  }
+
+  input,
+  select {
+    font-size: 16px;
+    padding: 2px;
+    margin-bottom: 0.5vh;
+    border: none;
+    outline: none;
+    background-color: rgb(255, 246, 246);
+    color: $colorTextMain;
+    background-color: transparent;
+    border-bottom: 1px $colorTextMain solid;
+  }
+
+  .close-modal {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: 1vh;
+    right: 5vw;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s;
+
+    svg {
+      &:hover {
+        stroke: black;
+      }
+    }
+  }
+
+  .informations {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: transform 0.5s;
+
+    &.active {
+      transform: translateX(-100%);
+    }
+
+    h2 {
+      color: $colorTextMain;
+      font-size: 30px;
+    }
+
+    .informations-user,
+    .informations-adress {
+      padding: 5px;
+      width: 70%;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .checkout {
+      background-color: white;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid $colorNavText;
+      outline: none;
+
+      &:hover .s1 span {
+        transform: translateY(-100%) rotateX(-90deg);
+      }
+      &:hover .s2 span {
+        transform: translateY(0%) rotateX(0deg);
+      }
+
+      .span-container {
+        width: 100%;
+        padding: 7px 10px;
+      }
+    }
+
+    .checkout span {
+      font-family: "Caladea", sans-serif;
+      color: $colorNavText;
+      transition: 0.4s;
+      will-change: transform;
+      display: inline-block;
+      font-size: 20px;
+      @include mobile {
+        font-size: 18px;
+      }
+    }
+
+    .s1 span {
+      transform-origin: bottom;
+    }
+
+    .s2 span {
+      transform-origin: top;
+      transform: translateY(100%) rotateX(-90deg);
+    }
+
+    .s2 {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

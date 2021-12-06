@@ -76,7 +76,7 @@ const ArticlesHome = ({dataArticles}) => {
           <h2 className="title">{dataArticles[0].firstArticle.title}</h2>
           <p className="text">{dataArticles[0].firstArticle.txt}</p>
           <Link onClick={() => changePageFunc()} to="/produits">
-            Accedér au shop
+            Accéder au shop
           </Link>
         </div>
         <div className="picture">

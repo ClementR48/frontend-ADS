@@ -52,9 +52,12 @@
       display: flex;
       flex-direction: column;
       position: relative;
+      transform: translateX(50%);
+      transition: all 1s ease;
 
       @include tablet {
         width: 100%;
+        transform: translateX(0);
       }
 
       img {
@@ -131,7 +134,7 @@
       }
 
       .contact {
-        /* background-color: $colorTitle; */
+        
         height: 30%;
         display: flex;
         align-items: center;
@@ -161,7 +164,7 @@
       background-color: white;
       transition: all 1s ease;
       opacity: 0;
-      transform: translateX(-100%);
+      transform: translateX(-50%);
       z-index: 3;
       position: relative;
       width: 50%;
@@ -171,7 +174,8 @@
 
       @include tablet {
         width: 100%;
-        transform: translateX(0) translateY(-100%);
+        transform: translateX(0) ;
+        
         
       }
 
@@ -187,7 +191,7 @@
 
       label {
         color: $colorNavText;
-        letter-spacing: 2px;
+        
         font-size: 20px;
 
         @include mobile {
@@ -286,6 +290,16 @@
         transform: translateX(-50%);
         top: 0;
         opacity: 0;
+      }
+    }
+
+    &.active-form {
+      .left {
+        transform: translateX(0);
+      }
+      .right {
+        transform: translateX(0);
+        opacity: 1;
       }
     }
   }

@@ -12,6 +12,7 @@ import ProductShowcase from "./Pages/ProductShowcase/ProductShowcase";
 import "./App.scss";
 
 import { AnimatePresence } from "framer-motion";
+import Checkout from "./Components/CartComponents/Checkout/Checkout";
 
 function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <MenuResponsive />
+      <Checkout />
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
           <Route exact path="/" component={Home} />

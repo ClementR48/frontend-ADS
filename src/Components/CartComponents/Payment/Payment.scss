@@ -1,0 +1,15 @@
+.payment {
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  color: white;
+  transform: translateX(100%);
+  transition: transform .5s;
+
+  &.active {
+    transform: translateX(0);
+  }
+}

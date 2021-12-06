@@ -2,9 +2,13 @@ import { db } from "../../utils/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
 const INITIAL_STATE = {
-  products: [],
+  products: localStorage.getItem("productItem")
+  ? JSON.parse(localStorage.getItem("productItem"))
+  : [],
   productsBeforeBuy: [],
-  productsToShow: [],
+  productsToShow: localStorage.getItem("productItem")
+  ? JSON.parse(localStorage.getItem("productItem"))
+  : [],
   category: "tout",
 };
 
@@ -30,7 +34,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
       };
       const newArr = [...state.products];
       newArr.splice(indexProduct, 1, updateQuantity);
-
+      localStorage.setItem('productItem', JSON.stringify(newArr))
       return {
         ...state,
         products: newArr,
@@ -50,7 +54,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
       };
       const newArr = [...state.products];
       newArr.splice(indexProduct, 1, updateQuantity);
-
+      localStorage.setItem('productItem', JSON.stringify(newArr))
       return {
         ...state,
         products: newArr,
@@ -62,13 +66,14 @@ export default function productReducer(state = INITIAL_STATE, action) {
           const newArr = state.products.filter(
             (product) => product.category.name === action.payload
           );
-
+          localStorage.setItem('productItem', JSON.stringify(newArr))
           return {
             ...state,
             productsToShow: newArr,
             category: action.payload,
           };
         } else if (action.payload === "tout") {
+          
           return {
             ...state,
             productsToShow: state.products,

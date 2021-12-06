@@ -15,12 +15,11 @@
     background-color: white;
     padding: 20px;
     width: 100%;
-    
+
     cursor: none;
 
     @include mobile {
       padding: 10px;
-
     }
 
     .cursor {
@@ -35,11 +34,10 @@
       pointer-events: none;
       border-radius: 50%;
       opacity: 0;
-     display: flex;
-     justify-content: center;
-     align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       mix-blend-mode: screen;
-      
     }
 
     .carousel-container {
@@ -57,6 +55,7 @@
       margin: 0;
 
       img {
+        object-fit: cover;
         cursor: none;
         width: 15vw;
         height: 15vw;

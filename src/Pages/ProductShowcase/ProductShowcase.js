@@ -46,6 +46,7 @@ const ProductShowcase = () => {
 
   const addToCart = (e) => {
     e.preventDefault();
+    
     const productAdded = {
       ...products[indexProductClicked],
       quantity: quantity,
@@ -86,7 +87,7 @@ const ProductShowcase = () => {
   const mousepos = (e) => {
     cursorRef.current.setAttribute(
       "style",
-      `top:${e.pageY - 40}px ; left:${e.pageX - 40}px; opacity:1`
+      `top:${e.clientY - 40}px ; left:${e.clientX - 40}px; opacity:1`
     );
   };
 

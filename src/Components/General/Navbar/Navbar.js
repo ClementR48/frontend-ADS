@@ -10,12 +10,15 @@ const Navbar = ({ isHomePage, changeNavScroll }) => {
   /* States */
 
   const [activeAnim, setActiveAnim] = useState();
+  const [opacityAnim, setOpacityAnim] = useState(1)
 
   /* Selector  */
 
-  const { changePage } = useSelector((state) => ({
+  const { changePage, openMenu } = useSelector((state) => ({
     ...state.appReducer,
   }));
+
+  
 
   const shoppingCart = useSelector((state) => ({
     ...state.cartReducer,
@@ -55,28 +58,28 @@ const Navbar = ({ isHomePage, changeNavScroll }) => {
 
   const hover = (e) => {
     if (e.target.innerText === "Acceuil") {
+      setOpacityAnim(1)
       let ref1 = allLink.current[0].getBoundingClientRect();
-      anim.current.style.opacity = 1;
       setActiveAnim(ref1.left + ref1.width / 2);
     }
     if (e.target.innerText === "Shop") {
-      anim.current.style.opacity = 1;
+      setOpacityAnim(1)
       let ref2 = allLink.current[1].getBoundingClientRect();
       setActiveAnim(ref2.left + ref2.width / 2);
     }
     if (e.target.innerText === "A propos") {
-      anim.current.style.opacity = 1;
+      setOpacityAnim(1)
       let ref3 = allLink.current[2].getBoundingClientRect();
       setActiveAnim(ref3.left + ref3.width / 2);
     }
     if (e.target.innerText === "Contact") {
-      anim.current.style.opacity = 1;
+      setOpacityAnim(1)
       let ref4 = allLink.current[3].getBoundingClientRect();
       setActiveAnim(ref4.left + ref4.width / 2);
     }
 
     if (e.target.className === "floating-cart") {
-      anim.current.style.opacity = 1;
+      setOpacityAnim(1)
       let ref5 = allLink.current[4].getBoundingClientRect();
       setActiveAnim(ref5.left + ref5.width / 2);
     }
@@ -111,7 +114,7 @@ const Navbar = ({ isHomePage, changeNavScroll }) => {
     }
 
     if (history.location.pathname.startsWith("/produits/")) {
-      anim.current.style.opacity = 0;
+      setOpacityAnim(0)
     }
   };
 
@@ -123,7 +126,6 @@ const Navbar = ({ isHomePage, changeNavScroll }) => {
 
     if (history.location.pathname === "/produits") {
       let ref2 = allLink.current[1].getBoundingClientRect();
-      anim.current.style.opacity = 1;
       setActiveAnim(ref2.left + ref2.width / 2);
     }
     if (history.location.pathname === "/à-propos") {
@@ -141,32 +143,53 @@ const Navbar = ({ isHomePage, changeNavScroll }) => {
       setActiveAnim(cartRefe.left + cartRefe.width / 2);
     }
     if (history.location.pathname.startsWith("/produits/")) {
-      anim.current.style.opacity = 0;
+      setOpacityAnim(0)
+      
     }
   }, [history.location.pathname, changePage]);
 
+  
+
   useEffect(() => {
     anim.current.style.left = `${activeAnim}px  `;
-    anim.current.style.opacity = 1;
-  }, [activeAnim]);
+    anim.current.style.opacity = opacityAnim;
+  }, [activeAnim, opacityAnim]);
 
   /* dynamisation de la classe de la nav et du logo a afficher en fonction de la page */
 
   let classe = "";
   let logoNav = "";
 
-  if (isHomePage) {
-    if (changeNavScroll) {
+  if(openMenu){
+    if (isHomePage) {
+    
+      if (changeNavScroll) {
+        classe = "navbar active-hamburger";
+        logoNav = "logoRose";
+      } else {
+        classe = "navbar active-hamburger";
+        logoNav = "logoRose";
+      }
+    } else {
+      classe = "navbar active-hamburger";
+      logoNav = "logoRose";
+    }
+  }else {
+    if (isHomePage) {
+    
+      if (changeNavScroll) {
+        classe = "navbar";
+        logoNav = "logoRose";
+      } else {
+        classe = "home-page ";
+        logoNav = "logoBlanc";
+      }
+    } else {
       classe = "navbar";
       logoNav = "logoRose";
-    } else {
-      classe = "home-page";
-      logoNav = "logoBlanc";
     }
-  } else {
-    classe = "navbar";
-    logoNav = "logoRose";
   }
+  
 
   /* Nombre items dans le cart */
 

@@ -15,15 +15,14 @@ const MenuResponsive = () => {
   const changePageFunc = () => {
     dispatch({
       type: "CHANGEPAGE",
-      
     });
   };
 
-  const openMenuFunc =() => {
+  const openMenuFunc = () => {
     dispatch({
-      type: "OPENMENU"
-    })
-  }
+      type: "OPENMENU",
+    });
+  };
 
   const shoppingCart = useSelector((state) => ({
     ...state.cartReducer,
@@ -34,71 +33,73 @@ const MenuResponsive = () => {
     totalItems += item.quantity;
   }
 
-  
-
   return (
-    <nav className={openMenu ? "menu-responsive active-menu" : "menu-responsive"}>
-      <div className="link">
-        <NavLink
-          className="nav-page"
-          activeClassName="active-nav-page"
-          exact
-          to="/"
-          onClick={() => {
-            changePageFunc()
-            openMenuFunc()
-          } }
-        >
-          Acceuil
-        </NavLink>
-        <NavLink
-          className="nav-page"
-          activeClassName="active-nav-page"
-          to="/produits"
-          onClick={() => {
-            changePageFunc()
-            openMenuFunc()
-          } }
-        >
-          Shop
-        </NavLink>
-        <NavLink
-          className="nav-page"
-          activeClassName="active-nav-page"
-          to="/à-propos"
-          onClick={() => {
-            changePageFunc()
-            openMenuFunc()
-          } }
-        >
-          A propos
-        </NavLink>
-        <NavLink
-          className="nav-page"
-          activeClassName="active-nav-page"
-          to="/contact"
-          onClick={() => {
-            changePageFunc()
-            openMenuFunc()
-          } }
-        >
-          Contact
-        </NavLink>
-        <NavLink
-          className="floating-cart"
-          activeClassName="floating-cart-active"
-          to="/panier"
-          
-          onClick={() => {
-            openMenuFunc()
-            changePageFunc()}}
-        >
-          <ShoppingCart />
-          <span className="nb-items">{totalItems}</span>
-        </NavLink>
-        
-      </div>
-    </nav>
+    <>
+    {openMenu && <div className="overlay" onClick={() => openMenuFunc()}></div>}
+      <nav
+        className={openMenu ? "menu-responsive active-menu" : "menu-responsive"}
+      >
+        <div className="link">
+          <NavLink
+            className="nav-page"
+            activeClassName="active-nav-page"
+            exact
+            to="/"
+            onClick={() => {
+              changePageFunc();
+              openMenuFunc();
+            }}
+          >
+            Acceuil
+          </NavLink>
+          <NavLink
+            className="nav-page"
+            activeClassName="active-nav-page"
+            to="/produits"
+            onClick={() => {
+              changePageFunc();
+              openMenuFunc();
+            }}
+          >
+            Shop
+          </NavLink>
+          <NavLink
+            className="nav-page"
+            activeClassName="active-nav-page"
+            to="/à-propos"
+            onClick={() => {
+              changePageFunc();
+              openMenuFunc();
+            }}
+          >
+            A propos
+          </NavLink>
+          <NavLink
+            className="nav-page"
+            activeClassName="active-nav-page"
+            to="/contact"
+            onClick={() => {
+              changePageFunc();
+              openMenuFunc();
+            }}
+          >
+            Contact
+          </NavLink>
+          <NavLink
+            className="floating-cart"
+            activeClassName="floating-cart-active"
+            to="/panier"
+            onClick={() => {
+              openMenuFunc();
+              changePageFunc();
+            }}
+          >
+            <ShoppingCart />
+            <span className="nb-items">{totalItems}</span>
+          </NavLink>
+        </div>
+      </nav>
+    </>
   );
 };
 

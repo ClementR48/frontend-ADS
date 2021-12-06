@@ -2,6 +2,21 @@
 
 .cart {
   position: relative;
+ transition: all 0.5s ease;
+ 
+
+  &.active {
+    transform: translateX(-40vw);
+    filter: blur(5px);
+    
+    @include tablet {
+      transform: translateX(-50vw);
+    }
+    @include mobile {
+      transform: translateX(-100vw);
+    }
+  }
+  
 
   
   .container-cart {

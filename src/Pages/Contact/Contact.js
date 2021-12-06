@@ -24,15 +24,15 @@ const Contact = () => {
     }
   }, [contactData.length, dispatch]);
   const formRef = useRef();
-  const [classForm, setClassForm] = useState("right");
+  const [classForm, setClassForm] = useState("formulaire");
 
   /* apparition au scroll */
 
   const callbackFunction = (entries) => {
     if (entries[0].isIntersecting) {
-      setClassForm("right active");
+      setClassForm("formulaire active-form");
     } else {
-      setClassForm("right");
+      setClassForm("formulaire");
     }
   };
 
@@ -185,7 +185,7 @@ const Contact = () => {
                 animate={{ opacity: 1, translateX: 0 }}
                 exit={{ opacity: 0, translateX: -200 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className="formulaire"
+                className={classForm}
               >
                 <div
                   className="left"
@@ -218,7 +218,7 @@ const Contact = () => {
                     alt="logo"
                   ></img>
                 </div>
-                <form className={classForm} onSubmit={sendEmail} ref={formRef}>
+                <form className="right" onSubmit={sendEmail} ref={formRef}>
                   <label ref={addValidateRef} htmlFor="name">
                     Nom
                   </label>

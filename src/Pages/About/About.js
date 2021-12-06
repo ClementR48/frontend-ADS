@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { Parallax } from "react-parallax";
+import { Background, Parallax } from "react-parallax";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../Components/General/Footer/Footer";
 import Navbar from "../../Components/General/Navbar/Navbar";
@@ -33,10 +33,12 @@ const About = () => {
         >
           <ScrollToTop />
           <Parallax
-            bgImage={aboutData[0].backgroundImage}
-            bgImageAlt="arriere plan coloré"
+            
             strength={1000}
           >
+             <Background className="bg-custom">
+              <img src={aboutData[0].backgroundImage} alt="" />
+            </Background>
           <Navbar />
             <main className="container-page-about" >
               <motion.h2

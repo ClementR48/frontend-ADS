@@ -11,7 +11,6 @@
   z-index: 500;
   background-color: $colorNavBg;
   transition: all 0.5s;
-  
 
   img {
     margin-left: 5vw;
@@ -25,7 +24,6 @@
     align-items: center;
     height: auto;
     position: relative;
-   
 
     @include tablet {
       display: none;
@@ -40,8 +38,6 @@
   .nav-page:not(:nth-child(1)) {
     margin-left: 10vw;
   }
-
-  
 
   .anim-active {
     position: absolute;
@@ -88,6 +84,24 @@
       transition: all 0.7s ease;
     }
   }
+
+  &.active-hamburger {
+    .hamburger {
+      span {
+        &:first-child {
+          background-color: orange;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          background-color: orange;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
   .floating-cart {
     margin: 0 5vw 0 10vw;
     position: relative;
@@ -124,23 +138,6 @@
       color: $colorPointNav;
     }
   }
-  &.active {
-    .hamburger {
-      span {
-        &:first-child {
-          background-color: $colorPointNav;
-          transform: rotate(45deg);
-        }
-        &:nth-child(2) {
-          opacity: 0;
-        }
-        &:last-child {
-          background-color: $colorPointNav;
-          transform: rotate(-45deg);
-        }
-      }
-    }
-  }
 }
 
 /* PAGE D'ACCEUIL NAV */
@@ -164,7 +161,7 @@
     margin-left: 5vw;
     width: 110px;
     @include tablet {
-      width:  90px;
+      width: 90px;
     }
   }
 
@@ -234,6 +231,23 @@
       transition: all 0.7s ease;
     }
   }
+  &.active-hamburger {
+    .hamburger {
+      span {
+        &:first-child {
+          background-color: $colorNavText;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          background-color: $colorNavText;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
 
   .floating-cart {
     margin: 0 5vw 0 10vw;
@@ -258,32 +272,12 @@
       top: -15px;
       right: -15px;
       font-size: 16px;
-
-      
     }
   }
 
   .floating-cart-active {
     svg {
       stroke: white;
-    }
-  }
-
-  &.active {
-    .hamburger {
-      span {
-        &:first-child {
-          background-color: $colorPointNav;
-          transform: rotate(45deg);
-        }
-        &:nth-child(2) {
-          opacity: 0;
-        }
-        &:last-child {
-          background-color: $colorPointNav;
-          transform: rotate(-45deg);
-        }
-      }
     }
   }
 }

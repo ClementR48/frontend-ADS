@@ -7,6 +7,7 @@
   column-gap: 80px;
   column-fill: balance;
   column-width: 10%;
+ 
 
   @include tablet {
     -webkit-column-count: 2;
@@ -101,6 +102,7 @@
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  
 
   
 

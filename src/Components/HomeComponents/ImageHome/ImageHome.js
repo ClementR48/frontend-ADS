@@ -29,11 +29,13 @@ const ImageHome = ({ dataImage }) => {
 
             <textPath
               fontSize="500"
+              fontFamily="'Inconsolata', monospace"
               fill="white"
               letterSpacing="350px"
               href="#curve"
+              
             >
-              LA CERAMIQUE INSPIREE
+              LA C&#201;RAMIQUE INSPIR&#201;E
             </textPath>
           </text>
         </svg>

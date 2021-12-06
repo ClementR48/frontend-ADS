@@ -4,10 +4,10 @@
   position: fixed;
   right: -100%;
   bottom: 0;
-  width: 40vw;
+  width: 50vw;
   height: calc(100vh - 90px);
   background-color: $colorNavBg;
-  z-index: 500;
+  z-index: 1000;
 
   transition: all 0.8s ease;
   display: none;
@@ -58,16 +58,31 @@
         border-radius: 50%;
         width: 20px;
         height: 20px;
-        background-color: orange;
+        color: $colorNavText;
         top: -15px;
         right: -15px;
+        font-size: 16px;
       }
     }
   
     .floating-cart-active {
       svg {
         stroke: $colorPointNav;
+        fill: $colorPointNav;
+      }
+      .nb-items {
+        color: $colorPointNav;
       }
     }
   }
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  
+  background-color: rgba(218, 102, 102, 0.2);
+  z-index: 499;
+  transition: all 0.5s;
 }
