@@ -115,6 +115,7 @@ const maxValueInput = (id) => {
         transition={{ delay: 0.5, duration: 1 }}
         className="cart-articles"
       >
+      
         <ul>
           {cartState.cart.map((item) => (
             <>

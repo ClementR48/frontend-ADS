@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ScrollToTop from '../../ScrollToTop'
 import "./EmptyCart.scss";
 
 const EmptyCart = ({ cartData }) => {
-  
-  
+  const { openThanks } = useSelector((state) => ({
+    ...state.cartReducer,
+  }));
 
   let cursorRef = useRef();
 
@@ -27,9 +30,9 @@ const EmptyCart = ({ cartData }) => {
       transition={{ delay: 0.5, duration: 1 }}
       className="cart-empty"
     >
+      <ScrollToTop />
       <div className="text-empty">
         <svg
-          
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-6548.5 -1361.5 13910 2575"
           height="250px"
@@ -50,18 +53,33 @@ const EmptyCart = ({ cartData }) => {
               dur="2s"
             />
 
-            <textPath
-              fontSize="500"
-              fill="rgba(134, 90, 71, 1)"
-              letterSpacing="350px"
-              href="#curve"
-            >
-              VOTRE PANIER EST VIDE
-            </textPath>
+            {openThanks ? (
+              <textPath
+                fontSize="500"
+                fill="rgba(134, 90, 71, 1)"
+                letterSpacing="350px"
+                href="#curve"
+              >
+                Merci pour votre achat
+              </textPath>
+            ) : (
+              <textPath
+                fontSize="500"
+                fill="rgba(134, 90, 71, 1)"
+                letterSpacing="350px"
+                href="#curve"
+              >
+                VOTRE PANIER EST VIDE
+              </textPath>
+            )}
           </text>
         </svg>
       </div>
-      <div className="carousel-empty" onMouseMove={mousePos} onMouseLeave={mouseLeave}>
+      <div
+        className="carousel-empty"
+        onMouseMove={mousePos}
+        onMouseLeave={mouseLeave}
+      >
         <div className="carousel-container">
           <div className="cursor" ref={cursorRef}>
             <span>Shop</span>

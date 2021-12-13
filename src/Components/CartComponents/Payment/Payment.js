@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Payment.scss";
+import ReactDOM from "react-dom";
+import emailjs from "emailjs-com";
+import { db } from "../../../utils/firebaseConfig";
+import { updateDoc, doc } from "firebase/firestore";
+import { Loader } from "react-feather";
 
-const Payment = ({ adressCountry }) => {
+const Payment = ({ adressCountry, nameUser, firstNameUser, emailUser }) => {
+  const PayPalButton = window.paypal.Buttons.driver("react", {
+    React,
+    ReactDOM,
+  });
+
   const { openPayment, cart } = useSelector((state) => ({
     ...state.cartReducer,
   }));
-  console.log(adressCountry);
+
   const [deliveryPrice, setDeliveryPrice] = useState(0);
 
   const cartState = useSelector((state) => ({
@@ -53,26 +63,94 @@ const Payment = ({ adressCountry }) => {
       } else {
         setDeliveryPrice(40);
       }
-    }else {
-      setDeliveryPrice(20)
+    } else {
+      setDeliveryPrice(20);
     }
   }, [sumWeight, adressCountry]);
 
-  let totalPrice = 0;
+  let totalPriceCart = 0;
   if (cartState.cart.length !== 0) {
     for (const item of cartState.cart) {
       const itemPrice = item.price * item.quantity;
-      totalPrice += itemPrice;
+      totalPriceCart += itemPrice;
     }
   }
-  console.log(deliveryPrice);
+
+  const totalPrice = deliveryPrice + totalPriceCart;
+
+  const sendMessageConfirmation = () => {
+    emailjs.send(
+      "service_p1h4m9i",
+      "template_c61bw3i",
+      {
+        to_name: firstNameUser,
+        user_email: emailUser,
+      },
+      "user_S6W9cox0UxXXczGLydsea"
+    );
+  };
+
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            currency: "EUR",
+            value: totalPrice,
+          },
+          shipping: {
+            adress: {
+              adress_line_1: "ok",
+              admin_area_2: "ok",
+              postal_code: "31",
+            },
+          },
+        },
+      ],
+    });
+  };
+
+  const onApprove = (data, actions) => {
+    return actions.order
+      .capture()
+      .then(function (details) {
+        cart.forEach((prod) => {
+          dispatch({
+            type: "UPDATEPRODUCTAFTERBUY",
+            payload: prod,
+          });
+        });
+      })
+
+      .then(function () {
+        sendMessageConfirmation();
+
+        dispatch({
+          type: "RESETCART",
+        });
+      })
+      .then(function () {
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      });
+  };
+
   return (
     <div className={openPayment ? "payment active" : "payment"}>
-      {deliveryPrice}
-      totalPrice : {deliveryPrice + totalPrice}
-      <button type="button" onClick={previousPage}>
-        prev
-      </button>
+      <>
+        <div>
+          {deliveryPrice}
+          totalPrice : {deliveryPrice + totalPriceCart}
+          <button type="button" onClick={previousPage}>
+            prev
+          </button>
+        </div>
+        <PayPalButton
+          createOrder={(data, actions) => createOrder(data, actions)}
+          onApprove={(data, actions) => onApprove(data, actions)}
+        />
+      </>
     </div>
   );
 };

@@ -185,7 +185,7 @@ const ProductShowcase = () => {
                 <p className="price">{products[indexProductClicked].price}€</p>
               </div>
 
-              {products[indexProductClicked].quantity !== 0 ? (
+              {products[indexProductClicked].quantity > 0 ? (
                 <form className="add-container" onSubmit={addToCart}>
                   {products[indexProductClicked].quantity > 1 && (
                     <div className="input-container">

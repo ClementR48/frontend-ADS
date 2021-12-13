@@ -4,7 +4,8 @@ const INITIAL_STATE = {
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
     openCheckout: false,
-    openPayment: false
+    openPayment: false,
+    openThanks : false
 };
 
 export default function cartReducer(state = INITIAL_STATE, action) {
@@ -66,6 +67,16 @@ export default function cartReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         openPayment: !state.openPayment
+      }
+    }
+    case 'RESETCART' : {
+      localStorage.removeItem('cartItems')
+      return {
+        
+        cart: [],
+        openCheckout: false,
+        openPayment: false,
+        openThanks: true
       }
     }
     default: {

@@ -111,7 +111,7 @@ const ListProducts = () => {
                       <h3>{item.name}</h3>
                       <p>{item.price}€</p>
                     </div>
-                    {item.quantity === 0 ?<div className="sold-out">
+                    {item.quantity <= 0 ?<div className="sold-out">
                       <p>&Eacute;PUIS&Eacute;</p>
                     </div> : ""}
                   </Link>

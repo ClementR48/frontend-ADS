@@ -110,6 +110,7 @@ const Checkout = () => {
         <>
           {openCheckout && <Overlay />}
           <form
+          onSubmit={e => e.preventDefault()}
             className={openCheckout ? "checkout-page active" : "checkout-page"}
           >
             <div
@@ -232,7 +233,7 @@ const Checkout = () => {
                 </div>
               </button>
             </div>
-            <Payment adressCountry={adressCountry}/>
+            <Payment adressCountry={adressCountry} nameUser={name} firstNameUser={firstName} emailUser={email}/>
           </form>
         </>
       ) : (

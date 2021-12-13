@@ -1,14 +1,10 @@
 import { db } from "../../utils/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 
 const INITIAL_STATE = {
-  products: localStorage.getItem("productItem")
-  ? JSON.parse(localStorage.getItem("productItem"))
-  : [],
+  products:[],
   productsBeforeBuy: [],
-  productsToShow: localStorage.getItem("productItem")
-  ? JSON.parse(localStorage.getItem("productItem"))
-  : [],
+  productsToShow:[],
   category: "tout",
 };
 
@@ -34,7 +30,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
       };
       const newArr = [...state.products];
       newArr.splice(indexProduct, 1, updateQuantity);
-      localStorage.setItem('productItem', JSON.stringify(newArr))
+      
       return {
         ...state,
         products: newArr,
@@ -54,7 +50,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
       };
       const newArr = [...state.products];
       newArr.splice(indexProduct, 1, updateQuantity);
-      localStorage.setItem('productItem', JSON.stringify(newArr))
+      
       return {
         ...state,
         products: newArr,
@@ -66,7 +62,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
           const newArr = state.products.filter(
             (product) => product.category.name === action.payload
           );
-          localStorage.setItem('productItem', JSON.stringify(newArr))
+          
           return {
             ...state,
             productsToShow: newArr,
@@ -80,6 +76,33 @@ export default function productReducer(state = INITIAL_STATE, action) {
             category: action.payload,
           };
         }
+      }
+    // eslint-disable-next-line no-fallthrough
+    case "UPDATEPRODUCTAFTERBUY":
+      {
+        const indexProduct = state.products.findIndex(
+        (obj) => obj.id === action.payload.id
+      );
+
+        const upadteProduct = async (id) => {
+          const ProductDoc = doc(db, "Product", id);
+           
+            const newFields = {
+              
+              quantity: state.products[indexProduct].quantity - action.payload.quantity,
+            };
+            await updateDoc(ProductDoc, newFields);
+            
+          
+        };
+
+        upadteProduct(action.payload.id)
+        
+          
+          return {
+            ...state
+          };
+        
       }
       
 
