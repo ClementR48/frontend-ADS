@@ -16,6 +16,9 @@ const FullCart = () => {
   const cartState = useSelector((state) => ({
     ...state.cartReducer,
   }));
+  const {openCheckout} = useSelector((state) => ({
+    ...state.cartReducer
+  }))
 
   const dispatch = useDispatch();
 
@@ -99,7 +102,7 @@ const maxValueInput = (id) => {
   }; 
 
    const checkoutOpen = () => {
-     console.log(cartState.openCheckout);
+    
     dispatch({
       type: 'OPENCHECKOUT'
     })
@@ -113,7 +116,7 @@ const maxValueInput = (id) => {
         animate={{ opacity: 1, translateX: 0 }}
         exit={{ opacity: 0, translateX: -100 }}
         transition={{ delay: 0.5, duration: 1 }}
-        className="cart-articles"
+        className={openCheckout ? "cart-articles close" : 'cart-articles'}
       >
       
         <ul>

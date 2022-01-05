@@ -79,6 +79,7 @@ export default function productReducer(state = INITIAL_STATE, action) {
       }
     // eslint-disable-next-line no-fallthrough
     case "UPDATEPRODUCTAFTERBUY":
+      console.log(action.payload);
       {
         const indexProduct = state.products.findIndex(
         (obj) => obj.id === action.payload.id

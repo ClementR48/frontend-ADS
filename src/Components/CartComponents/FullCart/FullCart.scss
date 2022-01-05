@@ -4,6 +4,8 @@
   
   display: flex;
   align-items: flex-end;
+
+  
   
   
   
@@ -16,7 +18,7 @@
     width: 60%;
     margin-top: 50px;
    /*  background-color: white; */
-    min-height: 70vh;
+    
     
 
     @include desktop {

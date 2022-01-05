@@ -61,8 +61,6 @@ const Checkout = () => {
     }
   };
 
-  
-
   const verificationBeforeBuy = () => {
     if (
       name === "" ||
@@ -109,8 +107,9 @@ const Checkout = () => {
       {data !== undefined ? (
         <>
           {openCheckout && <Overlay />}
+
           <form
-          onSubmit={e => e.preventDefault()}
+            onSubmit={(e) => e.preventDefault()}
             className={openCheckout ? "checkout-page active" : "checkout-page"}
           >
             <div
@@ -200,7 +199,7 @@ const Checkout = () => {
               </div>
               <button
                 type="button"
-                onClick={verificationBeforeBuy}
+                onClick={changeCheckout}
                 className="checkout"
               >
                 <div className="span-container s1">
@@ -233,7 +232,16 @@ const Checkout = () => {
                 </div>
               </button>
             </div>
-            <Payment adressCountry={adressCountry} nameUser={name} firstNameUser={firstName} emailUser={email}/>
+            <Payment
+              adressCity={adressCity}
+              adressCountry={adressCountry}
+              adressStreet={adressStreet}
+              nameUser={name}
+              firstNameUser={firstName}
+              emailUser={email}
+              adressPostal={adressPostal}
+              adressNumberStreet={adressNumberStreet}
+            />
           </form>
         </>
       ) : (

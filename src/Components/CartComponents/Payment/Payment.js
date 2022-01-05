@@ -4,14 +4,38 @@ import "./Payment.scss";
 import ReactDOM from "react-dom";
 import emailjs from "emailjs-com";
 import { db } from "../../../utils/firebaseConfig";
-import { updateDoc, doc } from "firebase/firestore";
-import { Loader } from "react-feather";
+import { updateDoc, doc, addDoc, collection } from "firebase/firestore";
+import { ArrowLeft } from "react-feather";
 
-const Payment = ({ adressCountry, nameUser, firstNameUser, emailUser }) => {
+const Payment = ({
+  adressStreet,
+  adressCity,
+  adressCountry,
+  nameUser,
+  firstNameUser,
+  emailUser,
+}) => {
   const PayPalButton = window.paypal.Buttons.driver("react", {
     React,
     ReactDOM,
   });
+
+  const paymentCollectionRef = collection(db, "Payment");
+  const addUserInPayment = async () => {
+    const newField = {
+      firstName: firstNameUser,
+      name: nameUser,
+      adress: {
+        country: adressCountry,
+        city: adressCity,
+        street: adressStreet,
+      },
+      email_user: emailUser,
+      products: cart,
+      totalPrice: totalPrice,
+    };
+    await addDoc(paymentCollectionRef, newField);
+  };
 
   const { openPayment, cart } = useSelector((state) => ({
     ...state.cartReducer,
@@ -66,6 +90,8 @@ const Payment = ({ adressCountry, nameUser, firstNameUser, emailUser }) => {
     } else {
       setDeliveryPrice(20);
     }
+
+    
   }, [sumWeight, adressCountry]);
 
   let totalPriceCart = 0;
@@ -91,6 +117,7 @@ const Payment = ({ adressCountry, nameUser, firstNameUser, emailUser }) => {
   };
 
   const createOrder = (data, actions) => {
+    
     return actions.order.create({
       purchase_units: [
         {
@@ -124,7 +151,7 @@ const Payment = ({ adressCountry, nameUser, firstNameUser, emailUser }) => {
 
       .then(function () {
         sendMessageConfirmation();
-
+        addUserInPayment();
         dispatch({
           type: "RESETCART",
         });
@@ -139,14 +166,25 @@ const Payment = ({ adressCountry, nameUser, firstNameUser, emailUser }) => {
   return (
     <div className={openPayment ? "payment active" : "payment"}>
       <>
-        <div>
-          {deliveryPrice}
-          totalPrice : {deliveryPrice + totalPriceCart}
-          <button type="button" onClick={previousPage}>
-            prev
-          </button>
+        <div className="total">
+          <div className="delivery">
+            <p>Livraison:</p>
+            <span>{deliveryPrice}€</span>
+          </div>
+          <div className="total-cart">
+            <p>Prix pieces:</p>
+            <span>{totalPriceCart}€</span>
+          </div>
+          <div className="total-price">
+            <p>Total:</p>
+            <span>{totalPrice}€</span>
+          </div>
         </div>
-        <PayPalButton
+        <div onClick={previousPage} className="previous">
+          <ArrowLeft color="rgba(134, 90, 71, 1)" />
+        </div>
+
+        <PayPalButton 
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
         />

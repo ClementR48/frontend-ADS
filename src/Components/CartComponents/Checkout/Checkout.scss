@@ -1,6 +1,7 @@
 @import "../../../global.scss";
 .checkout-page {
   position: fixed;
+  overflow-x: scroll;
   width: 40vw;
   height: 100vh;
   background-color: rgb(241, 204, 204);
@@ -58,6 +59,7 @@
     transition: all 0.2s;
 
     svg {
+      color: $colorTextMain;
       &:hover {
         stroke: black;
       }

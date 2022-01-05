@@ -25,6 +25,14 @@ const Contact = () => {
   }, [contactData.length, dispatch]);
   const formRef = useRef();
   const [classForm, setClassForm] = useState("formulaire");
+  const [successMessage, setSuccessMessage] = useState(false);
+
+  const isSuccess = () => {
+    setSuccessMessage(true);
+    setTimeout(() => {
+      setSuccessMessage(false);
+    }, 5000);
+  };
 
   /* apparition au scroll */
 
@@ -45,7 +53,6 @@ const Contact = () => {
   }, []);
 
   useEffect(() => {
-    
     const observer = new IntersectionObserver(callbackFunction, options);
     if (formRef.length !== 0) {
       if (formRef.current !== undefined) {
@@ -135,10 +142,9 @@ const Contact = () => {
               setObjet("");
               setMessage("");
               setEmail("");
+             isSuccess()
             },
-            (error) => {
-              
-            }
+            (error) => {}
           );
       } else {
         allValidateRef.current[1].style.fontWeight = "bold";
@@ -164,7 +170,7 @@ const Contact = () => {
         >
           <ScrollToTop />
           <Parallax
-           /*  bgImage={contactData[0].backgroundImage} */
+            /*  bgImage={contactData[0].backgroundImage} */
             bgImageAlt="arriere plan coloré"
             strength={1000}
           >
@@ -218,110 +224,127 @@ const Contact = () => {
                     alt="logo"
                   ></img>
                 </div>
-                <form className="right" onSubmit={sendEmail} ref={formRef}>
-                  <label ref={addValidateRef} htmlFor="name">
-                    Nom
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={(event) => {
-                      setName(event.target.value);
-                    }}
-                  ></input>
-                  <label ref={addValidateRef} htmlFor="email">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    className="input-email"
-                    value={email}
-                    type="mail"
-                    name="email"
-                    onChange={(event) => {
-                      validateEmail(event.target.value);
-                      setEmail(event.target.value);
-                    }}
-                  ></input>
-                  <label ref={addValidateRef} htmlFor="objet">
-                    Objet
-                  </label>
-                  <input
-                    id="objet"
-                    type="text"
-                    value={objet}
-                    name="objet"
-                    onChange={(event) => {
-                      setObjet(event.target.value);
-                    }}
-                  ></input>
-                  <label ref={addValidateRef} htmlFor="message">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    value={message}
-                    name="message"
-                    onChange={(event) => {
-                      setMessage(event.target.value);
-                    }}
-                  ></textarea>
-                  <button className="checkout">
-                    <div className="span-container s1">
-                      {sendButtonLetters.map((letter, index) => {
-                        return (
-                          <>
-                            {letter !== " " ? (
-                              <span
-                                style={{
-                                  transitionDelay: ` ${0.05 * index}s`,
-                                }}
-                              >
-                                {letter}
-                              </span>
-                            ) : (
-                              <span
-                                style={{
-                                  transitionDelay: ` ${0.05 * index}s`,
-                                }}
-                              >
-                                &nbsp;
-                              </span>
-                            )}
-                          </>
-                        );
-                      })}
-                    </div>
-                    <div className="span-container s2">
-                      {sendButtonLetters.map((letter, index) => {
-                        return (
-                          <>
-                            {letter !== " " ? (
-                              <span
-                                style={{
-                                  transitionDelay: ` ${0.05 * index}s`,
-                                }}
-                              >
-                                {letter}
-                              </span>
-                            ) : (
-                              <span
-                                style={{
-                                  transitionDelay: ` ${0.05 * index}s`,
-                                }}
-                              >
-                                &nbsp;
-                              </span>
-                            )}
-                          </>
-                        );
-                      })}
-                    </div>
-                  </button>
-                  <div className="form-message"></div>
-                </form>
+                <div className="right">
+                  <div
+                    className={
+                      successMessage
+                        ? "successMessage active"
+                        : "successMessage"
+                    }
+                  >
+                    <p>Votre message a bien été envoyé :)</p>
+                  </div>
+                  <form
+                    className={
+                      successMessage ? "right-form hide" : "right-form"
+                    }
+                    onSubmit={sendEmail}
+                    ref={formRef}
+                  >
+                    <label ref={addValidateRef} htmlFor="name">
+                      Nom
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      name="name"
+                      value={name}
+                      onChange={(event) => {
+                        setName(event.target.value);
+                      }}
+                    ></input>
+                    <label ref={addValidateRef} htmlFor="email">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      className="input-email"
+                      value={email}
+                      type="mail"
+                      name="email"
+                      onChange={(event) => {
+                        validateEmail(event.target.value);
+                        setEmail(event.target.value);
+                      }}
+                    ></input>
+                    <label ref={addValidateRef} htmlFor="objet">
+                      Objet
+                    </label>
+                    <input
+                      id="objet"
+                      type="text"
+                      value={objet}
+                      name="objet"
+                      onChange={(event) => {
+                        setObjet(event.target.value);
+                      }}
+                    ></input>
+                    <label ref={addValidateRef} htmlFor="message">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      value={message}
+                      name="message"
+                      onChange={(event) => {
+                        setMessage(event.target.value);
+                      }}
+                    ></textarea>
+                    <button className="checkout">
+                      <div className="span-container s1">
+                        {sendButtonLetters.map((letter, index) => {
+                          return (
+                            <>
+                              {letter !== " " ? (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  {letter}
+                                </span>
+                              ) : (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  &nbsp;
+                                </span>
+                              )}
+                            </>
+                          );
+                        })}
+                      </div>
+                      <div className="span-container s2">
+                        {sendButtonLetters.map((letter, index) => {
+                          return (
+                            <>
+                              {letter !== " " ? (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  {letter}
+                                </span>
+                              ) : (
+                                <span
+                                  style={{
+                                    transitionDelay: ` ${0.05 * index}s`,
+                                  }}
+                                >
+                                  &nbsp;
+                                </span>
+                              )}
+                            </>
+                          );
+                        })}
+                      </div>
+                    </button>
+                    <div className="form-message"></div>
+                  </form>
+                </div>
               </motion.div>
             </main>
 

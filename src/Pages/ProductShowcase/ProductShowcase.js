@@ -78,7 +78,7 @@ const ProductShowcase = () => {
     };
   }, [timerInfo]);
 
-  const buttonAddProduct = "Ajouter au panier";
+  const [buttonAddProduct, setButtonAddProduct] = useState('Ajouter au panier');
 
   const textButtonLetters = buttonAddProduct.split("");
 
@@ -94,6 +94,15 @@ const ProductShowcase = () => {
   const mouseLeave = () => {
     cursorRef.current.setAttribute("style", "opacity: 0");
   };
+
+ 
+
+ const textChange = () => {
+   setButtonAddProduct('Merci :)')
+   setTimeout(() => {
+    setButtonAddProduct('Ajouter au panier')
+   }, 1000)
+ }
 
   return (
     <>
@@ -199,7 +208,7 @@ const ProductShowcase = () => {
                     </div>
                   )}
 
-                  <button className="checkout">
+                  <button className= "checkout" onClick={textChange}>
                     <div className="span-container s1">
                       {textButtonLetters.map((letter, index) => {
                         return (

@@ -51,16 +51,18 @@ const Home = () => {
   return (
     <>
       {homeData.length !== 0 ? (
-        <Parallax strength={500}>
-          <Background className="bg-custom">
-            <img src={homeData[0].backgroundImage} alt="" />
-          </Background>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ delay: 0.5 }}
-            className="home"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ delay: 0.5 }}
+          className="home"
+        >
+          <Parallax
+            className="parallax"
+            bgImage={homeData[0].backgroundImage}
+            bgImageAlt="arriere plan coloré"
+            strength={1000}
           >
             <ScrollToTop />
 
@@ -81,8 +83,8 @@ const Home = () => {
               <ArticlesHome dataArticles={homeData} />
             </motion.div>
             <Footer footerColor={homeData[0].footerColor} />
-          </motion.div>
-        </Parallax>
+          </Parallax>
+        </motion.div>
       ) : (
         <Loader />
       )}
